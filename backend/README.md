@@ -22,7 +22,7 @@ $ pip install -r requirements/production.pip
 
 3. 创建数据库
 ```
-$ mysql -uroot -p123456 -e 'CREATE DATABASE itechub charset="utf8";'
+$ mysql -uroot -p -e 'CREATE DATABASE jane charset="utf8";'
 ```
 
 4. 环境变量
