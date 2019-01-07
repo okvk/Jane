@@ -40,7 +40,10 @@ class UserChangeForm(forms.ModelForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
-    password = ReadOnlyPasswordHashField()
+    password = ReadOnlyPasswordHashField(
+        label=("密码"),
+        help_text=("<a href=\"../password/\">修改密码</a>.")
+    )
 
     class Meta:
         model = User
