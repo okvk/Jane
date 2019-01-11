@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'rest_framework',
     'rest_framework_swagger',
-
-    # self-defined apps
+    # Self-defined apps
     'accounts',
 ]
 
@@ -132,5 +131,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Customizing authentication and user
+
 AUTH_USER_MODEL = 'accounts.User'
+
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailOrUsernameModelBackend', ]
+
+LOGIN_URL = 'rest_framework:login'
+
+LOGOUT_URL = 'rest_framework:logout'
+
+LOGIN_REDIRECT_URL = 'swagger'
