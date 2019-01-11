@@ -36,8 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third-party apps
-
-    # self-defined apps
+    'rest_framework',
+    'rest_framework_swagger',
+    # Self-defined apps
     'accounts',
 ]
 
@@ -85,6 +86,14 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -122,5 +131,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Customizing authentication and user
+
 AUTH_USER_MODEL = 'accounts.User'
+
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailOrUsernameModelBackend', ]
+
+LOGIN_URL = 'rest_framework:login'
+
+LOGOUT_URL = 'rest_framework:logout'
+
+LOGIN_REDIRECT_URL = 'swagger'
