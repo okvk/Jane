@@ -42,6 +42,8 @@ export NAME='jane'
 export HOST='localhost'
 export PORT=3306
 export DEBUG=Ture
+# sentry 用于辅助追踪生产环境运行时错误
+export SENTRY='https://......'
 
 # 重新激活
 $ source venv/bin/activate

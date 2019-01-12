@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,8 +26,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'unknown')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
-
-ALLOWED_HOSTS = ['*'] if DEBUG else []
 
 # Application definition
 
@@ -141,3 +142,14 @@ LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
 
 LOGIN_REDIRECT_URL = 'swagger'
+
+# DEBUG settings
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = []
+    # Sentry
+    sentry_sdk.init(
+        dsn=os.environ.get('SENTRY'),
+        integrations=[DjangoIntegration()]
+    )
