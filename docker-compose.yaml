@@ -1,0 +1,58 @@
+# docker-compose.yml
+# Copyright (C) 2018 shady <shady@MrRobot.local>
+#
+version: "3"
+services:
+  nginx:
+    image: itechub/jane-nginx:v1.0 
+    build: ./deployment/nginx
+    ports:
+      - "8090:80"
+    networks:
+      - jane
+        
+    # overwrite nginx vhost configuration
+    #volumes:
+    #  - ${DOCKER_DIR}/configuration/nginx/sites-enabled:/etc/nginx/conf.d 
+
+  django:
+    image: itechub/jane-django:v1.0
+    build: 
+        context: ./ 
+        dockerfile: ./deployment/django/Dockerfile
+    ports:
+      - "8088:8080"
+    environment:
+        - HOST=mysql
+        - PORT=3306
+        - DJANGO_MANAGEPY_MIGRATE=on
+        - DJANGO_MANAGEPY_COLLECTSTATIC=on
+        - USERNAME=root
+        - NAME=jane
+        - DEBUG=True
+        - SECRET_KEY=${SECRET_KEY}
+        - PASSWORD=janepassword
+        - SENTRY=${SENTRY}
+
+    networks:
+      - jane
+
+    #volumes:
+    #  - ${DOCKER_DIR}/log:/disk/log
+
+  mysql:
+    image: itechub/jane-mysql:v1.0
+    build: ./deployment/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: janepassword
+    volumes:
+      - ${DOCKER_DIR}/volumes/data:/var/lib/mysql # mysql data source
+      - ${DOCKER_DIR}/volumes/log:/disk/log  # mysql log
+  #frontend:
+    # build: ./frontend
+    # image: asia.gcr.io/ros-edu-198202/inrovo-react:v1.1
+    networks:
+      - jane
+
+networks:
+  jane:

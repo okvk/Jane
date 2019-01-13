@@ -7,15 +7,16 @@ RUN virtualenv /env
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
 
-COPY ../../backend/ /env/app
+# Reading the context from the docker-compose build setting
+COPY ./backend/ /env/app
 
-ADD ./docker-entrypoint.sh  /env/app
+ADD ./deployment/django/docker-entrypoint.sh  /env/app
 RUN chmod +x /env/app/docker-entrypoint.sh
 
 WORKDIR /env/app
 
 RUN apk add --no-cache --virtual .build-deps build-base linux-headers\
-    && pip install -r requirements.txt \
+    && pip install -r requirements/production.pip \
     && apk del .build-deps
 
 EXPOSE 8080
