@@ -7,21 +7,17 @@ services:
     image: itechub/jane-nginx:v1.0 
     build: ./deployment/nginx
     ports:
-      - "8090:80"
+      - "10001:80"
     networks:
       - jane
         
-    # overwrite nginx vhost configuration
-    #volumes:
-    #  - ${DOCKER_DIR}/configuration/nginx/sites-enabled:/etc/nginx/conf.d 
-
   django:
     image: itechub/jane-django:v1.0
     build: 
         context: ./ 
         dockerfile: ./deployment/django/Dockerfile
     ports:
-      - "8088:8080"
+      - "10002:8080"
     environment:
         - HOST=mysql
         - PORT=3306
@@ -33,12 +29,8 @@ services:
         - PASSWORD=${DB_PASSWORD}
         - SECRET_KEY=${SECRET_KEY}
         - SENTRY=${SENTRY}
-
     networks:
       - jane
-
-    #volumes:
-    #  - ${DOCKER_DIR}/log:/disk/log
 
   mysql:
     image: itechub/jane-mysql:v1.0
@@ -48,9 +40,6 @@ services:
     volumes:
       - ${DOCKER_DIR}/volumes/data:/var/lib/mysql # mysql data source
       - ${DOCKER_DIR}/volumes/log:/disk/log  # mysql log
-  #frontend:
-    # build: ./frontend
-    # image: asia.gcr.io/ros-edu-198202/inrovo-react:v1.1
     networks:
       - jane
 
