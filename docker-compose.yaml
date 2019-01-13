@@ -30,8 +30,8 @@ services:
         - USERNAME=root
         - NAME=jane
         - DEBUG=True
+        - PASSWORD=${DB_PASSWORD}
         - SECRET_KEY=${SECRET_KEY}
-        - PASSWORD=janepassword
         - SENTRY=${SENTRY}
 
     networks:

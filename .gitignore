@@ -45,3 +45,6 @@ yarn-error.log*
 
 # ignore docker runtime volume
 deployment/volumes/*
+
+# ignore django app static file
+backend/collectstatic/*
