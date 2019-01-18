@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
+from django.conf.urls.static import static
 
 from rest_framework_swagger.views import get_swagger_view
+
+from . import settings
 
 schema_view = get_swagger_view(title='API documentation')
 
@@ -26,3 +29,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('docs/', schema_view, name='swagger'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
