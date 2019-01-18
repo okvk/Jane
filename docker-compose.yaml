@@ -4,31 +4,31 @@
 version: "3"
 services:
   nginx:
-    image: itechub/jane-nginx:v1.0 
+    image: itechub/jane-nginx:v1.0
     build: ./deployment/nginx
     ports:
       - "10001:80"
     networks:
       - jane
-        
+
   django:
     image: itechub/jane-django:v1.0
-    build: 
-        context: ./ 
-        dockerfile: ./deployment/django/Dockerfile
+    build:
+      context: ./
+      dockerfile: ./deployment/django/Dockerfile
     ports:
       - "10002:8080"
     environment:
-        - HOST=mysql
-        - PORT=3306
-        - DJANGO_MANAGEPY_MIGRATE=on
-        - DJANGO_MANAGEPY_COLLECTSTATIC=on
-        - USERNAME=root
-        - NAME=jane
-        - DEBUG=True
-        - PASSWORD=${DB_PASSWORD}
-        - SECRET_KEY=${SECRET_KEY}
-        - SENTRY=${SENTRY}
+      - HOST=mysql
+      - PORT=3306
+      - DJANGO_MANAGEPY_MIGRATE=on
+      - DJANGO_MANAGEPY_COLLECTSTATIC=on
+      - USERNAME=root
+      - NAME=jane
+      - DEBUG=True
+      - PASSWORD=${DB_PASSWORD}
+      - SECRET_KEY=${SECRET_KEY}
+      - SENTRY=${SENTRY}
     networks:
       - jane
 
@@ -36,7 +36,8 @@ services:
     image: itechub/jane-mysql:v1.0
     build: ./deployment/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: janepassword
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - ${DOCKER_DIR}/volumes/data:/var/lib/mysql # mysql data source
       - ${DOCKER_DIR}/volumes/log:/disk/log  # mysql log
