@@ -19,16 +19,16 @@ services:
     ports:
       - "10002:8080"
     environment:
-      - HOST=mysql
-      - PORT=3306
-      - DJANGO_MANAGEPY_MIGRATE=on
-      - DJANGO_MANAGEPY_COLLECTSTATIC=on
-      - USERNAME=root
-      - NAME=jane
-      - DEBUG=True
-      - PASSWORD=${DB_PASSWORD}
-      - SECRET_KEY=${SECRET_KEY}
-      - SENTRY=${SENTRY}
+      HOST: mysql
+      PORT: 3306
+      DJANGO_MANAGEPY_MIGRATE: "on"
+      DJANGO_MANAGEPY_COLLECTSTATIC: "on"
+      USERNAME: root
+      NAME: jane
+      DEBUG: 1
+      PASSWORD: ${DB_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      SENTRY: ${SENTRY}
     networks:
       - jane
 
@@ -43,6 +43,17 @@ services:
       - ${DOCKER_DIR}/volumes/log:/disk/log  # mysql log
     networks:
       - jane
+
+  react:
+    image: itechub/jane-react:v1.0
+    build: 
+      context: ./
+      dockerfile: ./deployment/react/Dockerfile
+    environment:
+        REACT_APP_BACKEND_API: http://localhost:8000
+    ports:
+      - "10003:80"
+
 
 networks:
   jane:

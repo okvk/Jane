@@ -1,0 +1,23 @@
+.git
+.cache
+
+**/Dockerfile
+.DS_Store
+.gitignore
+.dockerignore
+.env
+
+# https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+
+**/node_modules
+**/build/
+**/dist/
+
