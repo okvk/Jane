@@ -12,7 +12,7 @@ Running Test:
 
 Docker Image Build:
   stage: build-image
-  image: 
+  image:
     name: docker/compose:1.23.2
     entrypoint: ["/bin/sh", "-c"]
   variables:
@@ -27,17 +27,17 @@ Docker Image Build:
     - docker-compose version
 
   script:
-    - docker-compose build 
+    - docker-compose build
     - docker login -u=$CI_REGISTRY_USER -p=$CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker push itechub/jane-mysql:latest
-    - docker push itechub/jane-react:latest
+    - docker push itechub/jane-nginx:latest
     - docker push itechub/jane-django:latest
 
     # push for tags
     - "[[ -z $CI_BUILD_TAG ]] && exit 0"
-    - docker tag $itechub/jane-react:latest itechub/jane-react:$CI_BUILD_TAG
+    - docker tag $itechub/jane-nginx:latest itechub/jane-nginx:$CI_BUILD_TAG
     - docker tag $itechub/jane-django:latest itechub/jane-django:$CI_BUILD_TAG
-    - docker push itechub/jane-react:$CI_BUILD_TAG
+    - docker push itechub/jane-nginx:$CI_BUILD_TAG
     - docker push itechub/jane-django:$CI_BUILD_TAG
   tags:
     - docker
@@ -47,7 +47,7 @@ Deployment:
   stage: deploy
   script:
     - rsync -r $CI_PROJECT_DIR /home/gitlab-runner
-    - cd /home/gitlab-runner/jane && docker-compose build && docker-compose restart
+    - cd /home/gitlab-runner/jane && docker-compose build && docker-compose down && docker-compose up -d
   tags:
     - web-client
 # vim:ft=ansible

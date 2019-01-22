@@ -17,7 +17,6 @@ services:
 
   django:
     image: itechub/jane-django:latest
-    container_name: django
     build:
       context: ./
       dockerfile: ./deployment/django/Dockerfile
@@ -27,31 +26,30 @@ services:
       DJANGO_MANAGEPY_MIGRATE: "on"
       DJANGO_MANAGEPY_COLLECTSTATIC: "on"
       USERNAME: root
-      NAME: jane
+      NAME: ${DB_NAME}
       DEBUG: 1
       PASSWORD: ${DB_PASSWORD}
       SECRET_KEY: ${SECRET_KEY}
       SENTRY: ${SENTRY}
     # mount django static file, serverd by nginx
     volumes:
-      - ${DOCKER_DIR}/volumes/statics:/env/app/collectstatic/statics 
+      - ${DOCKER_DIR}/volumes/statics:/env/app/collectstatic/statics
     networks:
       - jane
 
-  react:
-    image: itechub/jane-react:latest
-    build: 
+  nginx:
+    image: itechub/jane-nginx:latest
+    build:
       context: ./
-      dockerfile: ./deployment/react/Dockerfile
+      dockerfile: deployment/nginx/Dockerfile
     environment:
-        REACT_APP_BACKEND_API: http://localhost:8000
+      BACKEND_API_PREFIX: ${BACKEND_API_PREFIX}
     ports:
       - "1984:80"
     volumes:
-        - ${DOCKER_DIR}/volumes/statics:/usr/share/nginx/statics
+      - ${DOCKER_DIR}/volumes/statics:/usr/share/nginx/statics
     networks:
       - jane
-
 
 networks:
   jane:
