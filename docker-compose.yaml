@@ -3,37 +3,8 @@
 #
 version: "3"
 services:
-  nginx:
-    image: itechub/jane-nginx:v1.0
-    build: ./deployment/nginx
-    ports:
-      - "10001:80"
-    networks:
-      - jane
-
-  django:
-    image: itechub/jane-django:v1.0
-    build:
-      context: ./
-      dockerfile: ./deployment/django/Dockerfile
-    ports:
-      - "10002:8080"
-    environment:
-      HOST: mysql
-      PORT: 3306
-      DJANGO_MANAGEPY_MIGRATE: "on"
-      DJANGO_MANAGEPY_COLLECTSTATIC: "on"
-      USERNAME: root
-      NAME: jane
-      DEBUG: 1
-      PASSWORD: ${DB_PASSWORD}
-      SECRET_KEY: ${SECRET_KEY}
-      SENTRY: ${SENTRY}
-    networks:
-      - jane
-
   mysql:
-    image: itechub/jane-mysql:v1.0
+    image: itechub/jane-mysql:latest
     build: ./deployment/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -44,16 +15,41 @@ services:
     networks:
       - jane
 
-  react:
-    image: itechub/jane-react:v1.0
-    build: 
+  django:
+    image: itechub/jane-django:latest
+    build:
       context: ./
-      dockerfile: ./deployment/react/Dockerfile
+      dockerfile: ./deployment/django/Dockerfile
     environment:
-        REACT_APP_BACKEND_API: http://localhost:8000
-    ports:
-      - "10003:80"
+      HOST: mysql
+      PORT: 3306
+      DJANGO_MANAGEPY_MIGRATE: "on"
+      DJANGO_MANAGEPY_COLLECTSTATIC: "on"
+      USERNAME: root
+      NAME: ${DB_NAME}
+      DEBUG: 1
+      PASSWORD: ${DB_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      SENTRY: ${SENTRY}
+    # mount django static file, serverd by nginx
+    volumes:
+      - ${DOCKER_DIR}/volumes/statics:/env/app/collectstatic/statics
+    networks:
+      - jane
 
+  nginx:
+    image: itechub/jane-nginx:latest
+    build:
+      context: ./
+      dockerfile: deployment/nginx/Dockerfile
+    environment:
+      BACKEND_API_PREFIX: ${BACKEND_API_PREFIX}
+    ports:
+      - "1984:80"
+    volumes:
+      - ${DOCKER_DIR}/volumes/statics:/usr/share/nginx/statics
+    networks:
+      - jane
 
 networks:
   jane:

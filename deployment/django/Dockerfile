@@ -24,6 +24,8 @@ COPY ./backend/ /env/app
 
 EXPOSE 8080
 
+VOLUME ["/env/app/collectstatic/statics",]
+
 ENTRYPOINT ["/env/app/docker-entrypoint.sh"]
 
 CMD ["sh", "-c", "/env/bin/gunicorn --workers 4 --timeout 240 --bind  0.0.0.0:8080  config.wsgi:application"]
