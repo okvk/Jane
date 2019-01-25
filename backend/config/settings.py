@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     # Self-defined apps
     'accounts',
+    'articles',
 ]
 
 MIDDLEWARE = [

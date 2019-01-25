@@ -29,6 +29,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('docs/', schema_view, name='swagger'),
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='user_accounts')),
+    path('articles/', include(('articles.urls', 'articles'), namespace='articles')),
 ]
 
 if settings.DEBUG:
