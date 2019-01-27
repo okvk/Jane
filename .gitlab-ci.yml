@@ -39,6 +39,8 @@ Docker Image Build:
     - docker tag $itechub/jane-django:latest itechub/jane-django:$CI_BUILD_TAG
     - docker push itechub/jane-nginx:$CI_BUILD_TAG
     - docker push itechub/jane-django:$CI_BUILD_TAG
+  only:
+    - develop
   tags:
     - docker
 
@@ -50,4 +52,6 @@ Deployment:
     - cd /home/gitlab-runner/jane && docker-compose build && docker-compose down && docker-compose up -d
   tags:
     - web-client
+  only:
+    - develop
 # vim:ft=ansible

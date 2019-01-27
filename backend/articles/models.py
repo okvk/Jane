@@ -3,12 +3,21 @@ from accounts.models import User
 
 # Create your models here.
 class Article(models.Model):
-    name = models.CharField(max_length=256)
+    title = models.CharField(max_length=256)
+    summary = models.CharField(max_length=512, null=True)
     author = models.ForeignKey(User, verbose_name='author', related_name='user', on_delete=models.DO_NOTHING)
+    content = models.TextField(null=True)
+    is_stickied = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
+    last_modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['is_stickied', '-last_modified']
+
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Tag(models.Model):
