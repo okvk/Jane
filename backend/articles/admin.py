@@ -4,7 +4,7 @@ from django.contrib import messages
 from .models import Article, Tag, TagMap
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'created')
+    list_display = ('id', 'title', 'created')
     readonly_fields = ('id', 'created')
 
 

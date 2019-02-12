@@ -9,12 +9,15 @@ class ArticleSerializer(serializers.ModelSerializer):
     tags_list = serializers.ListField(
         child=serializers.IntegerField(), write_only=True        
     )
-    author = serializers.ReadOnlyField(source='user.username')
+    author = serializers.ReadOnlyField(source='author.username')
+    is_deleted = serializers.ReadOnlyField()
+    last_modified = serializers.ReadOnlyField()
     created = serializers.ReadOnlyField()
 
     class Meta:
         model = Article
-        fields = ('id', 'name', 'tags_list', 'author', 'created')
+        fields = ('id', 'title', 'summary', 'author', 'content', 'is_published', \
+                'is_stickied', 'is_deleted', 'last_modified', 'tags_list', 'created')
     
     def create(slef, validated_data):
         tag_list = validated_data.pop('tags_list')
