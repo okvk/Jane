@@ -4,7 +4,7 @@ FROM node:10.15.0 as builder
 RUN mkdir /app
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY ./frontend/package.json /app/package.json
+COPY ./frontend/package.json ./frontend/yarn.lock /app/
 RUN yarn install --silent
 COPY ./frontend /app
 # Read backend API from environment variables
