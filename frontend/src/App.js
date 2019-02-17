@@ -9,6 +9,10 @@ import Home from "./pages/Home";
 import "./App.less";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.hideLoading();
+  }
+
   render() {
     return (
       <Router>

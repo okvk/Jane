@@ -9,9 +9,13 @@ import * as serviceWorker from "./serviceWorker";
 
 const history = createBrowserHistory();
 
+const loadingScreen = document.querySelector(".loading-screen");
+const showLoading = () => loadingScreen.classList.remove("loading-off");
+const hideLoading = () => loadingScreen.classList.add("loading-off");
+
 ReactDOM.render(
   <Router history={history}>
-    <App />
+    <App showLoading={showLoading} hideLoading={hideLoading} />
   </Router>,
   document.getElementById("root")
 );
