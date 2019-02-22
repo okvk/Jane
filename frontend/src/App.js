@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Layout } from "antd";
 
 import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
-import Home from "./pages/Home";
+import RouteWrapper from "./components/RouteWrapper/RouteWrapper";
 
+import { routes } from "./config";
 import "./App.less";
 
 class App extends Component {
@@ -18,7 +19,9 @@ class App extends Component {
       <Router>
         <Layout className="layout">
           <Header />
-          <Route exact path="/" component={Home} />
+          {routes.map((route, i) => (
+            <RouteWrapper key={i} {...route} />
+          ))}
           <Footer />
         </Layout>
       </Router>
