@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import {routes} from './routes';
 
 const RouteWrapper = route => (
   <Route
@@ -12,4 +13,8 @@ const RouteWrapper = route => (
   />
 );
 
-export default RouteWrapper;
+const AppRoutes =  routes.map((route, i) => (
+  <RouteWrapper key={i} {...route} />
+))
+
+export default AppRoutes;
