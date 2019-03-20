@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { connect } from "react-redux";
 import { Layout } from "antd";
 
-import AppRoutes from './routes';
+import { history } from "./helpers";
+import AppRoutes from "./routes";
 import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
 
-import "./App.less";
+import "./App.scss";
 
 class App extends Component {
   componentDidMount() {
@@ -15,10 +17,10 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Layout className="layout">
           <Header />
-            {AppRoutes}
+          {AppRoutes}
           <Footer />
         </Layout>
       </Router>
@@ -26,4 +28,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  const { alert } = state;
+  return { alert };
+};
+
+const connectedApp = connect(mapStateToProps)(App);
+
+export { connectedApp as App };

@@ -6,7 +6,7 @@ import { Icon, Popover } from "antd";
 
 import "./NavBar.less";
 
-class NavBar extends Component {
+export class NavBar extends Component {
   state = {
     viewportWidth: 0,
     menuVisible: false
@@ -71,5 +71,3 @@ NavBar.defaultProps = {
   applyViewportChange: 250,
   placement: "bottom"
 };
-
-export default NavBar;
