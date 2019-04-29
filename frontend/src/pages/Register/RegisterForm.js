@@ -2,6 +2,8 @@ import React from 'react'
 import {
   Form, Input, Checkbox, Button,
 } from 'antd';
+import BaseFormItem from 'components/BaseForm/BaseFormItem';
+
 
 class RegistrationForm extends React.Component {
   state = {
@@ -45,18 +47,19 @@ class RegistrationForm extends React.Component {
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
+        xs: { span: 12 },
+        sm: { span: 6 },
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
+        xs: { span: 12 },
+        sm: { span: 6 },
       },
     };
 
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+        <BaseFormItem />
         <Form.Item
           label="E-mail"
         >

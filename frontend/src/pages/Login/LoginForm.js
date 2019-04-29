@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   Form, Icon, Input, Button, Checkbox,
 } from 'antd';
+import BaseFormItem from 'components/BaseForm/BaseFormItem';
 
 class Login extends Component {
   
@@ -18,6 +19,7 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
+        <BaseFormItem />
         <Form.Item>
           {getFieldDecorator('userName', {
             rules: [{ required: true, message: 'Please input your username!' }],

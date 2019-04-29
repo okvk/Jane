@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router";
-import { Menu, Icon, Layout, Avatar, Popover, Badge, List } from "antd";
+import { Menu, Layout} from "antd";
 import { Link } from "react-router-dom";
 
-import { MenuMarkup } from "../components/MenuMarkup";
-import { NavBar } from "../components/NavBar";
+import { MenuMarkup } from "components/MenuMarkup";
+import { NavBar } from "components/NavBar";
 
-import logo from "../assets/logo.png";
+import logo from "assets/logo.png";
 import "./Header.scss";
 
 const { SubMenu } = Menu;
