@@ -13,7 +13,7 @@ const { SubMenu } = Menu;
 
 const UserSection = props => [
   <Link to="/login" key="login">
-    Sign in
+    Login in
   </Link>,
   <Menu key="user" mode="horizontal" onClick={() => {}}>
     <SubMenu

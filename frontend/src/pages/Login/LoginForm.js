@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import {
   Form, Icon, Input, Button, Checkbox,
 } from 'antd';
 import BaseFormItem from 'components/BaseForm/BaseFormItem';
+import {loginUser} from 'actions/authentication';
 
 class Login extends Component {
   
@@ -11,6 +14,7 @@ class Login extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.dispatch(loginUser(values))
       }
     });
   }
@@ -21,7 +25,7 @@ class Login extends Component {
       <Form onSubmit={this.handleSubmit} className="login-form">
         <BaseFormItem />
         <Form.Item>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
@@ -41,11 +45,11 @@ class Login extends Component {
           })(
             <Checkbox>Remember me</Checkbox>
           )}
-          <a className="login-form-forgot" href="">Forgot password</a>
+          <Link to='/forget-password'>Forgot password</Link>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          Or <a href="/register">register now!</a>
+          Or  <Link to='/register'>register now!</Link>
         </Form.Item>
       </Form>
     );
@@ -54,4 +58,8 @@ class Login extends Component {
 
 const WrappedLogin = Form.create({ name: 'normal_login' })(Login);
 
-export default WrappedLogin;
+function mapStateToProps(state) {
+  return {}
+}
+
+export default withRouter(connect(mapStateToProps)(WrappedLogin));

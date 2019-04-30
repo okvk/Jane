@@ -8,7 +8,7 @@ class Footer extends Component {
     return (
       <Layout.Footer style={{ textAlign: "center" }}>
         CAMPFIRE ©{year} Powered by{" "}
-        <a href="https://github.com/itechub/jane" target="_blank">
+        <a href="https://github.com/itechub/jane" rel="noopener noreferrer" target="_blank">
           Jane
         </a>
       </Layout.Footer>

@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 
 import { App } from "./App";
-import { store } from "./helpers";
+import store from "helpers/store";
 import "./index.scss";
 
 const loadingScreen = document.querySelector(".loading-screen");

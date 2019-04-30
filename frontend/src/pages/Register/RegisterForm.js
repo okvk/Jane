@@ -45,23 +45,12 @@ class RegistrationForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 12 },
-        sm: { span: 6 },
-      },
-      wrapperCol: {
-        xs: { span: 12 },
-        sm: { span: 6 },
-      },
-    };
-
-
     return (
-      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <BaseFormItem />
         <Form.Item
           label="E-mail"
+          style={{marginBottom: "0px"}}
         >
           {getFieldDecorator('email', {
             rules: [{
@@ -75,6 +64,7 @@ class RegistrationForm extends React.Component {
         </Form.Item>
         <Form.Item
           label="Password"
+          style={{marginBottom: "0px"}}
         >
           {getFieldDecorator('password', {
             rules: [{
@@ -99,7 +89,7 @@ class RegistrationForm extends React.Component {
             <Input type="password" onBlur={this.handleConfirmBlur} />
           )}
         </Form.Item>
-        <Form.Item>
+        <Form.Item   style={{marginBottom: "0px"}}>
           {getFieldDecorator('agreement', {
             valuePropName: 'checked',
           })(

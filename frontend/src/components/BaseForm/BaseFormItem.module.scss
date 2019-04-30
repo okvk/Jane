@@ -1,23 +1,5 @@
-@import "App.scss";
-.logo_container {
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-    
-  .logo {
-    display: inline-block;
-    height: $header-height;
-    margin: 0 6px;
-  }
-
-  .logo img {
-    height: 32px;
-    width: 32px;
-    cursor: pointer;
-  }
-
-  .brand {
+.brand {
     font-family: 'Gloria Hallelujah', cursive;
     font-size: 32px;
-  }
+    text-align: center;
 }

@@ -3,10 +3,10 @@ import { Router } from "react-router-dom";
 import { connect } from "react-redux";
 import { Layout } from "antd";
 
-import { history } from "./helpers";
+import history from "helpers/history";
 import AppRoutes from "./routes";
-import Footer from "./layouts/Footer";
-import Header from "./layouts/Header";
+import Footer from "layouts/Footer";
+import Header from "layouts/Header";
 
 import "./App.scss";
 
@@ -33,6 +33,6 @@ const mapStateToProps = state => {
   return { alert };
 };
 
-const connectedApp = connect(mapStateToProps)(App);
+const connectedApp =  connect(mapStateToProps)(App);
 
 export { connectedApp as App };
