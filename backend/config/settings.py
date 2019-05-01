@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'unknown')
+SECRET_KEY = os.environ.get('JANE_SECRET_KEY', 'unknown')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': os.environ.get('USERNAME', 'unknown'),
-        'PASSWORD': os.environ.get('PASSWORD', 'unknown'),
-        'NAME': os.environ.get('NAME', 'unknown'),
-        'HOST': os.environ.get('HOST', 'unknown'),
-        'PORT': os.environ.get('PORT', 'unknown'),
+        'USER': os.environ.get('JANE_DB_USERNAME', 'unknown'),
+        'PASSWORD': os.environ.get('JANE_DB_PASSWORD', 'unknown'),
+        'NAME': os.environ.get('JANE_DB_NAME', 'unknown'),
+        'HOST': os.environ.get('JANE_DB_HOST', 'unknown'),
+        'PORT': os.environ.get('JANE_DB_PORT', 'unknown'),
     }
 }
 
@@ -182,6 +182,6 @@ else:
     ALLOWED_HOSTS = []
     # Sentry
     sentry_sdk.init(
-        dsn=os.environ.get('SENTRY'),
+        dsn=os.environ.get('JANE_SENTRY'),
         integrations=[DjangoIntegration()]
     )
