@@ -3,7 +3,7 @@ import {
 } from "constants/USER";
 
 const initialState = {
-  isAuthenticated: !localStorage.getItem('token'),
+  isAuthenticated: !!localStorage.getItem('token'),
   user: localStorage.getItem('user')
     ? JSON.parse(localStorage.getItem('user'))
     : {},

@@ -1,6 +1,4 @@
 import axios from 'axios';
-// import store from 'store';
-// import { push } from 'react-router-redux';
 import { config } from 'config';
 
 function getAxios() {
@@ -28,7 +26,6 @@ function getAxios() {
 function processData(data) {
   return data;
 }
-
 
 function handleError(error, hideErr) {
   if (!hideErr && error.response) {

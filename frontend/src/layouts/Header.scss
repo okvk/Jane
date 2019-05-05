@@ -8,7 +8,7 @@
 
 .logo {
   display: inline-block;
-  // height: $header-height;
+  height: $header-height;
   margin: 0 auto;
 }
 
@@ -22,4 +22,6 @@
   display: inline-block;
   position: absolute;
   right: 50px;
+  height: $header-height;
+  width: 80px;
 }

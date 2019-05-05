@@ -22,7 +22,7 @@ function receiveLogin(data) {
       token: data.token,
       user: data.user,
     });
-    console.log("Receive Login")
+    // Redirect to home page
     dispatch(() => store.dispatch(push('/')));
   };
 }
@@ -49,8 +49,7 @@ export function loginUser(creds) {
 function requestLogout() {
   return {
     type: LOGOUT_REQUEST,
-    isFetching: true,
-    isAuthenticated: true,
+    isAuthenticated: false,
   };
 }
 
@@ -61,11 +60,10 @@ function receiveLogout() {
       isFetching: false,
       isAuthenticated: false,
     });
-    // dispatch(() => store.dispatch(push('/auth/login')));
+    dispatch(() => store.dispatch(push('/login/')));
   };
 }
 
-// Logs the user out
 export function logoutUser() {
   return (dispatch) => {
     dispatch(requestLogout());
