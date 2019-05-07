@@ -1,6 +1,4 @@
-import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST,
-} from "constants/USER";
+import {default as CS} from 'constants/userConstants';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('token'),
@@ -12,21 +10,21 @@ const initialState = {
 
 export function authentication(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case CS.LOGIN_REQUEST:
       return {
         isAuthenticated: false,
         user: action.user
       };
-    case LOGIN_SUCCESS:
+    case CS.LOGIN_SUCCESS:
       return {
         isAuthenticated: true,
         user: action.user
       };
-    case LOGIN_FAILURE:
+    case CS.LOGIN_FAILURE:
       return {
         isAuthenticated: false,
       };
-    case LOGOUT_REQUEST:
+    case CS.LOGOUT_REQUEST:
       return {};
     default:
       return state;

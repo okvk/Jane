@@ -47,9 +47,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -128,7 +128,6 @@ JWT_AUTH = {
     'JWT_PAYLOAD_GET_USER_ID_HANDLER':
         'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
     # Overwrite the default JWT response
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'accounts.views.jwt_response_payload_handler',
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_GET_USER_SECRET_KEY': None,
     'JWT_PUBLIC_KEY': None,
@@ -162,6 +161,7 @@ USE_TZ = True
 # CORS setting
 CORS_ORIGIN_ALLOW_ALL=True
 
+
 CORS_ALLOW_HEADERS = (
     'accept',
     'accept-encoding',
@@ -172,16 +172,6 @@ CORS_ALLOW_HEADERS = (
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
-    'access-control-max-age'
-)
-
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
 )
 
 # Static files (CSS, JavaScript, Images)

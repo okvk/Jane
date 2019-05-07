@@ -33,6 +33,6 @@ const mapStateToProps = state => {
   return { alert };
 };
 
-const connectedApp =  connect(mapStateToProps)(App);
+const connectedApp = connect(mapStateToProps)(App);
 
 export { connectedApp as App };

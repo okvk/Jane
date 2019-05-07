@@ -1,79 +1,77 @@
-import store from 'helpers/store';
-import { push } from 'react-router-redux';
-import authRequest from 'middleware/auth';
+import store from "helpers/store";
+import { push } from "react-router-redux";
+import authRequest from "middleware/auth";
 
-import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST, LOGOUT_SUCCESS,
-} from "constants/USER";
+import {default as CS} from 'constants/userConstants';
 
 function requestLogin(creds) {
   return {
-    type: LOGIN_REQUEST,
+    type: CS.LOGIN_REQUEST,
     isAuthenticated: false,
-    creds,
+    creds
   };
 }
 
 function receiveLogin(data) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
-      type: LOGIN_SUCCESS,
+      type: CS.LOGIN_SUCCESS,
       isAuthenticated: true,
       token: data.token,
-      user: data.user,
+      user: data.user
     });
     // Redirect to home page
-    dispatch(() => store.dispatch(push('/')));
+    dispatch(() => store.dispatch(push("/")));
   };
 }
 
 export function loginUser(creds) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestLogin(creds));
     return authRequest.login(creds).then(
-      (response) => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
+      response => {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("user", JSON.stringify(response.user));
         dispatch(receiveLogin(response));
       },
-      err => dispatch({
-        type: LOGIN_FAILURE,
-        isAuthenticated: false,
-        error: err,
-      }),
-
+      err =>
+        dispatch({
+          type: CS.LOGIN_FAILURE,
+          isAuthenticated: false,
+          error: err
+        })
     );
   };
 }
 
 function requestLogout() {
   return {
-    type: LOGOUT_REQUEST,
-    isAuthenticated: false,
+    type: CS.LOGOUT_REQUEST,
+    isAuthenticated: false
   };
 }
 
 function receiveLogout() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
-      type: LOGOUT_SUCCESS,
+      type: CS.LOGOUT_SUCCESS,
       isFetching: false,
-      isAuthenticated: false,
+      isAuthenticated: false
     });
-    dispatch(() => store.dispatch(push('/login/')));
+    dispatch(() => store.dispatch(push("/login/")));
   };
 }
 
 export function logoutUser() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestLogout());
     authRequest.logout().then(
       () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
         dispatch(receiveLogout());
       },
-      err => console.log(err),
+      err => console.log(err)
     );
   };
 }
