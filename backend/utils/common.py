@@ -21,3 +21,12 @@ def paginate_data(request, data_set, data_serializer):
     context['count'] = paginator.count
     context['num_pages'] = paginator.num_pages
     return context
+
+class ResponseObject:
+    def __init__(self, data, status, errors=None):
+        self.data = data
+        self.status = status
+        self.errors = errors
+
+    def serialize(self):
+        return self.__dict__

@@ -30,9 +30,9 @@ export function loginUser(creds) {
     dispatch(requestLogin(creds));
     return authRequest.login(creds).then(
       response => {
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("user", JSON.stringify(response.user));
-        dispatch(receiveLogin(response));
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        dispatch(receiveLogin(response.data));
       },
       err =>
         dispatch({
