@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Layout, Breadcrumb } from "antd";
 
-class Home extends Component {
+export class Home extends Component {
   render() {
     return (
-      <Layout.Content style={{ padding: "0 50px", marginTop: "64px" }}>
+      <Layout.Content style={{ padding: "0 50px" }}>
         <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
@@ -17,5 +17,3 @@ class Home extends Component {
     );
   }
 }
-
-export default Home;

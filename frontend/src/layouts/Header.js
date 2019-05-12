@@ -1,14 +1,21 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { Layout } from "antd";
+import { connect } from "react-redux";
+import { Layout} from "antd";
 
-import MenuMarkup from "../components/MenuMarkup/MenuMarkup";
-import NavBar from "../components/NavBar/NavBar";
+import { MenuMarkup } from "components/MenuMarkup";
+import { NavBar } from "components/NavBar";
+import UserSection from "components/User/UserSection";
+import {logoutUser} from "actions/authentication";
 
-import logo from "../assets/logo.png";
-import "./Header.less";
+import logo from "assets/logo.png";
+import "./Header.scss";
 
-const Header = ({ location }) => {
+
+const Header = ({ location, dispatch }) => {
+  const onLogout = () => {
+    dispatch(logoutUser())
+  }
   return (
     <Layout.Header className="fixed">
       <NavBar
@@ -19,11 +26,12 @@ const Header = ({ location }) => {
       <div className="logo">
         <img src={logo} alt="Logo Campfire" />
       </div>
-      <div className="user-block">
-        <div>user section</div>
+      <div className="right-container">
+        <UserSection onLogout={onLogout}/>
       </div>
     </Layout.Header>
   );
 };
 
-export default withRouter(Header);
+
+export default withRouter(connect()(Header));

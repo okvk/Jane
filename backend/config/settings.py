@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third-party apps
+    'corsheaders',
     'rest_framework',
     'rest_framework_swagger',
     # Self-defined apps
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -126,7 +128,6 @@ JWT_AUTH = {
     'JWT_PAYLOAD_GET_USER_ID_HANDLER':
         'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
     # Overwrite the default JWT response
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'accounts.views.jwt_response_payload_handler',
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_GET_USER_SECRET_KEY': None,
     'JWT_PUBLIC_KEY': None,
@@ -156,6 +157,22 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# CORS setting
+CORS_ORIGIN_ALLOW_ALL=True
+
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

@@ -7,7 +7,10 @@ class Footer extends Component {
     const year = new Date().getFullYear();
     return (
       <Layout.Footer style={{ textAlign: "center" }}>
-        Campfire ©{year} Powered by Jane
+        CAMPFIRE ©{year} Powered by{" "}
+        <a href="https://github.com/itechub/jane" rel="noopener noreferrer" target="_blank">
+          Jane
+        </a>
       </Layout.Footer>
     );
   }

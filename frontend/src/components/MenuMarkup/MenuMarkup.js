@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Menu } from "antd";
 
+import styles from "./MenuMarkup.module.scss";
+
 // ref: https://tomas.piestansky.cz/posts/2018/responsive-menu-ant-design/
 
-const MenuMarkup = ({
+export const MenuMarkup = ({
   mobileVersion,
   activeLinkKey,
   onLinkClick,
@@ -15,8 +17,7 @@ const MenuMarkup = ({
     theme={"light"}
     mode={mobileVersion ? "vertical" : "horizontal"}
     selectedKeys={[`${activeLinkKey}`]}
-    className={className}
-    style={{ lineHeight: "64px" }}
+    className={`${className} ${styles.menu}`}
   >
     <Menu.Item key="/">
       <Link onClick={onLinkClick} to="/">
@@ -42,5 +43,3 @@ MenuMarkup.defaultProps = {
   mobileVersion: false,
   className: "mobile-navigation"
 };
-
-export default MenuMarkup;

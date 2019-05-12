@@ -1,22 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router } from "react-router";
-import createBrowserHistory from "history/createBrowserHistory";
-
-import "./index.less";
-import App from "./App";
+import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 
-const history = createBrowserHistory();
+import { App } from "./App";
+import store from "helpers/store";
+import "./index.scss";
 
 const loadingScreen = document.querySelector(".loading-screen");
 const showLoading = () => loadingScreen.classList.remove("loading-off");
 const hideLoading = () => loadingScreen.classList.add("loading-off");
 
 ReactDOM.render(
-  <Router history={history}>
+  <Provider store={store}>
     <App showLoading={showLoading} hideLoading={hideLoading} />
-  </Router>,
+  </Provider>,
   document.getElementById("root")
 );
 

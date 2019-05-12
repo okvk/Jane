@@ -1,3 +1,5 @@
+@import "App.scss";
+
 .ant-layout-header {
   background: #ffffff;
   box-shadow: 0 2px 8px #f0f1f2;
@@ -6,7 +8,7 @@
 
 .logo {
   display: inline-block;
-  height: 64px;
+  height: $header-height;
   margin: 0 auto;
 }
 
@@ -16,8 +18,10 @@
   cursor: pointer;
 }
 
-.user-block {
+.right-container {
   display: inline-block;
   position: absolute;
   right: 50px;
+  height: $header-height;
+  width: 80px;
 }
