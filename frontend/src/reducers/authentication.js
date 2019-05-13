@@ -8,7 +8,7 @@ const initialState = {
   token: localStorage.getItem('token'),
 }
 
-export function authentication(state = initialState, action) {
+const authentication = (state = initialState, action) =>{
   switch (action.type) {
     case CS.LOGIN_REQUEST:
       return {
@@ -30,3 +30,4 @@ export function authentication(state = initialState, action) {
       return state;
   }
 }
+export default authentication;

@@ -38,7 +38,6 @@ export function loginUser(creds) {
         dispatch({
           type: CS.LOGIN_FAILURE,
           isAuthenticated: false,
-          error: err
         })
     );
   };
