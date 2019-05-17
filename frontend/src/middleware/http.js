@@ -40,6 +40,7 @@ function handleError(error, hideErr) {
       const msg = error.response.data.errors;
       if (status === config.httpCode.UNAUTHORIZED) {
         store.dispatch(showNotification(authError));
+        localStorage.removeItem("token");
         store.dispatch(push('/login/'));
       } else if (status === config.httpCode.BADREQUEST) {
         store.dispatch(showNotification(networkError));

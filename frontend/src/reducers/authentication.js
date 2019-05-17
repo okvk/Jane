@@ -10,22 +10,16 @@ const initialState = {
 
 const authentication = (state = initialState, action) =>{
   switch (action.type) {
-    case CS.LOGIN_REQUEST:
-      return {
-        isAuthenticated: false,
-        user: action.user
-      };
     case CS.LOGIN_SUCCESS:
       return {
-        isAuthenticated: true,
+        isAuthenticated: action.isAuthenticated,
         user: action.user
       };
     case CS.LOGIN_FAILURE:
+    case CS.LOGOUT_SUCCESS:
       return {
-        isAuthenticated: false,
+        isAuthenticated: action.isAuthenticated
       };
-    case CS.LOGOUT_REQUEST:
-      return {};
     default:
       return state;
   }
