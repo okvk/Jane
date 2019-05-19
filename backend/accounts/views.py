@@ -11,7 +11,8 @@ from rest_framework_jwt.settings import api_settings
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
-# Create your views here.
+from utils.common import ResponseObject
+from utils.decorators import construct_response
 from .serializers import UserSerializer, LoginSerializer
 
 class Login(GenericAPIView):
@@ -19,6 +20,7 @@ class Login(GenericAPIView):
     renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
     serializer_class = LoginSerializer
 
+    @construct_response
     def post(self, request, format=None):
         """
         User login, identifier can either be username, or email
@@ -37,13 +39,13 @@ class Login(GenericAPIView):
                         'token': token,
                         'user': serializer.data,
                     }
-                    return Response(context, status.HTTP_200_OK)
+                    return ResponseObject(context, status.HTTP_200_OK)
                 else:
                     msg = 'The current account is disactived'
-                    return Response({'non_field_errors': msg}, status.HTTP_400_BAD_REQUEST)
+                    return ResponseObject(None, status.HTTP_400_BAD_REQUEST, {'non_field_errors': msg})
             else:
                 msg = 'Incorrect email address and / or password.'
-                return Response({'non_field_errors': msg},  status.HTTP_400_BAD_REQUEST)
+                return ResponseObject(None, status.HTTP_400_BAD_REQUEST, {'non_field_errors': msg})
         else:
             return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
@@ -51,8 +53,7 @@ class Logout(APIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
 
+    @construct_response
     def post(self, request, format=None):
         django_logout(request)
-        return Response({}, status.HTTP_200_OK)
-
-
+        return ResponseObject({}, status.HTTP_200_OK)

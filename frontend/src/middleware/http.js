@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { config } from 'config';
+import store from 'helpers/store';
+import { config, networkError, authError } from 'config';
+import { push } from "react-router-redux";
+import { showNotification } from 'actions/utils';
 
 function getAxios() {
   const token = localStorage.getItem('token') || null;
@@ -30,15 +33,22 @@ function processData(data) {
 function handleError(error, hideErr) {
   if (!hideErr && error.response) {
     const status = error.response.status;
-    const msg = error.response.data.errors;
-    if (status === config.httpCode.UNAUTHORIZED) {
-      // store.dispatch(expireAuthentication('Authorization Expired', 'warning'));
-      // store.dispatch(push('/auth/login'));
-    } else if (status === config.httpCode.BADREQUEST) {
-      throw msg;
-    } else {
-      throw msg;
+    console.log(status===500)
+    if(status === config.httpCode.INTERNAL_SERVER_ERROR){
+      store.dispatch(showNotification(networkError));
+    }else{
+      const msg = error.response.data.errors;
+      if (status === config.httpCode.UNAUTHORIZED) {
+        store.dispatch(showNotification(authError));
+        localStorage.removeItem("token");
+        store.dispatch(push('/login/'));
+      } else if (status === config.httpCode.BADREQUEST) {
+        store.dispatch(showNotification(networkError));
+      } else {
+        throw msg;
+      }
     }
+    throw  error;
   }
 }
 
