@@ -35,15 +35,16 @@ $ python
 'z1q=7ixu5&o=2lj05uziiemvhi)!z1-d9fwmyo(sqsyzpvg2u_'
 
 # 添加以下内容到 venv/bin/activate 文件末尾，在激活虚拟环境时引入配置
-export SECRET_KEY='z1q=7ixu5&o=2lj05uziiemvhi)!z1-d9fwmyo(sqsyzpvg2u_'
-export USERNAME='root'
-export PASSWORD='123456'
-export NAME='jane'
-export HOST='localhost'
-export PORT=3306
-export DEBUG=Ture
+export JANE_DEBUG=Ture
+export JANE_SECRET_KEY='z1q=7ixu5&o=2lj05uziiemvhi)!z1-d9fwmyo(sqsyzpvg2u_'
+# Database settings
+export JANE_DB_HOST='localhost'
+export JANE_DB_PORT=3306
+export JANE_DB_USERNAME='root'
+export JANE_DB_PASSWORD='123456'
+export JANE_DB_NAME='jane'
 # sentry 用于辅助追踪生产环境运行时错误
-export SENTRY='https://......'
+export JANE_SENTRY='https://......'
 
 # 重新激活
 $ source venv/bin/activate
