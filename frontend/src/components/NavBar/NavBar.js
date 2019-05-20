@@ -1,35 +1,35 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import throttle from "lodash.throttle";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import throttle from 'lodash/throttle';
 
-import { Icon, Popover } from "antd";
+import { Icon, Popover } from 'antd';
 
-import "./NavBar.less";
+import './NavBar.less';
 
-export class NavBar extends Component {
+class NavBar extends Component {
   state = {
     viewportWidth: 0,
-    menuVisible: false
-  };
-
-  componentDidMount() {
-    this.saveViewportDimensions();
-    window.addEventListener("resize", this.saveViewportDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.saveViewportDimensions);
-  }
-
-  handleMenuVisibility = menuVisible => {
-    this.setState({ menuVisible });
+    menuVisible: false,
   };
 
   saveViewportDimensions = throttle(() => {
     this.setState({
-      viewportWidth: window.innerWidth
+      viewportWidth: window.innerWidth,
     });
   }, this.props.applyViewportChange);
+
+  componentDidMount() {
+    this.saveViewportDimensions();
+    window.addEventListener('resize', this.saveViewportDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.saveViewportDimensions);
+  }
+
+  handleMenuVisibility = (menuVisible) => {
+    this.setState({ menuVisible });
+  };
 
   render() {
     const MenuMarkup = this.props.menuMarkup;
@@ -40,13 +40,13 @@ export class NavBar extends Component {
 
     return (
       <Popover
-        content={
+        content={(
           <MenuMarkup
             onLinkClick={() => this.handleMenuVisibility(false)}
             activeLinkKey={this.props.activeLinkKey}
             mobileVersion
           />
-        }
+        )}
         trigger="click"
         placement={this.props.placement}
         visible={this.state.menuVisible}
@@ -63,11 +63,13 @@ NavBar.propTypes = {
   applyViewportChange: PropTypes.number,
   activeLinkKey: PropTypes.string,
   placement: PropTypes.string,
-  menuMarkup: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  menuMarkup: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 NavBar.defaultProps = {
   mobileBreakPoint: 768,
   applyViewportChange: 250,
-  placement: "bottom"
+  placement: 'bottom',
 };
+
+export default NavBar;

@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
-import BaseFormItem from "components/BaseForm/BaseFormItem";
-import { loginUser } from "actions/authentication";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import {
+  Form, Icon, Input, Button, Checkbox,
+} from 'antd';
+import BaseFormItem from 'components/BaseForm/BaseFormItem';
+import { loginUser } from 'actions/authentication';
 
 class Login extends Component {
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        console.log('Received values of form: ', values);
         this.props.dispatch(loginUser(values));
       }
     });
@@ -22,30 +24,30 @@ class Login extends Component {
       <Form onSubmit={this.handleSubmit} className="login-form">
         <BaseFormItem />
         <Form.Item>
-          {getFieldDecorator("username", {
-            rules: [{ required: true, message: "Please input your username!" }]
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="Username"
-            />
+            />,
           )}
         </Form.Item>
         <Form.Item>
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input your Password!" }]
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
               placeholder="Password"
-            />
+            />,
           )}
         </Form.Item>
         <Form.Item>
-          {getFieldDecorator("remember", {
-            valuePropName: "checked",
-            initialValue: true
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: true,
           })(<Checkbox>Remember me</Checkbox>)}
           <Link to="/forget-password">Forgot password</Link>
           <Button
@@ -55,14 +57,16 @@ class Login extends Component {
           >
             Log in
           </Button>
-          Or <Link to="/register">register now!</Link>
+          Or
+          {' '}
+          <Link to="/register">register now!</Link>
         </Form.Item>
       </Form>
     );
   }
 }
 
-const WrappedLogin = Form.create({ name: "normal_login" })(Login);
+const WrappedLogin = Form.create({ name: 'normal_login' })(Login);
 
 function mapStateToProps(state) {
   return {};

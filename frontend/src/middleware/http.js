@@ -1,8 +1,8 @@
 import axios from 'axios';
 import store from 'helpers/store';
 import { config, networkError, authError } from 'config';
-import { push } from "react-router-redux";
-import { showNotification } from 'actions/utils';
+import { push } from 'react-router-redux';
+import showNotification from 'actions/utils';
 
 function getAxios() {
   const token = localStorage.getItem('token') || null;
@@ -33,14 +33,14 @@ function processData(data) {
 function handleError(error, hideErr) {
   if (!hideErr && error.response) {
     const status = error.response.status;
-    console.log(status===500)
-    if(status === config.httpCode.INTERNAL_SERVER_ERROR){
+    console.log(status === 500);
+    if (status === config.httpCode.INTERNAL_SERVER_ERROR) {
       store.dispatch(showNotification(networkError));
-    }else{
+    } else {
       const msg = error.response.data.errors;
       if (status === config.httpCode.UNAUTHORIZED) {
         store.dispatch(showNotification(authError));
-        localStorage.removeItem("token");
+        localStorage.removeItem('token');
         store.dispatch(push('/login/'));
       } else if (status === config.httpCode.BADREQUEST) {
         store.dispatch(showNotification(networkError));
@@ -48,7 +48,7 @@ function handleError(error, hideErr) {
         throw msg;
       }
     }
-    throw  error;
+    throw error;
   }
 }
 

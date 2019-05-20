@@ -1,6 +1,6 @@
-import React from "react";
-import { Form } from "antd";
-import styles from "./BaseFormItem.module.scss";
+import React from 'react';
+import { Form } from 'antd';
+import styles from './BaseFormItem.module.scss';
 
 const BaseFormItem = props => (
   <Form.Item>

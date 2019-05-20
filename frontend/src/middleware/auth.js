@@ -1,4 +1,4 @@
-import {post} from './http';
+import { post } from './http';
 
 export default {
   login(data) {
@@ -9,5 +9,5 @@ export default {
   },
   register(data) {
     return post('/accounts/register/', data);
-  }
+  },
 };
