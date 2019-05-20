@@ -3,17 +3,18 @@ from django.contrib import messages
 
 from .models import Article, Tag, TagMap
 
+
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created')
-    readonly_fields = ('id', 'created')
+    list_display = ("id", "title", "created")
+    readonly_fields = ("id", "created")
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'description', 'counts', 'created')
-    ordering = ['counts']
-    actions = ['combine_tags',]
-    readonly_fields = ('id', 'created')
-    
+    list_display = ("id", "name", "description", "counts", "created")
+    ordering = ["counts"]
+    actions = ["combine_tags"]
+    readonly_fields = ("id", "created")
+
     def combine_tags(self, request, queryset):
         """
         Combine multiple tags into one
@@ -30,11 +31,14 @@ class TagAdmin(admin.ModelAdmin):
             selected_tag.counts += sum_counts
             selected_tag.save()
             self.message_user(request, "成功合并 %d tags" % len(queryset))
+
     combine_tags.short_description = "合并所选 tags"
 
+
 class TagMapAdmin(admin.ModelAdmin):
-    list_display = ('id', 'aid', 'tid')
-    readonly_fields = ('id',)
+    list_display = ("id", "aid", "tid")
+    readonly_fields = ("id",)
+
 
 # unregister the Group model from admin.
 admin.site.register(Article, ArticleAdmin)

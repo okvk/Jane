@@ -5,7 +5,11 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import (
+    IsAuthenticated,
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+)
 
 from utils.common import paginate_data, ResponseObject
 from utils.decorators import exception_handler_wrapper, construct_response
@@ -13,19 +17,21 @@ from .models import Article, Tag, TagMap
 from .filters import TagFilterBackend, ArticleFilterBackend
 from .serializers import ArticleSerializer, TagSerializer
 
+
 class TagList(GenericAPIView):
     """
     Getting tag list or adding a new tag
     """
+
     permission_classes = (IsAuthenticatedOrReadOnly,)
     renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
-    queryset = Tag.objects.all().order_by('-counts')
+    queryset = Tag.objects.all().order_by("-counts")
     filter_backends = (TagFilterBackend,)
     serializer_class = TagSerializer
-    
+
     @construct_response
     def get(self, request, format=None):
-        name = request.GET.get('name')
+        name = request.GET.get("name")
         if name:
             tags = self.get_queryset().filter(name__contains=name)
         else:
@@ -43,10 +49,12 @@ class TagList(GenericAPIView):
         else:
             return ResponseObject(None, status.HTTP_400_BAD_REQUEST, serializer.errors)
 
+
 class ArticleList(GenericAPIView):
     """
     Getting Article list or adding a new Article
     """
+
     permission_classes = (IsAuthenticatedOrReadOnly,)
     renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
     filter_backends = (ArticleFilterBackend,)
@@ -56,20 +64,22 @@ class ArticleList(GenericAPIView):
         user = self.request.user
         articles = Article.objects.filter(is_deleted=False)
         if user.is_authenticated:
-            if self.request.GET.get('scoped', False):
+            if self.request.GET.get("scoped", False):
                 articles = articles.filter(author=user)
-        keyword = self.request.GET.get('keyword', False)
-        is_published = self.request.GET.get('is_published', True)
+        keyword = self.request.GET.get("keyword", False)
+        is_published = self.request.GET.get("is_published", True)
         if keyword:
             articles = articles.filter(title__contains=keyword)
         # Filter by tag
-        tag = self.request.GET.get('tag', False)
+        tag = self.request.GET.get("tag", False)
         if tag:
-            articleList = TagMap.objects.filter(tid__id=tag).values_list('aid', flat=True)
+            articleList = TagMap.objects.filter(tid__id=tag).values_list(
+                "aid", flat=True
+            )
             articles = articles.filter(id__in=articleList)
         articles = articles.filter(is_published=is_published)
         return articles
-    
+
     @construct_response
     @exception_handler_wrapper
     def get(self, request, format=None):
@@ -85,6 +95,7 @@ class ArticleList(GenericAPIView):
             return ResponseObject(serializer.data, status.HTTP_201_CREATED)
         else:
             return ResponseObject(None, status.HTTP_400_BAD_REQUEST, serializer.errors)
+
 
 class ArticleInstance(GenericAPIView):
     permission_classes = (IsAuthenticated,)

@@ -22,14 +22,16 @@ from rest_framework_swagger.views import get_swagger_view
 
 from . import settings
 
-schema_view = get_swagger_view(title='API documentation')
+schema_view = get_swagger_view(title="API documentation")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('docs/', schema_view, name='swagger'),
-    path('accounts/', include(('accounts.urls', 'accounts'), namespace='user_accounts')),
-    path('articles/', include(('articles.urls', 'articles'), namespace='articles')),
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
+    path("docs/", schema_view, name="swagger"),
+    path(
+        "accounts/", include(("accounts.urls", "accounts"), namespace="user_accounts")
+    ),
+    path("articles/", include(("articles.urls", "articles"), namespace="articles")),
 ]
 
 if settings.DEBUG:

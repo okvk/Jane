@@ -9,19 +9,21 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('articles', '0001_initial'),
+        ("articles", "0001_initial"),
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='tagmap',
-            old_name='aid',
-            new_name='pid',
-        ),
+        migrations.RenameField(model_name="tagmap", old_name="aid", new_name="pid"),
         migrations.AddField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='user', to=settings.AUTH_USER_MODEL, verbose_name='author'),
+            model_name="post",
+            name="author",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="user",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="author",
+            ),
             preserve_default=False,
         ),
     ]
