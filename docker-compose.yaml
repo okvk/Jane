@@ -7,8 +7,8 @@ services:
     image: itechub/jane-mysql:latest
     build: ./deployment/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${JANE_DB_PASSWORD}
+      MYSQL_DATABASE: ${JANE_DB_NAME}
     volumes:
       - ${DOCKER_DIR}/volumes/data:/var/lib/mysql # mysql data source
       - ${DOCKER_DIR}/volumes/log:/disk/log  # mysql log
@@ -21,17 +21,17 @@ services:
       context: ./
       dockerfile: ./deployment/django/Dockerfile
     environment:
-      HOST: mysql
-      PORT: 3306
       DJANGO_MANAGEPY_MIGRATE: "on"
       DJANGO_MANAGEPY_COLLECTSTATIC: "on"
-      USERNAME: root
-      NAME: ${DB_NAME}
-      DEBUG: 1
-      PASSWORD: ${DB_PASSWORD}
-      SECRET_KEY: ${SECRET_KEY}
-      SENTRY: ${SENTRY}
-    # mount django static file, serverd by nginx
+      JANE_DEBUG: ${JANE_DEBUG}
+      JANE_SECRET_KEY: ${JANE_SECRET_KEY}
+      JANE_DB_HOST: mysql
+      JANE_DB_PORT: 3306
+      JANE_DB_USERNAME: ${JANE_DB_USERNAME}
+      JANE_DB_PASSWORD: ${JANE_DB_PASSWORD}
+      JANE_DB_NAME: ${JANE_DB_NAME}
+      JANE_SENTRY: ${JANE_SENTRY}
+    # mount django static file, served by nginx
     volumes:
       - ${DOCKER_DIR}/volumes/statics:/env/app/collectstatic/statics
     networks:
@@ -42,8 +42,8 @@ services:
     build:
       context: ./
       dockerfile: deployment/nginx/Dockerfile
-    environment:
-      BACKEND_API_PREFIX: ${BACKEND_API_PREFIX}
+      args:
+        REACT_APP_JANE_API: ${REACT_APP_JANE_API}
     ports:
       - "1984:80"
     volumes:

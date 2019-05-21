@@ -6,10 +6,6 @@ RUN pip3 install virtualenv
 RUN virtualenv /env
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
-
-COPY ./deployment/django/docker-entrypoint.sh  /env/app/
-RUN chmod +x /env/app/docker-entrypoint.sh
-
 # Copy requirements.pip in advance
 COPY ./backend/requirements/ /env/app/requirements/
 
@@ -19,12 +15,15 @@ RUN apk add --no-cache --virtual .build-deps build-base linux-headers \
     && pip install -r requirements/production.pip \
     && apk del .build-deps
 
+COPY ./deployment/django/docker-entrypoint.sh  /env/app/
+RUN chmod +x /env/app/docker-entrypoint.sh
+
 # Reading the context from the docker-compose build setting
 COPY ./backend/ /env/app
 
 EXPOSE 8080
 
-VOLUME ["/env/app/collectstatic/statics",]
+VOLUME ["/env/app/collectstatic/statics"]
 
 ENTRYPOINT ["/env/app/docker-entrypoint.sh"]
 

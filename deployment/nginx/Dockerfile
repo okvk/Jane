@@ -7,8 +7,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY ./frontend/package.json ./frontend/yarn.lock /app/
 RUN yarn install --silent
 COPY ./frontend /app
+ARG REACT_APP_JANE_API
 # Read backend API from environment variables
-ENV BACKEND_API_PREFIX=$BACKEND_API_PREFIX
 RUN yarn run build
 
 # production environment

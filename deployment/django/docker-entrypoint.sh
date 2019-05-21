@@ -2,7 +2,7 @@
 
 set -e
 
-until nc -z -v -w30 $HOST 3306
+until nc -z -v -w30 $JANE_DB_HOST 3306
 do
   echo "Waiting for database mysql connection..."
   sleep 1
