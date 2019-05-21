@@ -1,16 +1,15 @@
-import React from 'react';
-import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
-import { Layout } from 'antd';
+import React from "react";
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import { Layout } from "antd";
 
-import MenuMarkup from 'components/MenuMarkup/MenuMarkup';
-import NavBar from 'components/NavBar/NavBar';
-import UserSection from 'components/User/UserSection';
-import { logoutUser } from 'actions/authentication';
+import MenuMarkup from "components/MenuMarkup/MenuMarkup";
+import NavBar from "components/NavBar/NavBar";
+import UserSection from "components/User/UserSection";
+import { logoutUser } from "actions/authentication";
 
-import logo from 'assets/logo.png';
-import './Header.scss';
-
+import logo from "assets/logo.png";
+import "./Header.scss";
 
 const Header = ({ location, dispatch }) => {
   const onLogout = () => {
@@ -32,6 +31,5 @@ const Header = ({ location, dispatch }) => {
     </Layout.Header>
   );
 };
-
 
 export default withRouter(connect()(Header));

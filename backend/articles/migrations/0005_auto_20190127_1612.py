@@ -8,7 +8,9 @@ class Migration(migrations.Migration):
     dependencies = [("articles", "0004_auto_20190125_1658")]
 
     operations = [
-        migrations.RenameField(model_name="tag", old_name="links", new_name="counts"),
+        migrations.RenameField(
+            model_name="tag", old_name="links", new_name="counts"
+        ),
         migrations.AlterField(
             model_name="tag",
             name="name",

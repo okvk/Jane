@@ -9,7 +9,7 @@ from utils.common import ResponseObject
 
 def exception_handler_wrapper(function):
     """
-    A decorator that wraps the passed in function and handle logs 
+    A decorator that wraps the passed in function and handle logs
     """
 
     @functools.wraps(function)
@@ -24,7 +24,9 @@ def exception_handler_wrapper(function):
         except Exception as e:
             msg = "Server Error: {0} ".format(e)
             return ResponseObject(
-                None, status.HTTP_500_INTERNAL_SERVER_ERROR, {"non_field_errors": msg}
+                None,
+                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                {"non_field_errors": msg},
             )
 
     return wrap

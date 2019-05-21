@@ -1,28 +1,28 @@
-import axios from 'axios';
-import store from 'helpers/store';
-import { config, networkError, authError } from 'config';
-import { push } from 'react-router-redux';
-import showNotification from 'actions/utils';
+import axios from "axios";
+import store from "helpers/store";
+import { config, networkError, authError } from "config";
+import { push } from "react-router-redux";
+import showNotification from "actions/utils";
 
 function getAxios() {
-  const token = localStorage.getItem('token') || null;
-  const headers = { 'Content-Type': 'application/json' };
+  const token = localStorage.getItem("token") || null;
+  const headers = { "Content-Type": "application/json" };
   if (token) {
     headers.Authorization = `JWT ${token}`;
   }
 
   return axios.create({
     headers,
-    method: 'get',
+    method: "get",
     baseURL: config.BASE_URL,
     timeout: 60000,
-    responseType: 'json',
+    responseType: "json",
     transformRequest: [
-      function (data) {
+      function(data) {
         if (data instanceof FormData) return data;
         return JSON.stringify(data);
-      },
-    ],
+      }
+    ]
   });
 }
 
@@ -40,8 +40,8 @@ function handleError(error, hideErr) {
       const msg = error.response.data.errors;
       if (status === config.httpCode.UNAUTHORIZED) {
         store.dispatch(showNotification(authError));
-        localStorage.removeItem('token');
-        store.dispatch(push('/login/'));
+        localStorage.removeItem("token");
+        store.dispatch(push("/login/"));
       } else if (status === config.httpCode.BADREQUEST) {
         store.dispatch(showNotification(networkError));
       } else {
@@ -56,7 +56,7 @@ export function post(url, data, hideErr = false) {
   return getAxios()
     .post(url, processData(data))
     .then(res => res.data)
-    .catch((err) => {
+    .catch(err => {
       handleError(err, hideErr);
     });
 }
@@ -65,7 +65,7 @@ export function get(url, data, hideErr = false) {
   return getAxios()
     .get(url, processData(data))
     .then(res => res.data)
-    .catch((err) => {
+    .catch(err => {
       handleError(err, hideErr);
     });
 }
@@ -74,7 +74,7 @@ export function put(url, data, hideErr = false) {
   return getAxios()
     .put(url, processData(data))
     .then(res => res.data)
-    .catch((err) => {
+    .catch(err => {
       handleError(err, hideErr);
     });
 }
@@ -83,7 +83,7 @@ export function del(url, hideErr = false) {
   return getAxios()
     .delete(url)
     .then(res => res.data)
-    .catch((err) => {
+    .catch(err => {
       handleError(err, hideErr);
     });
 }

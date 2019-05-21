@@ -47,7 +47,9 @@ class TagList(GenericAPIView):
             serializer.save()
             return ResponseObject(serializer.data, status.HTTP_201_CREATED)
         else:
-            return ResponseObject(None, status.HTTP_400_BAD_REQUEST, serializer.errors)
+            return ResponseObject(
+                None, status.HTTP_400_BAD_REQUEST, serializer.errors
+            )
 
 
 class ArticleList(GenericAPIView):
@@ -94,7 +96,9 @@ class ArticleList(GenericAPIView):
             serializer.save(author=request.user)
             return ResponseObject(serializer.data, status.HTTP_201_CREATED)
         else:
-            return ResponseObject(None, status.HTTP_400_BAD_REQUEST, serializer.errors)
+            return ResponseObject(
+                None, status.HTTP_400_BAD_REQUEST, serializer.errors
+            )
 
 
 class ArticleInstance(GenericAPIView):
@@ -113,12 +117,16 @@ class ArticleInstance(GenericAPIView):
     @construct_response
     def put(self, request, pk, format=None):
         article = Article.objects.get(id=pk, author=request.user)
-        serializer = ArticleSerializer(article, data=request.data, partial=True)
+        serializer = ArticleSerializer(
+            article, data=request.data, partial=True
+        )
         if serializer.is_valid():
             serializer.save()
             return ResponseObject(serializer.data, status.HTTP_200_OK)
         else:
-            return ResponseObject(None, status.HTTP_400_BAD_REQUEST, serializer.errors)
+            return ResponseObject(
+                None, status.HTTP_400_BAD_REQUEST, serializer.errors
+            )
 
     @exception_handler_wrapper
     @construct_response

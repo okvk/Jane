@@ -1,54 +1,56 @@
-import store from 'helpers/store';
-import { push } from 'react-router-redux';
-import authRequest from 'middleware/auth';
+import store from "helpers/store";
+import { push } from "react-router-redux";
+import authRequest from "middleware/auth";
 
-import CS from 'constants/userConstants';
+import CS from "constants/userConstants";
 
 function receiveLogin(data) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: CS.LOGIN_SUCCESS,
       isAuthenticated: true,
-      user: data.user,
+      user: data.user
     });
     // Redirect to home page
-    dispatch(() => store.dispatch(push('/')));
+    dispatch(() => store.dispatch(push("/")));
   };
 }
 
 export function loginUser(creds) {
-  return dispatch => authRequest.login(creds).then(
-    (response) => {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      dispatch(receiveLogin(response.data));
-    },
-    err => dispatch({
-      type: CS.LOGIN_FAILURE,
-      isAuthenticated: false,
-    }),
-  );
+  return dispatch =>
+    authRequest.login(creds).then(
+      response => {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        dispatch(receiveLogin(response.data));
+      },
+      err =>
+        dispatch({
+          type: CS.LOGIN_FAILURE,
+          isAuthenticated: false
+        })
+    );
 }
 
 function receiveLogout() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: CS.LOGOUT_SUCCESS,
-      isAuthenticated: false,
+      isAuthenticated: false
     });
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    dispatch(() => store.dispatch(push('/login/')));
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    dispatch(() => store.dispatch(push("/login/")));
   };
 }
 
 export function logoutUser() {
-  return (dispatch) => {
+  return dispatch => {
     authRequest.logout().then(
       () => {
         dispatch(receiveLogout());
       },
-      err => console.log(err),
+      err => console.log(err)
     );
   };
 }

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Router } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Layout } from 'antd';
+import React, { Component } from "react";
+import { Router } from "react-router-dom";
+import { connect } from "react-redux";
+import { Layout } from "antd";
 
-import history from 'helpers/history';
-import Footer from 'layouts/Footer';
-import Header from 'layouts/Header';
-import AppRoutes from './routes';
+import history from "helpers/history";
+import Footer from "layouts/Footer";
+import Header from "layouts/Header";
+import AppRoutes from "./routes";
 
-import './App.scss';
+import "./App.scss";
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { alert } = state;
   return { alert };
 };

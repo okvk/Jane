@@ -20,7 +20,9 @@ class TagAdmin(admin.ModelAdmin):
         Combine multiple tags into one
         """
         if len(queryset) <= 1:
-            self.message_user(request, "非法操作：请勾选两个或两个以上 tag 实例", level=messages.ERROR)
+            self.message_user(
+                request, "非法操作：请勾选两个或两个以上 tag 实例", level=messages.ERROR
+            )
         else:
             sum_counts = 0
             selected_tag = queryset[0]

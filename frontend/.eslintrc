@@ -5,10 +5,11 @@
     "node": true,
     "jest": true
   },
-  "plugins": ["react"],
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["react", "prettier"],
   "rules": {
-    "indent": [2, 2],
+    "quotes": [2, "double", { "avoidEscape": true }],
+    "comma-dangle": ["error", "never"],
     "no-tabs": 0,
     "prefer-destructuring": 0,
     "import/no-cycle": 0,
@@ -26,7 +27,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src"]
+        "paths": ["frontend/src"]
       }
     }
   }

@@ -11,7 +11,7 @@ services:
       MYSQL_DATABASE: ${JANE_DB_NAME}
     volumes:
       - ${DOCKER_DIR}/volumes/data:/var/lib/mysql # mysql data source
-      - ${DOCKER_DIR}/volumes/log:/disk/log  # mysql log
+      - ${DOCKER_DIR}/volumes/log:/disk/log # mysql log
     networks:
       - jane
 

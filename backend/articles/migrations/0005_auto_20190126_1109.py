@@ -11,9 +11,13 @@ class Migration(migrations.Migration):
         migrations.AlterModelOptions(
             name="article", options={"ordering": ["-last_modified"]}
         ),
-        migrations.RenameField(model_name="article", old_name="name", new_name="title"),
+        migrations.RenameField(
+            model_name="article", old_name="name", new_name="title"
+        ),
         migrations.AddField(
-            model_name="article", name="content", field=models.TextField(null=True)
+            model_name="article",
+            name="content",
+            field=models.TextField(null=True),
         ),
         migrations.AddField(
             model_name="article",

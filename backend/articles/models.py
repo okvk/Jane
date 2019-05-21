@@ -1,12 +1,16 @@
 from django.db import models
 from accounts.models import User
 
+
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length=256)
     summary = models.CharField(max_length=512, null=True)
     author = models.ForeignKey(
-        User, verbose_name="author", related_name="user", on_delete=models.DO_NOTHING
+        User,
+        verbose_name="author",
+        related_name="user",
+        on_delete=models.DO_NOTHING,
     )
     content = models.TextField(null=True)
     is_stickied = models.BooleanField(default=False)

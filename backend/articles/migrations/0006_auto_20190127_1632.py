@@ -9,7 +9,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name="article", options={"ordering": ["is_stickied", "-last_modified"]}
+            name="article",
+            options={"ordering": ["is_stickied", "-last_modified"]},
         ),
         migrations.AddField(
             model_name="article",

@@ -31,5 +31,8 @@ class LoginSerializer(serializers.Serializer):
         required=True, max_length=100, label="username/email"
     )
     password = serializers.CharField(
-        required=True, max_length=50, style={"input_type": "password"}, label="password"
+        required=True,
+        max_length=50,
+        style={"input_type": "password"},
+        label="password",
     )

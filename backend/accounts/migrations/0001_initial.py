@@ -22,7 +22,10 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "password",
+                    models.CharField(max_length=128, verbose_name="password"),
+                ),
                 (
                     "last_login",
                     models.DateTimeField(
@@ -31,28 +34,48 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "email",
-                    models.EmailField(max_length=255, unique=True, verbose_name="邮箱"),
+                    models.EmailField(
+                        max_length=255, unique=True, verbose_name="邮箱"
+                    ),
                 ),
                 (
                     "username",
                     models.CharField(
-                        max_length=32, null=True, unique=True, verbose_name="用户名"
+                        max_length=32,
+                        null=True,
+                        unique=True,
+                        verbose_name="用户名",
                     ),
                 ),
                 (
                     "nickname",
-                    models.CharField(max_length=32, null=True, verbose_name="昵称"),
+                    models.CharField(
+                        max_length=32, null=True, verbose_name="昵称"
+                    ),
                 ),
                 (
                     "real_name",
-                    models.CharField(max_length=32, null=True, verbose_name="真实姓名"),
+                    models.CharField(
+                        max_length=32, null=True, verbose_name="真实姓名"
+                    ),
                 ),
-                ("date_of_birth", models.DateField(null=True, verbose_name="出生日期")),
-                ("is_active", models.BooleanField(default=True, verbose_name="账户可用")),
-                ("is_admin", models.BooleanField(default=False, verbose_name="管理员")),
+                (
+                    "date_of_birth",
+                    models.DateField(null=True, verbose_name="出生日期"),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(default=True, verbose_name="账户可用"),
+                ),
+                (
+                    "is_admin",
+                    models.BooleanField(default=False, verbose_name="管理员"),
+                ),
                 (
                     "joined",
-                    models.DateTimeField(auto_now_add=True, verbose_name="加入时间"),
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="加入时间"
+                    ),
                 ),
             ],
             options={"abstract": False},

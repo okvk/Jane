@@ -10,15 +10,13 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
 from rest_framework_jwt.settings import api_settings
-
-jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-
 from utils.common import ResponseObject
 from utils.decorators import construct_response
 from .serializers import UserSerializer, LoginSerializer
+
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
 class Login(GenericAPIView):
@@ -48,12 +46,16 @@ class Login(GenericAPIView):
                 else:
                     msg = "The current account is disactived"
                     return ResponseObject(
-                        None, status.HTTP_400_BAD_REQUEST, {"non_field_errors": msg}
+                        None,
+                        status.HTTP_400_BAD_REQUEST,
+                        {"non_field_errors": msg},
                     )
             else:
                 msg = "Incorrect email address and / or password."
                 return ResponseObject(
-                    None, status.HTTP_400_BAD_REQUEST, {"non_field_errors": msg}
+                    None,
+                    status.HTTP_400_BAD_REQUEST,
+                    {"non_field_errors": msg},
                 )
         else:
             return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)

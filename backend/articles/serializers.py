@@ -7,7 +7,9 @@ from .models import Article, Tag, TagMap
 
 class ArticleSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
-    tags_list = serializers.ListField(child=serializers.IntegerField(), write_only=True)
+    tags_list = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True
+    )
     author = serializers.ReadOnlyField(source="author.username")
     is_deleted = serializers.ReadOnlyField()
     last_modified = serializers.ReadOnlyField()

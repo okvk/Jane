@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import throttle from 'lodash/throttle';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import throttle from "lodash/throttle";
 
-import { Icon, Popover } from 'antd';
+import { Icon, Popover } from "antd";
 
-import './NavBar.less';
+import "./NavBar.less";
 
 class NavBar extends Component {
   state = {
     viewportWidth: 0,
-    menuVisible: false,
+    menuVisible: false
   };
 
   saveViewportDimensions = throttle(() => {
     this.setState({
-      viewportWidth: window.innerWidth,
+      viewportWidth: window.innerWidth
     });
   }, this.props.applyViewportChange);
 
   componentDidMount() {
     this.saveViewportDimensions();
-    window.addEventListener('resize', this.saveViewportDimensions);
+    window.addEventListener("resize", this.saveViewportDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.saveViewportDimensions);
+    window.removeEventListener("resize", this.saveViewportDimensions);
   }
 
-  handleMenuVisibility = (menuVisible) => {
+  handleMenuVisibility = menuVisible => {
     this.setState({ menuVisible });
   };
 
@@ -40,13 +40,13 @@ class NavBar extends Component {
 
     return (
       <Popover
-        content={(
+        content={
           <MenuMarkup
             onLinkClick={() => this.handleMenuVisibility(false)}
             activeLinkKey={this.props.activeLinkKey}
             mobileVersion
           />
-        )}
+        }
         trigger="click"
         placement={this.props.placement}
         visible={this.state.menuVisible}
@@ -61,15 +61,15 @@ class NavBar extends Component {
 NavBar.propTypes = {
   mobileBreakPoint: PropTypes.number,
   applyViewportChange: PropTypes.number,
-  activeLinkKey: PropTypes.string,
+  activeLinkKey: PropTypes.string.isRequired,
   placement: PropTypes.string,
-  menuMarkup: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  menuMarkup: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired
 };
 
 NavBar.defaultProps = {
   mobileBreakPoint: 768,
   applyViewportChange: 250,
-  placement: 'bottom',
+  placement: "bottom"
 };
 
 export default NavBar;

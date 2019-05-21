@@ -13,7 +13,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(model_name="tagmap", old_name="aid", new_name="pid"),
+        migrations.RenameField(
+            model_name="tagmap", old_name="aid", new_name="pid"
+        ),
         migrations.AddField(
             model_name="post",
             name="author",
