@@ -9,7 +9,7 @@ module.exports = override(
   }),
   // less loader
   addLessLoader({
-    javascriptEnabled: true,
+    javascriptEnabled: true
     // customizing antd
     // modifyVars: { "@primary-color": "#1DA57A" }
   })

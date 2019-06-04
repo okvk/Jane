@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import throttle from "lodash.throttle";
+import throttle from "lodash/throttle";
 
 import { Icon, Popover } from "antd";
 
 import "./NavBar.less";
 
-export class NavBar extends Component {
+class NavBar extends Component {
   state = {
     viewportWidth: 0,
     menuVisible: false
   };
+
+  saveViewportDimensions = throttle(() => {
+    this.setState({
+      viewportWidth: window.innerWidth
+    });
+  }, this.props.applyViewportChange);
 
   componentDidMount() {
     this.saveViewportDimensions();
@@ -24,12 +30,6 @@ export class NavBar extends Component {
   handleMenuVisibility = menuVisible => {
     this.setState({ menuVisible });
   };
-
-  saveViewportDimensions = throttle(() => {
-    this.setState({
-      viewportWidth: window.innerWidth
-    });
-  }, this.props.applyViewportChange);
 
   render() {
     const MenuMarkup = this.props.menuMarkup;
@@ -61,9 +61,9 @@ export class NavBar extends Component {
 NavBar.propTypes = {
   mobileBreakPoint: PropTypes.number,
   applyViewportChange: PropTypes.number,
-  activeLinkKey: PropTypes.string,
+  activeLinkKey: PropTypes.string.isRequired,
   placement: PropTypes.string,
-  menuMarkup: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  menuMarkup: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired
 };
 
 NavBar.defaultProps = {
@@ -71,3 +71,5 @@ NavBar.defaultProps = {
   applyViewportChange: 250,
   placement: "bottom"
 };
+
+export default NavBar;

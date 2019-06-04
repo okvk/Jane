@@ -1,14 +1,14 @@
-import {default as CS} from 'constants/userConstants';
+import CS from "constants/userConstants";
 
 const initialState = {
-  isAuthenticated: !!localStorage.getItem('token'),
-  user: localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
+  isAuthenticated: !!localStorage.getItem("token"),
+  user: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
     : {},
-  token: localStorage.getItem('token'),
-}
+  token: localStorage.getItem("token")
+};
 
-const authentication = (state = initialState, action) =>{
+const authentication = (state = initialState, action) => {
   switch (action.type) {
     case CS.LOGIN_SUCCESS:
       return {
@@ -23,5 +23,5 @@ const authentication = (state = initialState, action) =>{
     default:
       return state;
   }
-}
+};
 export default authentication;

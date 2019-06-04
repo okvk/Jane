@@ -1,8 +1,8 @@
-import { Home } from "pages/Home";
+import Home from "pages/Home/Home";
 import Login from "pages/Login/Login";
 import Register from "pages/Register/Register";
 
-export const routes = [
+const routes = [
   {
     path: "/",
     component: Home
@@ -16,3 +16,5 @@ export const routes = [
     component: Register
   }
 ];
+
+export default routes;

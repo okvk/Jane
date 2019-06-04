@@ -2,7 +2,7 @@ import store from "helpers/store";
 import { push } from "react-router-redux";
 import authRequest from "middleware/auth";
 
-import {default as CS} from 'constants/userConstants';
+import CS from "constants/userConstants";
 
 function receiveLogin(data) {
   return dispatch => {
@@ -17,8 +17,8 @@ function receiveLogin(data) {
 }
 
 export function loginUser(creds) {
-  return dispatch => {
-    return authRequest.login(creds).then(
+  return dispatch =>
+    authRequest.login(creds).then(
       response => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -27,10 +27,9 @@ export function loginUser(creds) {
       err =>
         dispatch({
           type: CS.LOGIN_FAILURE,
-          isAuthenticated: false,
+          isAuthenticated: false
         })
     );
-  };
 }
 
 function receiveLogout() {

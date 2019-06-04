@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import store from "helpers/store";
 import * as serviceWorker from "./serviceWorker";
 
-import { App } from "./App";
-import store from "helpers/store";
+import App from "./App";
 import "./index.scss";
 
 const loadingScreen = document.querySelector(".loading-screen");

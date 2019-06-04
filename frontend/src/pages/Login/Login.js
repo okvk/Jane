@@ -1,6 +1,6 @@
 import React from "react";
-import LoginForm from "./LoginForm";
 import FormLayout from "layouts/Form/FormLayout";
+import LoginForm from "./LoginForm";
 
 const Login = props => (
   <FormLayout>

@@ -7,14 +7,14 @@ import styles from "./MenuMarkup.module.scss";
 
 // ref: https://tomas.piestansky.cz/posts/2018/responsive-menu-ant-design/
 
-export const MenuMarkup = ({
+const MenuMarkup = ({
   mobileVersion,
   activeLinkKey,
   onLinkClick,
   className
 }) => (
   <Menu
-    theme={"light"}
+    theme="light"
     mode={mobileVersion ? "vertical" : "horizontal"}
     selectedKeys={[`${activeLinkKey}`]}
     className={`${className} ${styles.menu}`}
@@ -35,7 +35,6 @@ export const MenuMarkup = ({
 MenuMarkup.propTypes = {
   mobileVersion: PropTypes.bool,
   activeLinkKey: PropTypes.string.isRequired,
-  onLinkClick: PropTypes.func,
   className: PropTypes.string
 };
 
@@ -43,3 +42,4 @@ MenuMarkup.defaultProps = {
   mobileVersion: false,
   className: "mobile-navigation"
 };
+export default MenuMarkup;

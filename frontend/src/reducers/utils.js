@@ -1,5 +1,4 @@
-import {default as CS} from 'constants/utilsConstants';
-
+import CS from "constants/utilsConstants";
 
 const utils = (state = {}, action) => {
   switch (action.type) {
@@ -8,6 +7,6 @@ const utils = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 export default utils;

@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { Layout } from "antd";
 
 import history from "helpers/history";
-import AppRoutes from "./routes";
 import Footer from "layouts/Footer";
 import Header from "layouts/Header";
+import AppRoutes from "./routes";
 
 import "./App.scss";
 
@@ -35,4 +35,4 @@ const mapStateToProps = state => {
 
 const connectedApp = connect(mapStateToProps)(App);
 
-export { connectedApp as App };
+export default connectedApp;
