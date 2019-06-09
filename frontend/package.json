@@ -6,6 +6,7 @@
     "antd": "^3.12.4",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.0",
+    "braft-editor": "^2.3.2",
     "customize-cra": "^0.2.10",
     "history": "^4.9.0",
     "less": "^3.9.0",
