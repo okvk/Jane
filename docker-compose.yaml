@@ -31,6 +31,9 @@ services:
       JANE_DB_PASSWORD: ${JANE_DB_PASSWORD}
       JANE_DB_NAME: ${JANE_DB_NAME}
       JANE_SENTRY: ${JANE_SENTRY}
+      JANE_ADMIN_NAME: ${JANE_ADMIN_NAME}
+      JANE_ADMIN_EMAIL: ${JANE_ADMIN_EMAIL}
+      JANE_ADMIN_PASS: ${JANE_ADMIN_PASS}
     # mount django static file, served by nginx
     volumes:
       - ${DOCKER_DIR}/volumes/statics:/env/app/collectstatic/statics
