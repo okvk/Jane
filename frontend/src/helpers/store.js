@@ -11,8 +11,8 @@ const loggerMiddleware = createLogger();
 
 const middleware = applyMiddleware(
   routerMiddleware(history),
-  thunkMiddleware,
-  loggerMiddleware
+  thunkMiddleware
+  // loggerMiddleware
 );
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
