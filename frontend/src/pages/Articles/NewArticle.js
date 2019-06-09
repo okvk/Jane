@@ -35,6 +35,7 @@ class Write extends Component {
     const data = {
       title: this.state.title,
       content: this.state.editorState.toHTML(),
+      raw: this.state.editorState.toRAW(),
       is_published: true,
       tags_list: this.state.selectedTags.map(tag => tag.key)
     };

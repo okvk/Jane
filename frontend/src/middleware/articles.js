@@ -9,5 +9,8 @@ export default {
   },
   getArticle(articleId) {
     return get(`/articles/${articleId}/`);
+  },
+  getArticleList() {
+    return get("/articles/");
   }
 };
