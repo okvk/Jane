@@ -30,8 +30,23 @@ export function getArticle(articleId) {
       response => {
         dispatch(() =>
           store.dispatch({
-            type: CS.GET_ARTICLE_SUCCESS,
+            type: CS.RECEIVE_ARTICLE_INSTANCE,
             article: response.data
+          })
+        );
+      },
+      err => console.log(err)
+    );
+}
+
+export function getArticleList() {
+  return dispatch =>
+    articlesRequest.getArticleList().then(
+      response => {
+        dispatch(() =>
+          store.dispatch({
+            type: CS.RECEIVE_ARTICLE_LIST,
+            articles: response.data.records
           })
         );
       },

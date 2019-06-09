@@ -13,6 +13,7 @@ class Article(models.Model):
         on_delete=models.DO_NOTHING,
     )
     content = models.TextField(null=True)
+    raw = models.TextField(null=True)
     is_stickied = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)

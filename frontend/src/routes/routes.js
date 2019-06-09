@@ -2,7 +2,8 @@ import Home from "pages/Home/Home";
 import Login from "pages/Login/Login";
 import Register from "pages/Register/Register";
 import NewArticle from "pages/Articles/NewArticle";
-import Article from "pages/Articles/Article";
+import ArticlePage from "pages/Articles/ArticlePage";
+import ArticleList from "pages/Articles/ArticleList";
 
 const routes = [
   {
@@ -22,8 +23,12 @@ const routes = [
     component: NewArticle
   },
   {
+    path: "/articles/",
+    component: ArticleList
+  },
+  {
     path: "/articles/:articleId",
-    component: Article
+    component: ArticlePage
   }
 ];
 
