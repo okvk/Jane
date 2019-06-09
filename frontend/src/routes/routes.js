@@ -1,7 +1,8 @@
 import Home from "pages/Home/Home";
 import Login from "pages/Login/Login";
 import Register from "pages/Register/Register";
-import Write from "pages/NewArticle/Write";
+import NewArticle from "pages/Articles/NewArticle";
+import Article from "pages/Articles/Article";
 
 const routes = [
   {
@@ -18,7 +19,11 @@ const routes = [
   },
   {
     path: "/write",
-    component: Write
+    component: NewArticle
+  },
+  {
+    path: "/articles/:articleId",
+    component: Article
   }
 ];
 

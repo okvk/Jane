@@ -1,43 +1,72 @@
-import React from "react";
-import BraftEditor from "braft-editor";
 import "braft-editor/dist/index.css";
+import React from "react";
+import PropTypes from "prop-types";
+import BraftEditor from "braft-editor";
+import PreviewHtml from "./PreviewHtml";
 
-export default class Editor extends React.Component {
-  state = {
-    editorState: null
-  };
-
-  // async componentDidMount () {
-  //   // 假设此处从服务端获取html格式的编辑器内容
-  //   const htmlContent = await fetchEditorContent()
-  //   // 使用BraftEditor.createEditorState将html字符串转换为编辑器需要的editorState数据
-  //   this.setState({
-  //     editorState: BraftEditor.createEditorState(htmlContent)
-  //   })
-  // }
-
-  submitContent = async () => {
-    // 在编辑器获得焦点时按下ctrl+s会执行此方法
-    // 编辑器内容提交到服务端之前，可直接调用editorState.toHTML()来获取HTML格式的内容
-    const htmlContent = this.state.editorState.toHTML();
-    // const result = await saveEditorContent(htmlContent)
-  };
-
-  handleEditorChange = editorState => {
-    this.setState({ editorState });
+class Editor extends React.Component {
+  preview = () => {
+    if (window.previewWindow) {
+      window.previewWindow.close();
+    }
+    window.previewWindow = window.open();
+    window.previewWindow.document.write(
+      PreviewHtml(this.props.editorState.toHTML())
+    );
+    window.previewWindow.document.close();
   };
 
   render() {
-    const { editorState } = this.state;
+    const { theme, editorState, handleEditorChange } = this.props;
+    let excludeControls = [
+      "letter-spacing",
+      "line-height",
+      "clear",
+      "headings",
+      "list-ol",
+      "list-ul",
+      "remove-styles",
+      "superscript",
+      "subscript",
+      "hr",
+      "text-align"
+    ];
+    if (theme === "full") {
+      excludeControls = [];
+    }
+
+    const extendControls = [
+      {
+        key: "custom-button",
+        type: "button",
+        text: "预览",
+        onClick: this.preview
+      }
+    ];
 
     return (
-      <div className="my-component">
+      <div className="editor-wrapper">
         <BraftEditor
-          value={editorState}
-          onChange={this.handleEditorChange}
-          onSave={this.submitContent}
+          // TODO: Using Throttle to improve performance
+          onChange={editor => handleEditorChange(editor)}
+          excludeControls={excludeControls}
+          extendControls={extendControls}
+          contentStyle={{ height: 800 }}
         />
       </div>
     );
   }
 }
+
+Editor.propTypes = {
+  theme: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  editorState: PropTypes.object.isRequired,
+  handleEditorChange: PropTypes.func.isRequired
+};
+
+Editor.defaultProps = {
+  theme: "full"
+};
+
+export default Editor;
