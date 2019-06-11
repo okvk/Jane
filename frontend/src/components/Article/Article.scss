@@ -1,0 +1,27 @@
+.article-item {
+  margin-bottom: 12px;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.article-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: left;
+}
+.article-summary {
+  text-indent: 12px;
+  opacity: 0.8;
+}
+.article-meta {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.article-clock {
+  margin-right: 8px;
+}
+.tag-item {
+  padding: 2px;
+  margin-right: 6px;
+}

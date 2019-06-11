@@ -2,8 +2,9 @@ import Home from "pages/Home/Home";
 import Login from "pages/Login/Login";
 import Register from "pages/Register/Register";
 import NewArticle from "pages/Articles/NewArticle";
-import ArticlePage from "pages/Articles/ArticlePage";
+import ArticleDetail from "pages/Articles/ArticleDetail";
 import ArticleList from "pages/Articles/ArticleList";
+import Tags from "pages/Tags/Tags";
 
 const routes = [
   {
@@ -27,8 +28,12 @@ const routes = [
     component: ArticleList
   },
   {
+    path: "/tags/",
+    component: Tags
+  },
+  {
     path: "/articles/:articleId",
-    component: ArticlePage
+    component: ArticleDetail
   }
 ];
 

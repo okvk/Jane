@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import BraftEditor from "braft-editor";
 import "./NewArticle.scss";
 import Editor from "components/Editor/Editor";
-import TagSelector from "components/TagSelector/TagSelector";
+import TagSelector from "components/Tags/TagSelector";
 import { createArticle, getTagList } from "actions/articles";
 
 class Write extends Component {
