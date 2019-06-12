@@ -21,8 +21,9 @@ class ArticlePage extends Component {
     };
 
     const { article } = this.props;
+    const username = this.props.match.params.username;
     return (
-      <BlogLayout>
+      <BlogLayout username={username}>
         <div className="article-detail">
           <h1 className="title">{article.title}</h1>
           <div className="meta">
@@ -40,7 +41,8 @@ class ArticlePage extends Component {
             }}
           />
           <Separator />
-          {article.tags && article.tags.map(tag => <Tag {...tag} />)}
+          {article.tags &&
+            article.tags.map(tag => <Tag {...tag} key={tag.name} />)}
         </div>
       </BlogLayout>
     );

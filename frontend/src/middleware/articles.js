@@ -10,7 +10,7 @@ export default {
   getArticle(articleId) {
     return get(`/articles/${articleId}/`);
   },
-  getArticleList() {
-    return get("/articles/");
+  getArticleList(username) {
+    return get(`/articles/?username=${username}`);
   }
 };

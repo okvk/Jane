@@ -15,7 +15,7 @@ const dateFormat = date => {
 const Article = props => (
   <div className="article-item">
     <div className="article-title">
-      <Link to={`/articles/${props.id}/`}>{props.title}</Link>
+      <Link to={`/${props.username}/articles/${props.id}/`}>{props.title}</Link>
     </div>
     <hr className="article-line" />
     <div className="article-summary">{props.summary}</div>
@@ -26,7 +26,7 @@ const Article = props => (
       </div>
       <div className="article-tags">
         {props.tags.map(tag => (
-          <Tag {...tag} />
+          <Tag {...tag} key={tag.name} />
         ))}
       </div>
     </div>

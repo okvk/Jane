@@ -11,7 +11,7 @@ import TagArticle from "./TagArticle";
 class Tags extends Component {
   componentDidMount() {
     this.props.dispatch(getTagList());
-    this.props.dispatch(getArticleList());
+    this.props.dispatch(getArticleList(this.props.match.params.username));
   }
 
   render() {
@@ -29,15 +29,16 @@ class Tags extends Component {
     });
 
     const TagComponent = props => (
-      <Link to={`/tags#${props.name}`}>
+      <Link to={`#${props.name}`}>
         <Button className="item">
           <span className="name">{props.name}</span>
           <span className="count">{props.count}</span>
         </Button>
       </Link>
     );
+    const username = this.props.match.params.username;
     return (
-      <BlogLayout>
+      <BlogLayout username={username}>
         <div className="tags-wrapper">
           <div className="tags-container">
             <div className="header">
@@ -47,13 +48,17 @@ class Tags extends Component {
             <Separator />
             <div className="list">
               {tags.map(tag => (
-                <TagComponent {...tag} count={tag.tagArticles.length} />
+                <TagComponent
+                  {...tag}
+                  key={tag.name}
+                  count={tag.tagArticles.length}
+                />
               ))}
             </div>
           </div>
           <div className="tags-articles">
             {tags.map(tag => (
-              <TagArticle {...tag} />
+              <TagArticle {...tag} key={tag.name} />
             ))}
           </div>
         </div>

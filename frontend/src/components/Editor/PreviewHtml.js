@@ -1,6 +1,5 @@
 const PreviewHtml = html =>
-  `
-      <!Doctype html>
+  ` <!Doctype html>
       <html>
         <head>
           <title>Preview Content</title>

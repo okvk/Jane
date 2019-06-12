@@ -24,13 +24,13 @@ const ArticleItem = props => (
 
 const TagArticle = props => (
   <div className="tag-article">
-    <div className="tag-name" id={props.name}>
+    <div className="tag-name jumptarget" id={props.name}>
       <Icon type="tags" style={{ fontSize: "1.2em", opacity: 0.6 }} />
       <span className="tags-title">{props.name}</span>
     </div>
     <div className="tag-article-list">
       {props.tagArticles.map(article => (
-        <div>
+        <div key={article.id}>
           <Separator />
           <ArticleItem {...article} />
         </div>

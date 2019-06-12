@@ -1,7 +1,7 @@
 const Menu = [
   {
-    path: "/timeline",
-    sidebarName: "时间线",
+    path: "articles",
+    sidebarName: "文章",
     wrapped: false
   },
   {
@@ -10,27 +10,27 @@ const Menu = [
     wrapped: false
   },
   {
-    path: "/tags",
+    path: "tags",
     sidebarName: "标签",
     wrapped: false
   },
   {
-    path: "/links",
+    path: "links",
     sidebarName: "链接",
     wrapped: false
   },
   {
-    path: "/history",
+    path: "history",
     sidebarName: "变更",
     wrapped: false
   },
   {
-    path: "/about",
+    path: "about",
     sidebarName: "关于",
     wrapped: false
   },
   {
-    path: "/subscribe",
+    path: "subscribe",
     sidebarName: "订阅",
     wrapped: false
   }

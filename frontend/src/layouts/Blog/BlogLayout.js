@@ -1,19 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Layout } from "antd";
+import { getUser } from "actions/articles";
 import BlogSidebar from "components/BlogSidebar/BlogSidebar";
 import "./BlogLayout.scss";
 
-const BlogLayout = props => {
-  return (
-    <Layout.Content style={{ padding: "0 50px" }}>
-      <div className="blog-container">
-        <div className="blog-left-pane">
-          <BlogSidebar />
+class BlogLayout extends Component {
+  componentDidMount() {
+    this.props.dispatch(getUser(this.props.username));
+  }
+
+  render() {
+    const user = this.props.user;
+    return (
+      <Layout.Content style={{ padding: "0 50px" }}>
+        <div className="blog-container">
+          <div className="blog-left-pane">
+            <BlogSidebar {...user} />
+          </div>
+          <div className="blog-right-pane">{this.props.children}</div>
         </div>
-        <div className="blog-right-pane">{props.children}</div>
-      </div>
-    </Layout.Content>
-  );
+      </Layout.Content>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const { user } = state.articles;
+  return { user };
 };
 
-export default BlogLayout;
+export default connect(mapStateToProps)(BlogLayout);

@@ -6,15 +6,20 @@ import Article from "components/Article/Article";
 
 class ArticleList extends Component {
   componentDidMount() {
-    this.props.dispatch(getArticleList());
+    this.props.dispatch(getArticleList(this.props.match.params.username));
   }
 
   render() {
+    const username = this.props.match.params.username;
     return (
-      <BlogLayout>
+      <BlogLayout username={username}>
         <div className="articles-wrapper">
           {this.props.articleList.map(article => (
-            <Article key={article.id} {...article} />
+            <Article
+              key={article.id}
+              {...article}
+              username={this.props.user.username}
+            />
           ))}
         </div>
       </BlogLayout>
@@ -23,7 +28,7 @@ class ArticleList extends Component {
 }
 
 function mapStateToProps(state) {
-  const articleList = state.articles.articleList;
-  return { articleList };
+  const { articleList, user } = state.articles;
+  return { articleList, user };
 }
 export default connect(mapStateToProps)(ArticleList);

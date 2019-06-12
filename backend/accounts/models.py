@@ -1,5 +1,8 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 
 class UserManager(BaseUserManager):
@@ -37,6 +40,12 @@ class User(AbstractBaseUser):
     date_of_birth = models.DateField(verbose_name="出生日期", null=True)
     is_active = models.BooleanField(verbose_name="账户可用", default=True)
     is_admin = models.BooleanField(verbose_name="管理员", default=False)
+    motto = models.CharField(verbose_name="座右铭", max_length=200, null=True)
+    avatar = models.ImageField(
+        upload_to=settings.MEDIA_FILE_PREFIX + "/account/photoes/%Y/%D",
+        null=True,
+        blank=True,
+    )
     joined = models.DateTimeField(verbose_name="加入时间", auto_now_add=True)
 
     objects = UserManager()
@@ -63,3 +72,12 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+# Delete user photo file after delete user
+@receiver(post_delete, sender=User)
+def photo_delete_handler(sender, **kwargs):
+    user = kwargs["instance"]
+    if user.avatar:
+        storage, path = user.avatar.storage, user.avatar.path
+        storage.delete(path)

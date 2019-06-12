@@ -1,3 +1,4 @@
+@import "App.scss";
 .tags-wrapper {
   background-color: #f0f2f5;
 }
@@ -20,6 +21,12 @@
     text-align: center;
     position: relative;
     margin-right: 24px;
+    margin-bottom: 12px;
+  }
+  .item:hover {
+    vertical-align: top;
+    background-color: $active-button-color;
+    color: #ffffff;
   }
   .name {
     padding: 0 12px;
@@ -67,6 +74,16 @@
     font-size: 1.2em;
     font-weight: 500;
     margin-left: 24px;
-    color: rgba(102, 102, 102, 1);
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
   }
+}
+// handle Fixed page header overlaps in-page anchors
+.jumptarget::before {
+  content: "";
+  display: block;
+  height: $header-height;
+  margin: -$header-height 0 0;
 }

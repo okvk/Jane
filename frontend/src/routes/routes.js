@@ -24,15 +24,15 @@ const routes = [
     component: NewArticle
   },
   {
-    path: "/articles/",
+    path: "/:username/articles/",
     component: ArticleList
   },
   {
-    path: "/tags/",
+    path: "/:username/tags/",
     component: Tags
   },
   {
-    path: "/articles/:articleId",
+    path: "/:username/articles/:articleId",
     component: ArticleDetail
   }
 ];

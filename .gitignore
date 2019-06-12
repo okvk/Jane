@@ -49,3 +49,4 @@ deployment/volumes/*
 
 # ignore django app static file
 backend/collectstatic/*
+backend/media/*
