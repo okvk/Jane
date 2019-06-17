@@ -3,7 +3,10 @@
 
 import re
 from rest_framework import serializers
-from .models import Article, Tag, TagMap
+
+from .models import Article
+from tags.models import Tag, TagMap
+from tags.serializers import TagSerializer
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -27,7 +30,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             "content",
             "raw",
             "is_published",
-            "is_stickied",
+            "is_sticky",
             "is_deleted",
             "last_modified",
             "tags_list",
@@ -59,12 +62,3 @@ class ArticleSerializer(serializers.ModelSerializer):
         tag_map = TagMap.objects.filter(aid=obj.id).values_list("tid")
         tags = Tag.objects.filter(id__in=tag_map)
         return TagSerializer(tags, many=True).data
-
-
-class TagSerializer(serializers.ModelSerializer):
-    id = serializers.ReadOnlyField()
-    created = serializers.ReadOnlyField()
-
-    class Meta:
-        model = Tag
-        fields = ("id", "name", "description", "counts", "created")

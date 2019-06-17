@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Self-defined apps
     "accounts",
     "articles",
+    "tags",
 ]
 
 MIDDLEWARE = [

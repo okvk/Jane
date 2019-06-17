@@ -31,22 +31,24 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(verbose_name="邮箱", max_length=255, unique=True)
+    email = models.EmailField(verbose_name="email", max_length=255, unique=True)
     username = models.CharField(
-        verbose_name="用户名", max_length=32, null=True, unique=True
+        verbose_name="username", max_length=32, null=True, unique=True
     )
-    nickname = models.CharField(verbose_name="昵称", max_length=32, null=True)
-    real_name = models.CharField(verbose_name="真实姓名", max_length=32, null=True)
-    date_of_birth = models.DateField(verbose_name="出生日期", null=True)
-    is_active = models.BooleanField(verbose_name="账户可用", default=True)
-    is_admin = models.BooleanField(verbose_name="管理员", default=False)
-    motto = models.CharField(verbose_name="座右铭", max_length=200, null=True)
+    nickname = models.CharField(verbose_name="nickname", max_length=32,
+                                null=True)
+    real_name = models.CharField(verbose_name="real name", max_length=32,
+                                 null=True)
+    date_of_birth = models.DateField(verbose_name="birthday", null=True)
+    is_active = models.BooleanField(verbose_name="is active", default=True)
+    is_admin = models.BooleanField(verbose_name="is admin", default=False)
+    motto = models.CharField(verbose_name="motto", max_length=200, null=True)
     avatar = models.ImageField(
-        upload_to=settings.MEDIA_FILE_PREFIX + "/account/photoes/%Y/%D",
+        upload_to=settings.MEDIA_FILE_PREFIX + "/account/photos/%Y/%M",
         null=True,
         blank=True,
     )
-    joined = models.DateTimeField(verbose_name="加入时间", auto_now_add=True)
+    joined = models.DateTimeField(verbose_name="joined at", auto_now_add=True)
 
     objects = UserManager()
 
