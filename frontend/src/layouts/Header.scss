@@ -19,9 +19,12 @@
 }
 
 .right-container {
+  right: 50px;
   display: inline-block;
   position: absolute;
-  right: 50px;
-  height: $header-height;
-  width: 80px;
+}
+
+.user-section {
+  position: relative;
+  display: inline-block;
 }

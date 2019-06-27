@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { Menu, Avatar } from "antd";
+import { Avatar, Menu } from "antd";
 import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
@@ -12,8 +12,9 @@ const UserSection = props => {
       <Menu
         key="user"
         mode="horizontal"
-        onClick={() => {}}
-        style={{ lineHeight: "62px" }}
+        onClick={() => { }}
+        style={{ lineHeight: "63px" }}
+        className="user-section"
       >
         <SubMenu
           title={

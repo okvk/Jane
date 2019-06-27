@@ -23,7 +23,7 @@ COPY ./backend/ /env/app
 
 EXPOSE 8080
 
-VOLUME ["/env/app/collectstatic/statics"]
+VOLUME ["/env/app/collectstatic/statics", "/env/app/media"]
 
 ENTRYPOINT ["/env/app/docker-entrypoint.sh"]
 

@@ -1,0 +1,19 @@
+.article-detail {
+  padding: 32px;
+  background-color: #ffffff;
+
+  .title {
+    font-size: 1.8em;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
+    line-height: 37px;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.8;
+  }
+  .content {
+    margin-top: 24px;
+  }
+}

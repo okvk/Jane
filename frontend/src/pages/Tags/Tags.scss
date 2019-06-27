@@ -1,0 +1,89 @@
+@import "App.scss";
+.tags-wrapper {
+  background-color: #f0f2f5;
+}
+.tags-container {
+  padding: 24px;
+  margin-bottom: 12px;
+  background-color: #ffffff;
+
+  .title {
+    font-size: 1.4em;
+    margin-left: 8px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+  .list {
+    margin-top: 24px;
+  }
+  .item {
+    height: 30px;
+    text-align: center;
+    position: relative;
+    margin-right: 24px;
+    margin-bottom: 12px;
+  }
+  .item:hover {
+    vertical-align: top;
+    background-color: $active-button-color;
+    color: #ffffff;
+  }
+  .name {
+    padding: 0 12px;
+  }
+  .count {
+    font-size: 10px;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+  }
+}
+
+.tags-articles {
+  background-color: #f0f2f5;
+}
+
+.tag-article {
+  background-color: #ffffff;
+  margin-bottom: 12px;
+  padding: 24px;
+}
+
+.tags-title {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-left: 12px;
+}
+.tag-article-item {
+  padding: 12px 0px;
+  .dot {
+    height: 4px;
+    width: 4px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 4px 8px;
+    opacity: 0.6;
+  }
+  .date {
+    display: inline-block;
+    opacity: 0.6;
+  }
+  .title {
+    display: inline-block;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-left: 24px;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+// handle Fixed page header overlaps in-page anchors
+.jumptarget::before {
+  content: "";
+  display: block;
+  height: $header-height;
+  margin: -$header-height 0 0;
+}

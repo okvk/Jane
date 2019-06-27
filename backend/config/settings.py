@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Self-defined apps
     "accounts",
     "articles",
+    "tags",
 ]
 
 MIDDLEWARE = [
@@ -175,6 +176,8 @@ CORS_ALLOW_HEADERS = (
 
 STATIC_URL = "/statics/"
 STATIC_ROOT = os.path.join(BASE_DIR, "collectstatic", "statics")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_FILE_PREFIX = "media"
 
 # Customizing authentication and user
 
