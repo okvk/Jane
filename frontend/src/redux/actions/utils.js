@@ -1,4 +1,4 @@
-import openNotification from "components/Notification/Notification";
+import { openNotification } from "components";
 
 import TYPES from "redux/types/utilsTypes";
 

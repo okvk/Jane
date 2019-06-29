@@ -3,8 +3,7 @@ import { Layout, Button, Input } from "antd";
 import { connect } from "react-redux";
 import BraftEditor from "braft-editor";
 import "./NewArticle.scss";
-import Editor from "components/Editor/Editor";
-import TagSelector from "components/Tags/TagSelector";
+import { Editor, TagSelector } from "components";
 import { createArticle, getTagList } from "redux/actions/articleActions";
 
 class Write extends Component {

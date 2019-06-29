@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getArticleList } from "redux/actions/articleActions";
-import BlogLayout from "layouts/Blog/BlogLayout";
-import Article from "components/Article/Article";
+import { BlogLayout } from "layouts";
+import { Article } from "components";
 
 class ArticleList extends Component {
   componentDidMount() {

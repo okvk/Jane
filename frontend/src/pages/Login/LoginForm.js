@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
-import BaseFormItem from "components/BaseForm/BaseFormItem";
+import { BaseFormItem} from "components";
 import { loginUser } from "redux/actions/authActions";
 
 class Login extends Component {
