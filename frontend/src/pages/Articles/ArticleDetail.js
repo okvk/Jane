@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getArticle } from "actions/articles";
+import { getArticle } from "redux/actions/articleActions";
 import BlogLayout from "layouts/Blog/BlogLayout";
 import "./ArticleDetail.scss";
 import Separator from "components/Separator/Separator";

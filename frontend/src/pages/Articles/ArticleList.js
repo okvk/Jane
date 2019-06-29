@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getArticleList } from "actions/articles";
+import { getArticleList } from "redux/actions/articleActions";
 import BlogLayout from "layouts/Blog/BlogLayout";
 import Article from "components/Article/Article";
 

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Icon, Button } from "antd";
 import { HashLink as Link } from "react-router-hash-link";
 import "./Tags.scss";
-import { getTagList, getArticleList } from "actions/articles";
+import { getTagList, getArticleList } from "redux/actions/articleActions";
 import BlogLayout from "layouts/Blog/BlogLayout";
 import Separator from "components/Separator/Separator";
 import TagArticle from "./TagArticle";

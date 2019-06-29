@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import MenuMarkup from "components/MenuMarkup/MenuMarkup";
 import NavBar from "components/NavBar/NavBar";
 import UserSection from "components/User/UserSection";
-import { logoutUser } from "actions/authentication";
+import { logoutUser } from "redux/actions/authActions";
 
 import logo from "assets/logo.png";
 import "./Header.scss";

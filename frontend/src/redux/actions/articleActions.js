@@ -1,5 +1,5 @@
-import CS from "constants/articlesConstants";
-import store from "helpers/store";
+import TYPES from "redux/types/articleTypes";
+import store from "redux/store";
 import { push } from "react-router-redux";
 import authRequest from "middleware/auth";
 import articlesRequest from "middleware/articles";
@@ -10,7 +10,7 @@ export function getUser(username) {
       response => {
         dispatch(() =>
           store.dispatch({
-            type: CS.RECEIVE_USER,
+            type: TYPES.RECEIVE_USER,
             user: response.data
           })
         );
@@ -23,7 +23,7 @@ export function getTagList() {
   return dispatch =>
     articlesRequest.getTagList().then(
       response => {
-        dispatch({ type: CS.GET_TAG_LIST, tags: response.data });
+        dispatch({ type: TYPES.GET_TAG_LIST, tags: response.data });
       },
       err => console.log(err)
     );
@@ -48,7 +48,7 @@ export function getArticle(articleId) {
       response => {
         dispatch(() =>
           store.dispatch({
-            type: CS.RECEIVE_ARTICLE_INSTANCE,
+            type: TYPES.RECEIVE_ARTICLE_INSTANCE,
             article: response.data
           })
         );
@@ -63,7 +63,7 @@ export function getArticleList(username = null) {
       response => {
         dispatch(() =>
           store.dispatch({
-            type: CS.RECEIVE_ARTICLE_LIST,
+            type: TYPES.RECEIVE_ARTICLE_LIST,
             articles: response.data.records
           })
         );

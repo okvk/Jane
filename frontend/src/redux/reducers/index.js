@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
-import authentication from "./authentication";
+import authentication from "./authReducers";
 import utils from "./utils";
-import articles from "./articles";
+import articles from "./articleReducers";
 
 const rootReducer = combineReducers({
   authentication,

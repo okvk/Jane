@@ -1,8 +1,8 @@
 import axios from "axios";
-import store from "helpers/store";
+import store from "redux/store";
 import { config, networkError, authError } from "config";
 import { push } from "react-router-redux";
-import showNotification from "actions/utils";
+import showNotification from "redux/actions/utils";
 
 function getAxios() {
   const token = localStorage.getItem("token") || null;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Layout } from "antd";
-import { getUser } from "actions/articles";
+import { getUser } from "redux/actions/articleActions";
 import BlogSidebar from "components/BlogSidebar/BlogSidebar";
 import "./BlogLayout.scss";
 
