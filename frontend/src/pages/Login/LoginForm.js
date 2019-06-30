@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
-import BaseFormItem from "components/BaseForm/BaseFormItem";
-import { loginUser } from "actions/authentication";
+import { BaseFormItem} from "components";
+import { loginUser } from "redux/actions/authActions";
 
 class Login extends Component {
   handleSubmit = e => {

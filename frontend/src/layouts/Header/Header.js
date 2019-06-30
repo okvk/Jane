@@ -4,10 +4,8 @@ import { connect } from "react-redux";
 import { Button, Layout } from "antd";
 import { Link } from "react-router-dom";
 
-import MenuMarkup from "components/MenuMarkup/MenuMarkup";
-import NavBar from "components/NavBar/NavBar";
-import UserSection from "components/User/UserSection";
-import { logoutUser } from "actions/authentication";
+import { MenuMarkup, NavBar, DropdownMenu } from "components";
+import { logoutUser } from "redux/actions/authActions";
 
 import logo from "assets/logo.png";
 import "./Header.scss";
@@ -34,7 +32,7 @@ const Header = ({ location, dispatch, isAuthenticated }) => {
             </Button>
           </Link>
         )}
-        <UserSection onLogout={onLogout} />
+        <DropdownMenu onLogout={onLogout} />
       </div>
     </Layout.Header>
   );

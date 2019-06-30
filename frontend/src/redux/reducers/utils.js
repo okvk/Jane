@@ -1,8 +1,8 @@
-import CS from "constants/utilsConstants";
+import TYPES from "redux/types/utilsTypes";
 
 const utils = (state = {}, action) => {
   switch (action.type) {
-    case CS.SHOW_NOTIFICATION:
+    case TYPES.SHOW_NOTIFICATION:
       return state;
     default:
       return state;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon } from "antd";
-import Separator from "components/Separator/Separator";
+import { Separator } from "components";
 import { Link } from "react-router-dom";
 import "./Tags.scss";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Icon } from "antd";
 import { HashLink as Link } from "react-router-hash-link";
 import "./Article.scss";
-import Tag from "components/Tags/Tag";
+import { Tag } from "components";
 
 const dateFormat = date => {
   const dateObj = new Date(Date.parse(date));

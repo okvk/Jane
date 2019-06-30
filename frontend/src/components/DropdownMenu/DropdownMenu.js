@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 
-const UserSection = props => {
+const DropdownMenu = props => {
   if (props.isAuthenticated) {
     return (
       <Menu
@@ -44,4 +44,4 @@ const mapStateToProps = state => {
   return { user, isAuthenticated };
 };
 
-export default withRouter(connect(mapStateToProps)(UserSection));
+export default withRouter(connect(mapStateToProps)(DropdownMenu));

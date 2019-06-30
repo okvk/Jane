@@ -1,4 +1,4 @@
-import CS from "constants/articlesConstants";
+import TYPES from "redux/types/articleTypes";
 
 const initialState = {
   user: {},
@@ -8,19 +8,19 @@ const initialState = {
 };
 const articles = (state = initialState, action) => {
   switch (action.type) {
-    case CS.RECEIVE_USER:
+    case TYPES.RECEIVE_USER:
       return Object.assign({}, state, {
         user: action.user
       });
-    case CS.GET_TAG_LIST:
+    case TYPES.GET_TAG_LIST:
       return Object.assign({}, state, {
         tags: action.tags
       });
-    case CS.RECEIVE_ARTICLE_INSTANCE:
+    case TYPES.RECEIVE_ARTICLE_INSTANCE:
       return Object.assign({}, state, {
         article: action.article
       });
-    case CS.RECEIVE_ARTICLE_LIST:
+    case TYPES.RECEIVE_ARTICLE_LIST:
       return Object.assign({}, state, {
         articleList: action.articles
       });

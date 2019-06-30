@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Layout } from "antd";
-import { getUser } from "actions/articles";
-import BlogSidebar from "components/BlogSidebar/BlogSidebar";
+import { getUser } from "redux/actions/articleActions";
+import { BlogSidebar } from "components";
 import "./BlogLayout.scss";
 
 class BlogLayout extends Component {

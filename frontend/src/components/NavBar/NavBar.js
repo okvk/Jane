@@ -4,7 +4,7 @@ import throttle from "lodash/throttle";
 
 import { Icon, Popover } from "antd";
 
-import "./NavBar.less";
+import "./NavBar.scss";
 
 class NavBar extends Component {
   state = {
