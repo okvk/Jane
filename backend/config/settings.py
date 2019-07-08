@@ -10,11 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
 import datetime
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
+from config.config import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,11 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("JANE_SECRET_KEY", "unknown")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("JANE_DEBUG", False)
 
 # Application definition
 
@@ -77,21 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "USER": os.environ.get("JANE_DB_USERNAME", "unknown"),
-        "PASSWORD": os.environ.get("JANE_DB_PASSWORD", "unknown"),
-        "NAME": os.environ.get("JANE_DB_NAME", "unknown"),
-        "HOST": os.environ.get("JANE_DB_HOST", "unknown"),
-        "PORT": os.environ.get("JANE_DB_PORT", "unknown"),
-        "OPTIONS": {"charset": "utf8mb4"},
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -190,13 +168,3 @@ LOGIN_URL = "rest_framework:login"
 LOGOUT_URL = "rest_framework:logout"
 
 LOGIN_REDIRECT_URL = "swagger"
-
-# DEBUG settings
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = []
-    # Sentry
-    sentry_sdk.init(
-        dsn=os.environ.get("JANE_SENTRY"), integrations=[DjangoIntegration()]
-    )
