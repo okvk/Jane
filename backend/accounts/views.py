@@ -12,11 +12,31 @@ from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_jwt.settings import api_settings
 from utils.common import ResponseObject
-from utils.decorators import construct_response
-from .serializers import UserSerializer, LoginSerializer
+from utils.decorators import exception_handler_wrapper, construct_response
+from .serializers import UserSerializer, UserInfoSerializer, LoginSerializer
+from .filters import UserFilterBackend
+from .models import User
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+
+class UserInfo(GenericAPIView):
+    permission_classes = (AllowAny,)
+    renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
+    serializer_class = UserInfoSerializer
+    filter_backends = (UserFilterBackend,)
+
+    @construct_response
+    @exception_handler_wrapper
+    def get(self, request, format=None):
+        """
+        Get User Basic Info
+        """
+        username = request.GET.get("username")
+        user = User.objects.get(username=username)
+        serializer = self.get_serializer_class()(user)
+        return ResponseObject(serializer.data, status.HTTP_200_OK)
 
 
 class Login(GenericAPIView):

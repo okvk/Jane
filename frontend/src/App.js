@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { Layout } from "antd";
 
 import history from "helpers/history";
-import Footer from "layouts/Footer";
-import Header from "layouts/Header";
+import { Footer, Header } from "layouts";
 import AppRoutes from "./routes";
 
 import "./App.scss";

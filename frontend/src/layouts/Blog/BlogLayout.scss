@@ -1,0 +1,16 @@
+.blog-container {
+  min-height: 280px;
+  margin: 12px;
+  display: flex;
+}
+.blog-left-pane {
+  width: 20%;
+  height: 100%;
+  position: fixed;
+  background-color: #ffffff;
+}
+.blog-right-pane {
+  width: 75%;
+  margin-left: 25%;
+  background-color: #f0f2f5;
+}

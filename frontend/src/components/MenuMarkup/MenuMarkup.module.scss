@@ -1,5 +1,5 @@
 @import "../../App";
 
 .menu {
-  line-height: $header-height !important;
+  line-height: $header-height - 1px !important;
 }

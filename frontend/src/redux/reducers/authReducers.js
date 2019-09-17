@@ -1,4 +1,4 @@
-import CS from "constants/userConstants";
+import TYPES from "redux/types/userTypes";
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem("token"),
@@ -10,13 +10,13 @@ const initialState = {
 
 const authentication = (state = initialState, action) => {
   switch (action.type) {
-    case CS.LOGIN_SUCCESS:
+    case TYPES.LOGIN_SUCCESS:
       return {
         isAuthenticated: action.isAuthenticated,
         user: action.user
       };
-    case CS.LOGIN_FAILURE:
-    case CS.LOGOUT_SUCCESS:
+    case TYPES.LOGIN_FAILURE:
+    case TYPES.LOGOUT_SUCCESS:
       return {
         isAuthenticated: action.isAuthenticated
       };

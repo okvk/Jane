@@ -4,15 +4,15 @@ import thunkMiddleware from "redux-thunk";
 import { routerMiddleware } from "react-router-redux";
 import { createLogger } from "redux-logger";
 
-import rootReducer from "../reducers";
-import history from "./history";
+import rootReducer from "./reducers";
+import history from "../helpers/history";
 
 const loggerMiddleware = createLogger();
 
 const middleware = applyMiddleware(
   routerMiddleware(history),
-  thunkMiddleware,
-  loggerMiddleware
+  thunkMiddleware
+  // loggerMiddleware
 );
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -13,9 +13,10 @@ from rest_framework.permissions import (
 
 from utils.common import paginate_data, ResponseObject
 from utils.decorators import exception_handler_wrapper, construct_response
-from .models import Article, Tag, TagMap
+from .models import Article
 from .filters import TagFilterBackend, ArticleFilterBackend
 from .serializers import ArticleSerializer, TagSerializer
+from tags.models import Tag, TagMap
 
 
 class TagList(GenericAPIView):
@@ -70,8 +71,11 @@ class ArticleList(GenericAPIView):
                 articles = articles.filter(author=user)
         keyword = self.request.GET.get("keyword", False)
         is_published = self.request.GET.get("is_published", True)
+        username = self.request.GET.get("username", False)
+        if username:
+            articles = articles.filter(author__username=username)
         if keyword:
-            articles = articles.filter(title__contains=keyword)
+            articles = articles.filter(title__contains=username)
         # Filter by tag
         tag = self.request.GET.get("tag", False)
         if tag:

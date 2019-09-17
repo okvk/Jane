@@ -1,19 +1,20 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { Menu, Avatar } from "antd";
+import { Avatar, Menu } from "antd";
 import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 
-const UserSection = props => {
+const DropdownMenu = props => {
   if (props.isAuthenticated) {
     return (
       <Menu
         key="user"
         mode="horizontal"
-        onClick={() => {}}
-        style={{ lineHeight: "62px" }}
+        onClick={() => { }}
+        style={{ lineHeight: "63px" }}
+        className="user-section"
       >
         <SubMenu
           title={
@@ -43,4 +44,4 @@ const mapStateToProps = state => {
   return { user, isAuthenticated };
 };
 
-export default withRouter(connect(mapStateToProps)(UserSection));
+export default withRouter(connect(mapStateToProps)(DropdownMenu));

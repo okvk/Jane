@@ -1,11 +1,11 @@
-import openNotification from "components/Notification/Notification";
+import { openNotification } from "components";
 
-import CS from "constants/utilsConstants";
+import TYPES from "redux/types/utilsTypes";
 
 function showNotification(msg) {
   openNotification(msg.type, msg.title, msg.description);
   return {
-    type: CS.SHOW_NOTIFICATION
+    type: TYPES.SHOW_NOTIFICATION
   };
 }
 

@@ -1,13 +1,13 @@
-import store from "helpers/store";
+import store from "redux/store";
 import { push } from "react-router-redux";
 import authRequest from "middleware/auth";
 
-import CS from "constants/userConstants";
+import TYPES from "redux/types/userTypes";
 
 function receiveLogin(data) {
   return dispatch => {
     dispatch({
-      type: CS.LOGIN_SUCCESS,
+      type: TYPES.LOGIN_SUCCESS,
       isAuthenticated: true,
       user: data.user
     });
@@ -26,7 +26,7 @@ export function loginUser(creds) {
       },
       err =>
         dispatch({
-          type: CS.LOGIN_FAILURE,
+          type: TYPES.LOGIN_FAILURE,
           isAuthenticated: false
         })
     );
@@ -35,7 +35,7 @@ export function loginUser(creds) {
 function receiveLogout() {
   return dispatch => {
     dispatch({
-      type: CS.LOGOUT_SUCCESS,
+      type: TYPES.LOGOUT_SUCCESS,
       isAuthenticated: false
     });
     localStorage.removeItem("token");

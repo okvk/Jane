@@ -1,0 +1,22 @@
+.ant-select-selection {
+  border: none;
+}
+.ant-select-selection--multiple .ant-select-selection__choice {
+  background-color: #fff;
+  border-radius: 12px;
+}
+.tag {
+  padding: 6px;
+  display: inline-block;
+  margin-right: 12px;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+    text-shadow: 0px 0px #558abb;
+  }
+
+  .name {
+    margin-left: 6px;
+    font-size: 1em;
+  }
+}
