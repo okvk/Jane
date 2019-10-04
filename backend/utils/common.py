@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from rest_framework.response import Response
 
 
 def paginate_data(request, data_set, data_serializer):
@@ -24,11 +25,17 @@ def paginate_data(request, data_set, data_serializer):
     return context
 
 
-class ResponseObject:
-    def __init__(self, data, status, errors=None):
-        self.data = data
-        self.status = status
-        self.errors = errors
+class StructuredResponse(Response):
+    """
+    Restructure DRF Response
+    """
 
-    def serialize(self):
-        return self.__dict__
+    def __init__(self, data, http_code, error_code=None, errors=None,
+                 template_name=None, headers=None, content_type=None):
+        self.data = {
+            "data": data,
+            "error_code": error_code,
+            "errors": errors
+        }
+        super().__init__(self.data, http_code, template_name, headers,
+                         content_type)

@@ -1,18 +1,18 @@
-from django.shortcuts import render
 from django.contrib.auth import (
     authenticate,
     login as django_login,
     logout as django_logout,
 )
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_jwt.settings import api_settings
-from utils.common import ResponseObject
-from utils.decorators import exception_handler_wrapper, construct_response
+
+from config import errors
+from utils.common import StructuredResponse
+from utils.decorators import exception_handler_wrapper
 from .serializers import UserSerializer, UserInfoSerializer, LoginSerializer
 from .filters import UserFilterBackend
 from .models import User
@@ -27,16 +27,21 @@ class UserInfo(GenericAPIView):
     serializer_class = UserInfoSerializer
     filter_backends = (UserFilterBackend,)
 
-    @construct_response
     @exception_handler_wrapper
     def get(self, request, format=None):
         """
         Get User Basic Info
         """
         username = request.GET.get("username")
-        user = User.objects.get(username=username)
-        serializer = self.get_serializer_class()(user)
-        return ResponseObject(serializer.data, status.HTTP_200_OK)
+        try:
+            user = User.objects.get(username=username)
+            serializer = self.get_serializer_class()(user)
+            return StructuredResponse(serializer.data, status.HTTP_200_OK)
+        except User.DoesNotExist as e:
+            return StructuredResponse(
+                None, status.HTTP_404_NOT_FOUND, errors.USER_NOT_FOUND_4041,
+                {errors.NOT_FOUND_TITLE: str(e)}
+            )
 
 
 class Login(GenericAPIView):
@@ -44,7 +49,6 @@ class Login(GenericAPIView):
     renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
     serializer_class = LoginSerializer
 
-    @construct_response
     def post(self, request, format=None):
         """
         User login, identifier can either be username, or email
@@ -62,30 +66,38 @@ class Login(GenericAPIView):
                     token = jwt_encode_handler(payload)
                     serializer = UserSerializer(user)
                     context = {"token": token, "user": serializer.data}
-                    return ResponseObject(context, status.HTTP_200_OK)
+                    return StructuredResponse(context, status.HTTP_200_OK)
                 else:
-                    msg = "The current account is disactived"
-                    return ResponseObject(
+                    return StructuredResponse(
                         None,
-                        status.HTTP_400_BAD_REQUEST,
-                        {"non_field_errors": msg},
+                        status.HTTP_404_NOT_FOUND,
+                        errors.USER_INACTIVE_4042,
+                        {errors.NOT_FOUND_TITLE: errors.USER_INACTIVE_4042}
                     )
             else:
-                msg = "Incorrect email address and / or password."
-                return ResponseObject(
+
+                return StructuredResponse(
                     None,
                     status.HTTP_400_BAD_REQUEST,
-                    {"non_field_errors": msg},
+                    errors.WRONG_CREDENTIALS_4002,
+                    {
+                        errors.BAD_REQUEST_TITLE:
+                            errors.WRONG_CREDENTIALS_4002_MSG
+                    },
                 )
         else:
-            return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+            return StructuredResponse(
+                None,
+                status.HTTP_400_BAD_REQUEST,
+                errors.BAD_REQUEST_4000,
+                {errors.BAD_REQUEST_TITLE: serializer.errors}
+            )
 
 
 class Logout(APIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
 
-    @construct_response
     def post(self, request, format=None):
         django_logout(request)
-        return ResponseObject({}, status.HTTP_200_OK)
+        return StructuredResponse({}, status.HTTP_200_OK)
