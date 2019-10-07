@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { getArticleList } from "redux/actions/articleActions";
 import { BlogLayout } from "layouts";
 import { Article } from "components";
-import { registryRoutes } from "routes";
 
 class ArticleList extends Component {
   componentDidMount() {
@@ -23,7 +22,6 @@ class ArticleList extends Component {
             />
           ))}
         </div>
-        {this.props.routes && registryRoutes(this.props.routes)}
       </BlogLayout>
     );
   }
