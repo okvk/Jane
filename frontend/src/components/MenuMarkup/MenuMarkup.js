@@ -24,11 +24,6 @@ const MenuMarkup = ({
         Home
       </Link>
     </Menu.Item>
-    <Menu.Item key="/about">
-      <Link onClick={onLinkClick} to="/about">
-        About
-      </Link>
-    </Menu.Item>
   </Menu>
 );
 

@@ -13,6 +13,6 @@ const RouteWrapper = route => (
   />
 );
 
-const AppRoutes = routes.map((route, i) => <RouteWrapper key={i} {...route} />);
+const registryRoutes = _routes => _routes.map((route, i) => <RouteWrapper key={i} {...route} />);
 
-export default AppRoutes;
+export { registryRoutes, routes };

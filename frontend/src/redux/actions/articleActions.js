@@ -1,8 +1,8 @@
 import TYPES from "redux/types/articleTypes";
 import store from "redux/store";
 import { push } from "react-router-redux";
-import authRequest from "middleware/auth";
-import articlesRequest from "middleware/articles";
+import authRequest from "middlewares/auth";
+import articlesRequest from "middlewares/articles";
 
 export function getUser(username) {
   return dispatch =>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "redux/store";
-import { config, networkError, authError } from "config";
+import { config, networkError, authError } from "configs/settings";
 import { push } from "react-router-redux";
 import showNotification from "redux/actions/utils";
 
