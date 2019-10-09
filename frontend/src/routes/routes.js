@@ -20,16 +20,24 @@ const routes = [
     component: NewArticle
   },
   {
-    path: "/:username/articles/",
-    component: ArticleList
-  },
-  {
-    path: "/:username/tags/",
-    component: Tags
-  },
-  {
-    path: "/:username/articles/:articleId",
-    component: ArticleDetail
+    path: "/:username",
+    component: ArticleList,
+    routes: [
+      {
+        path: "/:username/articles",
+        component: ArticleList,
+        routes: [
+          {
+            path: "/:username/articles/:articleId",
+            component: ArticleDetail
+          }
+        ]
+      },
+      {
+        path: "/:username/tags",
+        component: Tags
+      }
+    ]
   }
 ];
 

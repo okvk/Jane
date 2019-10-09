@@ -25,6 +25,11 @@ const DropdownMenu = props => {
             </Fragment>
           }
         >
+          <Menu.Item key="profile">
+            <Link to={`/${props.user.username}`} key="profile">
+              Profile
+          </Link>
+          </Menu.Item>
           <Menu.Item key="SignOut" onClick={props.onLogout}>
             Logout
           </Menu.Item>

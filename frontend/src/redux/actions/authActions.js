@@ -1,6 +1,6 @@
 import store from "redux/store";
 import { push } from "react-router-redux";
-import authRequest from "middleware/auth";
+import authRequest from "middlewares/auth";
 
 import TYPES from "redux/types/userTypes";
 
