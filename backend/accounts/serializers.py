@@ -18,12 +18,20 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "username",
             "nickname",
+            "motto",
             "real_name",
             "date_of_birth",
             "is_active",
             "is_admin",
+            "avatar",
             "joined",
         )
+
+
+class UserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("username", "nickname", "motto", "avatar")
 
 
 class LoginSerializer(serializers.Serializer):

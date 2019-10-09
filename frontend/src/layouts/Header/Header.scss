@@ -1,0 +1,30 @@
+@import "App.scss";
+
+.ant-layout-header {
+  background: #ffffff;
+  box-shadow: 0 2px 8px #f0f1f2;
+  text-align: center;
+}
+
+.logo {
+  display: inline-block;
+  height: $header-height;
+  margin: 0 auto;
+}
+
+.logo img {
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+.right-container {
+  right: 50px;
+  display: inline-block;
+  position: absolute;
+}
+
+.user-section {
+  position: relative;
+  display: inline-block;
+}

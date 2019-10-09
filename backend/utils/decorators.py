@@ -1,10 +1,9 @@
 import functools
-from django.core.exceptions import PermissionDenied
 from django.core.exceptions import ObjectDoesNotExist
-
 from rest_framework import status
-from rest_framework.response import Response
-from utils.common import ResponseObject
+
+from config import errors
+from utils.common import StructuredResponse
 
 
 def exception_handler_wrapper(function):
@@ -13,30 +12,20 @@ def exception_handler_wrapper(function):
     """
 
     @functools.wraps(function)
-    def wrap(*args, **kwargs):
+    def wrapper(*args, **kwargs):
         try:
             return function(*args, **kwargs)
         except ObjectDoesNotExist as e:
-            msg = "Exception404: {0} ".format(e)
-            return ResponseObject(
-                None, status.HTTP_400_BAD_REQUEST, {"non_field_errors": msg}
+            return StructuredResponse(
+                None, status.HTTP_404_NOT_FOUND, errors.NOT_FOUND_4040,
+                {errors.NOT_FOUND_TITLE: str(e)}
             )
         except Exception as e:
-            msg = "Server Error: {0} ".format(e)
-            return ResponseObject(
+            return StructuredResponse(
                 None,
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
-                {"non_field_errors": msg},
+                errors.INTERNAL_SERVER_ERROR_5000,
+                {errors.INTERNAL_SERVER_ERROR_TITLE: str(e)},
             )
 
-    return wrap
-
-
-# Common wrapper for http response data
-def construct_response(function):
-    @functools.wraps(function)
-    def wrap(self, *args, **kwargs):
-        obj = function(self, *args, **kwargs)
-        return Response(obj.serialize(), status=obj.status)
-
-    return wrap
+    return wrapper

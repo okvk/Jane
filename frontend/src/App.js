@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { Layout } from "antd";
 
 import history from "helpers/history";
-import Footer from "layouts/Footer";
-import Header from "layouts/Header";
-import AppRoutes from "./routes";
+import { Footer, Header } from "layouts";
+import { registryRoutes, routes } from "routes";
 
 import "./App.scss";
 
@@ -20,7 +19,7 @@ class App extends Component {
       <Router history={history}>
         <Layout className="layout">
           <Header />
-          {AppRoutes}
+          {registryRoutes(routes)}
           <Footer />
         </Layout>
       </Router>

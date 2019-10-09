@@ -1,21 +1,18 @@
-from django.shortcuts import render
-
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.permissions import (
     IsAuthenticated,
-    AllowAny,
     IsAuthenticatedOrReadOnly,
 )
 
-from utils.common import paginate_data, ResponseObject
-from utils.decorators import exception_handler_wrapper, construct_response
-from .models import Article, Tag, TagMap
+from config import errors
+from utils.common import paginate_data, StructuredResponse
+from utils.decorators import exception_handler_wrapper
+from .models import Article
 from .filters import TagFilterBackend, ArticleFilterBackend
 from .serializers import ArticleSerializer, TagSerializer
+from tags.models import Tag, TagMap
 
 
 class TagList(GenericAPIView):
@@ -29,7 +26,6 @@ class TagList(GenericAPIView):
     filter_backends = (TagFilterBackend,)
     serializer_class = TagSerializer
 
-    @construct_response
     def get(self, request, format=None):
         name = request.GET.get("name")
         if name:
@@ -37,18 +33,19 @@ class TagList(GenericAPIView):
         else:
             tags = self.get_queryset()
         serializer = TagSerializer(tags, many=True)
-        return ResponseObject(serializer.data, status.HTTP_200_OK)
+        return StructuredResponse(serializer.data, status.HTTP_200_OK)
 
-    @construct_response
     @exception_handler_wrapper
     def post(self, request, format=None):
         serializer = TagSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return ResponseObject(serializer.data, status.HTTP_201_CREATED)
+            return StructuredResponse(serializer.data, status.HTTP_201_CREATED)
         else:
-            return ResponseObject(
-                None, status.HTTP_400_BAD_REQUEST, serializer.errors
+            return StructuredResponse(
+                None, status.HTTP_400_BAD_REQUEST,
+                errors.BAD_REQUEST_4000,
+                serializer.errors
             )
 
 
@@ -70,8 +67,11 @@ class ArticleList(GenericAPIView):
                 articles = articles.filter(author=user)
         keyword = self.request.GET.get("keyword", False)
         is_published = self.request.GET.get("is_published", True)
+        username = self.request.GET.get("username", False)
+        if username:
+            articles = articles.filter(author__username=username)
         if keyword:
-            articles = articles.filter(title__contains=keyword)
+            articles = articles.filter(title__contains=username)
         # Filter by tag
         tag = self.request.GET.get("tag", False)
         if tag:
@@ -82,22 +82,21 @@ class ArticleList(GenericAPIView):
         articles = articles.filter(is_published=is_published)
         return articles
 
-    @construct_response
     @exception_handler_wrapper
     def get(self, request, format=None):
         articles = self.get_queryset()
         context = paginate_data(request, articles, ArticleSerializer)
-        return ResponseObject(context, status.HTTP_200_OK)
+        return StructuredResponse(context, status.HTTP_200_OK)
 
-    @construct_response
     def post(self, request, format=None):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(author=request.user)
-            return ResponseObject(serializer.data, status.HTTP_201_CREATED)
+            return StructuredResponse(serializer.data, status.HTTP_201_CREATED)
         else:
-            return ResponseObject(
-                None, status.HTTP_400_BAD_REQUEST, serializer.errors
+            return StructuredResponse(
+                None, status.HTTP_400_BAD_REQUEST,
+                errors.BAD_REQUEST_4000, serializer.errors
             )
 
 
@@ -107,14 +106,12 @@ class ArticleInstance(GenericAPIView):
     serializer_class = ArticleSerializer
 
     @exception_handler_wrapper
-    @construct_response
     def get(self, request, pk, format=None):
         article = Article.objects.get(id=pk)
         serializer = ArticleSerializer(article)
-        return ResponseObject(serializer.data, status.HTTP_200_OK)
+        return StructuredResponse(serializer.data, status.HTTP_200_OK)
 
     @exception_handler_wrapper
-    @construct_response
     def put(self, request, pk, format=None):
         article = Article.objects.get(id=pk, author=request.user)
         serializer = ArticleSerializer(
@@ -122,16 +119,16 @@ class ArticleInstance(GenericAPIView):
         )
         if serializer.is_valid():
             serializer.save()
-            return ResponseObject(serializer.data, status.HTTP_200_OK)
+            return StructuredResponse(serializer.data, status.HTTP_200_OK)
         else:
-            return ResponseObject(
-                None, status.HTTP_400_BAD_REQUEST, serializer.errors
+            return StructuredResponse(
+                None, status.HTTP_400_BAD_REQUEST,
+                errors.BAD_REQUEST_4000, serializer.errors
             )
 
     @exception_handler_wrapper
-    @construct_response
     def delete(self, request, pk, format=None):
         article = Article.objects.get(id=pk, author=request.user)
         article.is_deleted = True
         article.save()
-        return ResponseObject({}, status.HTTP_204_NO_CONTENT)
+        return StructuredResponse({}, status.HTTP_204_NO_CONTENT)

@@ -31,9 +31,13 @@ services:
       JANE_DB_PASSWORD: ${JANE_DB_PASSWORD}
       JANE_DB_NAME: ${JANE_DB_NAME}
       JANE_SENTRY: ${JANE_SENTRY}
+      JANE_ADMIN_NAME: ${JANE_ADMIN_NAME}
+      JANE_ADMIN_EMAIL: ${JANE_ADMIN_EMAIL}
+      JANE_ADMIN_PASS: ${JANE_ADMIN_PASS}
     # mount django static file, served by nginx
     volumes:
       - ${DOCKER_DIR}/volumes/statics:/env/app/collectstatic/statics
+      - ${DOCKER_DIR}/volumes/media:/env/app/media
     networks:
       - jane
 
@@ -43,11 +47,12 @@ services:
       context: ./
       dockerfile: deployment/nginx/Dockerfile
       args:
-        REACT_APP_JANE_API: ${REACT_APP_JANE_API}
+        REACT_APP_JANE_API: ${REACT_APP_JANE_API}:${JANE_PORT}/api
     ports:
-      - "1984:80"
+      - "${JANE_PORT}:80"
     volumes:
       - ${DOCKER_DIR}/volumes/statics:/usr/share/nginx/statics
+      - ${DOCKER_DIR}/volumes/media:/usr/share/nginx/media
     networks:
       - jane
 

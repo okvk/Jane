@@ -1,6 +1,6 @@
-import Home from "pages/Home/Home";
-import Login from "pages/Login/Login";
-import Register from "pages/Register/Register";
+import { ArticlePages, Home, Login, Register, Tags } from "pages";
+
+const { ArticleDetail, ArticleList, NewArticle } = ArticlePages;
 
 const routes = [
   {
@@ -14,6 +14,30 @@ const routes = [
   {
     path: "/register",
     component: Register
+  },
+  {
+    path: "/write",
+    component: NewArticle
+  },
+  {
+    path: "/:username",
+    component: ArticleList,
+    routes: [
+      {
+        path: "/:username/articles",
+        component: ArticleList,
+        routes: [
+          {
+            path: "/:username/articles/:articleId",
+            component: ArticleDetail
+          }
+        ]
+      },
+      {
+        path: "/:username/tags",
+        component: Tags
+      }
+    ]
   }
 ];
 

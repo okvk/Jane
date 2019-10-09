@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Checkbox, Button } from "antd";
-import BaseFormItem from "components/BaseForm/BaseFormItem";
+import { BaseFormItem } from "components";
 
 class RegistrationForm extends React.Component {
   state = {
