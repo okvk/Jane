@@ -44,13 +44,23 @@ Docker Image Build:
   tags:
     - docker
 
-Deployment:
-  stage: deploy
+Staging:
+  stage: staging
   script:
-    - rsync -r $CI_PROJECT_DIR /home/gitlab-runner
-    - cd /home/gitlab-runner/jane && docker-compose build && docker-compose down && docker-compose up -d
+    - mkdir -p /home/gitlab-runner/develop && rsync -r $CI_PROJECT_DIR /home/gitlab-runner/develop
+    - cd /home/gitlab-runner/develop/jane && docker-compose build && docker-compose down && docker-compose up -d
   tags:
     - web-client
   only:
     - develop
+
+Production:
+  stage: production
+  script:
+    - mkdir -p /home/gitlab-runner/production && rsync -r $CI_PROJECT_DIR /home/gitlab-runner/production
+    - cd /home/gitlab-runner/production/jane && docker-compose build && docker-compose down && docker-compose up -d
+  tags:
+    - web-client
+  only:
+    - master
 # vim:ft=ansible
