@@ -41,7 +41,7 @@ Docker Image Build:
     - docker push itechub/jane-nginx:$CI_BUILD_TAG
     - docker push itechub/jane-django:$CI_BUILD_TAG
   only:
-    - develop
+    - master
   tags:
     - docker
 
@@ -49,7 +49,7 @@ Staging:
   stage: staging
   script:
     - mkdir -p /home/gitlab-runner/develop && rsync -r $CI_PROJECT_DIR /home/gitlab-runner/develop
-    - cd /home/gitlab-runner/develop/jane && docker-compose build && docker-compose down && docker-compose up -d
+    - cd /home/gitlab-runner/develop/jane && docker-compose build && docker-compose -p develop down && docker-compose -p develop up -d
   tags:
     - web-client
   only:
@@ -59,7 +59,7 @@ Production:
   stage: production
   script:
     - mkdir -p /home/gitlab-runner/production && rsync -r $CI_PROJECT_DIR /home/gitlab-runner/production
-    - cd /home/gitlab-runner/production/jane && docker-compose build && docker-compose down && docker-compose up -d
+    - cd /home/gitlab-runner/production/jane && docker-compose build && docker-compose -p production down && docker-compose -p production up -d
   tags:
     - web-client
   only:

@@ -47,7 +47,7 @@ services:
       context: ./
       dockerfile: deployment/nginx/Dockerfile
       args:
-        REACT_APP_JANE_API: ${REACT_APP_JANE_API}:${JANE_PORT}/api
+        REACT_APP_JANE_API: ${REACT_APP_JANE_API}
     ports:
       - "${JANE_PORT}:80"
     volumes:
