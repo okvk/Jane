@@ -3,7 +3,8 @@
 stages:
   - test
   - build-image
-  - deploy
+  - staging
+  - production
 
 Running Test:
   stage: test
