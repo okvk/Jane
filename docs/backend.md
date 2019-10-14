@@ -1,4 +1,4 @@
-# Jane 后端
+# Jane 后端开发文档
 
 ### 技术栈
 
@@ -62,7 +62,7 @@ export JANE_SENTRY='https://......'
 $ source venv/bin/activate
 ```
 
-##### 运行通过&数据库初始化
+##### 运行通过 & 数据库初始化
 
 ```
 $ python manage.py check

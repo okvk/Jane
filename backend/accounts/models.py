@@ -31,18 +31,24 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(verbose_name="email", max_length=255, unique=True)
     username = models.CharField(
         verbose_name="username", max_length=32, null=True, unique=True
     )
-    nickname = models.CharField(verbose_name="nickname", max_length=32,
-                                null=True)
-    real_name = models.CharField(verbose_name="real name", max_length=32,
-                                 null=True)
-    date_of_birth = models.DateField(verbose_name="birthday", null=True)
+    email = models.EmailField(verbose_name="email", max_length=255, unique=True)
+    nickname = models.CharField(
+        verbose_name="nickname", max_length=32, null=True, blank=True
+    )
+    real_name = models.CharField(
+        verbose_name="real name", max_length=32, null=True, blank=True
+    )
+    date_of_birth = models.DateField(
+        verbose_name="birthday", null=True, blank=True
+    )
     is_active = models.BooleanField(verbose_name="is active", default=True)
     is_admin = models.BooleanField(verbose_name="is admin", default=False)
-    motto = models.CharField(verbose_name="motto", max_length=200, null=True)
+    motto = models.CharField(
+        verbose_name="motto", max_length=200, null=True, blank=True
+    )
     avatar = models.ImageField(
         upload_to=settings.MEDIA_FILE_PREFIX + "/account/photos/%Y/%M",
         null=True,
