@@ -4,11 +4,6 @@ const { ArticleDetail, ArticleList, NewArticle } = ArticlePages;
 
 const routes = [
   {
-    path: "/",
-    exact: true,
-    component: Home
-  },
-  {
     path: "/login",
     component: Login
   },
@@ -21,20 +16,26 @@ const routes = [
     component: NewArticle
   },
   {
-    path: "/:username/articles/:articleId",
-    component: ArticleDetail
-  },
-  {
-    path: "/:username/articles",
-    component: ArticleList
-  },
-  {
-    path: "/:username/tags",
-    component: Tags
-  },
-  {
     path: "/:username",
-    component: ArticleList
+    component: ArticleList,
+    routes: [
+      {
+        path: "/:username/articles",
+        component: ArticleList
+      },
+      {
+        path: "/:username/articles/:articleId",
+        component: ArticleDetail
+      },
+      {
+        path: "/:username/tags",
+        component: Tags
+      }
+    ]
+  },
+  {
+    path: "/",
+    component: Home
   }
 ];
 

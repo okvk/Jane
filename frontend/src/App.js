@@ -19,7 +19,7 @@ class App extends Component {
       <Router history={history}>
         <Layout className="layout">
           <Header />
-          {AppRoutes}
+          <AppRoutes />
           <Footer />
         </Layout>
       </Router>
