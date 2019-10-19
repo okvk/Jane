@@ -5,7 +5,7 @@ import { Layout } from "antd";
 
 import history from "helpers/history";
 import { Footer, Header } from "layouts";
-import { registryRoutes, routes } from "routes";
+import AppRoutes from "routes";
 
 import "./App.scss";
 
@@ -19,7 +19,7 @@ class App extends Component {
       <Router history={history}>
         <Layout className="layout">
           <Header />
-          {registryRoutes(routes)}
+          {AppRoutes}
           <Footer />
         </Layout>
       </Router>

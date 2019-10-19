@@ -2,6 +2,7 @@ import React from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import { connect } from "react-redux";
 import { Icon } from "antd";
+import "./Tag.scss";
 
 const Tag = props => (
   <div className="tag">
