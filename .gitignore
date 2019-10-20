@@ -20,6 +20,7 @@ tests/report/
 # development files
 venv/
 .idea/
+.vscode
 
 # dependencies
 /node_modules
