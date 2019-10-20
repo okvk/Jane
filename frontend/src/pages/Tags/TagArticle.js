@@ -15,7 +15,7 @@ const dateFormat = date => {
 const ArticleItem = props => (
   <div className="tag-article-item">
     <span className="dot" />
-    <div className="date">{dateFormat(props.created)}</div>
+    <div className="date">{dateFormat(props.ctime)}</div>
     <Link to={`articles/${props.id}/`} className="title">
       {props.title}
     </Link>

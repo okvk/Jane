@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
             "is_active",
             "is_admin",
             "avatar",
-            "joined",
+            "ctime",
         )
 
 

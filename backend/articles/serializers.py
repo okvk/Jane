@@ -17,8 +17,8 @@ class ArticleSerializer(serializers.ModelSerializer):
     tags = serializers.SerializerMethodField()
     author = serializers.ReadOnlyField(source="author.username")
     is_deleted = serializers.ReadOnlyField()
-    last_modified = serializers.ReadOnlyField()
-    created = serializers.ReadOnlyField()
+    ctime = serializers.ReadOnlyField()
+    mtime = serializers.ReadOnlyField()
 
     class Meta:
         model = Article
@@ -32,10 +32,10 @@ class ArticleSerializer(serializers.ModelSerializer):
             "is_published",
             "is_sticky",
             "is_deleted",
-            "last_modified",
             "tags_list",
             "tags",
-            "created",
+            "ctime",
+            "mtime",
         )
 
     def cleanhtml(self, raw_html):
