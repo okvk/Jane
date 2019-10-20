@@ -31,7 +31,8 @@ class ResourceList(GenericAPIView):
     def post(self, request, format=None):
         serializer = ResourceSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(owner=request.user)
+            upload = serializer.validated_data["upload"]
+            serializer.save(owner=request.user, filename=upload.name)
             return StructuredResponse(serializer.data, status.HTTP_201_CREATED)
         else:
             return StructuredResponse(
@@ -40,3 +41,21 @@ class ResourceList(GenericAPIView):
                 errors.INVALID_INPUT_4001,
                 serializer.errors,
             )
+
+
+class ResourceInstance(GenericAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
+    serializer_class = ResourceSerializer
+
+    @exception_handler_wrapper
+    def get(self, request, pk, format=None):
+        resource = Resource.objects.get(id=pk)
+        serializer = ResourceSerializer(resource)
+        return StructuredResponse(serializer.data, status.HTTP_200_OK)
+
+    @exception_handler_wrapper
+    def delete(self, request, pk, format=None):
+        resource = Resource.objects.get(id=pk, owner=request.user)
+        resource.delete()
+        return StructuredResponse({}, status.HTTP_204_NO_CONTENT)

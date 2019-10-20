@@ -12,16 +12,13 @@ from .models import Resource
 
 class ResourceSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
+    filename = serializers.ReadOnlyField()
     owner = serializers.ReadOnlyField(source="owner.id")
     ctime = serializers.ReadOnlyField()
 
     class Meta:
         model = Resource
         fields = ("id", "filename", "filetype", "upload", "owner", "ctime")
-
-    # def validate_upload(self, value):
-    #    print(upload)
-    #    return value
 
     def validate(self, attrs):
         if attrs["filetype"] == "IMAGE":
@@ -30,8 +27,8 @@ class ResourceSerializer(serializers.ModelSerializer):
                 im.verify()
             except IOError:
                 raise serializers.ValidationError("Invalid Image File")
-            # Do image Resize here
+            # TODO:  Do image Resize here
         elif attrs["filetype"] == "ATTACHMENT":
             pass
-            # Do file compression here
+        # TODO: Do file compression here
         return attrs

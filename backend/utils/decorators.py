@@ -17,8 +17,10 @@ def exception_handler_wrapper(function):
             return function(*args, **kwargs)
         except ObjectDoesNotExist as e:
             return StructuredResponse(
-                None, status.HTTP_404_NOT_FOUND, errors.NOT_FOUND_4040,
-                {errors.NOT_FOUND_TITLE: str(e)}
+                None,
+                status.HTTP_404_NOT_FOUND,
+                errors.NOT_FOUND_4040,
+                {errors.NOT_FOUND_TITLE: str(e)},
             )
         except Exception as e:
             return StructuredResponse(
