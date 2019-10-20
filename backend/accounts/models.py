@@ -54,7 +54,8 @@ class User(AbstractBaseUser):
         null=True,
         blank=True,
     )
-    joined = models.DateTimeField(verbose_name="joined at", auto_now_add=True)
+    ctime = models.DateTimeField(verbose_name="joined at", auto_now_add=True)
+    mtime = models.DateTimeField(verbose_name="updated at", auto_now=True)
 
     objects = UserManager()
 

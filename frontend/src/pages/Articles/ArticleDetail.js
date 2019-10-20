@@ -27,7 +27,7 @@ class ArticlePage extends Component {
           <h1 className="title">{article.title}</h1>
           <div className="meta">
             <span className="date">
-              最后更新时间: {dateFormat(article.created)}
+              最后更新时间: {dateFormat(article.ctime)}
             </span>
             <span className="author">作者: {article.author}</span>
           </div>
