@@ -10,7 +10,6 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         this.props.dispatch(loginUser(values));
       }
     });
