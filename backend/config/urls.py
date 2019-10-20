@@ -35,6 +35,10 @@ urlpatterns = [
         "articles/",
         include(("articles.urls", "articles"), namespace="articles"),
     ),
+    path(
+        "resources/",
+        include(("resources.urls", "resources"), namespace="resources"),
+    ),
 ]
 
 if settings.DEBUG:
