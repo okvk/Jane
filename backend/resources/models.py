@@ -31,6 +31,7 @@ class Resource(models.Model):
         on_delete=models.CASCADE,
     )
     ctime = models.DateTimeField(verbose_name="created at", auto_now_add=True)
+    mtime = models.DateTimeField(verbose_name="updated at", auto_now=True)
 
     def __str__(self):
         return self.id
