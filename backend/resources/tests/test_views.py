@@ -7,8 +7,10 @@ from django.utils.six import BytesIO
 from django.urls import reverse
 from rest_framework.test import APIRequestFactory, force_authenticate
 from django.contrib.auth import get_user_model
+
 from resources.models import Resource
 from resources.views import ResourceList, ResourceInstance
+from utils import errors
 
 
 def create_image(
@@ -88,7 +90,7 @@ class ResourceTests(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["error_code"], 4001)
         self.assertEqual(
-            response.data["errors"]["non_field_errors"], ["Invalid Image File"]
+            response.data["errors"][errors.MSG], ["Invalid Image File"]
         )
 
     def test_query_resource_list(self):
@@ -117,7 +119,7 @@ class ResourceTests(TestCase):
     def test_resource_list_distinguish_different_user(self):
         filename_a = "test1.txt"
         filename_b = "test2.txt"
-        # By two resource own by user_a and user_a respectively
+        # Create two resource own by user_a and user_a respectively
         self.create_resource_instance(
             filename=filename_a, filetype="ATTACHMENT", user=self.user_a
         )
@@ -178,7 +180,7 @@ class ResourceTests(TestCase):
         response = ResourceInstance.as_view()(request, pk=uid)
         self.assertEqual(response.status_code, 204)
 
-        # Make the request should return 404
+        # After resource being deleted,  the request should return 404
         request = self.factory.get(
             reverse("resources:resource-detail", kwargs={"pk": uid})
         )
@@ -194,7 +196,7 @@ class ResourceTests(TestCase):
         response = ResourceInstance.as_view()(request, pk=uid)
         self.assertEqual(response.status_code, 401)
 
-        # Make the request should return 404
+        # The request should return 200 since it's not deleted
         request = self.factory.get(
             reverse("resources:resource-detail", kwargs={"pk": uid})
         )

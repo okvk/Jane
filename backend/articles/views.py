@@ -6,7 +6,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
 )
 
-from config import errors
+from utils import errors
 from utils.common import paginate_data, StructuredResponse
 from utils.decorators import exception_handler_wrapper
 from .models import Article
@@ -33,19 +33,19 @@ class TagList(GenericAPIView):
         else:
             tags = self.get_queryset()
         serializer = TagSerializer(tags, many=True)
-        return StructuredResponse(serializer.data, status.HTTP_200_OK)
+        return StructuredResponse(status.HTTP_200_OK, serializer.data)
 
     @exception_handler_wrapper
     def post(self, request, format=None):
         serializer = TagSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return StructuredResponse(serializer.data, status.HTTP_201_CREATED)
+            return StructuredResponse(status.HTTP_201_CREATED, serializer.data)
         else:
             return StructuredResponse(
-                None, status.HTTP_400_BAD_REQUEST,
-                errors.BAD_REQUEST_4000,
-                serializer.errors
+                status.HTTP_400_BAD_REQUEST,
+                error_code=errors.BAD_REQUEST_4000,
+                errors=serializer.errors,
             )
 
 
@@ -86,17 +86,18 @@ class ArticleList(GenericAPIView):
     def get(self, request, format=None):
         articles = self.get_queryset()
         context = paginate_data(request, articles, ArticleSerializer)
-        return StructuredResponse(context, status.HTTP_200_OK)
+        return StructuredResponse(status.HTTP_200_OK, context)
 
     def post(self, request, format=None):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(author=request.user)
-            return StructuredResponse(serializer.data, status.HTTP_201_CREATED)
+            return StructuredResponse(status.HTTP_201_CREATED, serializer.data)
         else:
             return StructuredResponse(
-                None, status.HTTP_400_BAD_REQUEST,
-                errors.BAD_REQUEST_4000, serializer.errors
+                status.HTTP_400_BAD_REQUEST,
+                error_code=errors.BAD_REQUEST_4000,
+                errors=serializer.errors,
             )
 
 
@@ -109,7 +110,7 @@ class ArticleInstance(GenericAPIView):
     def get(self, request, pk, format=None):
         article = Article.objects.get(id=pk)
         serializer = ArticleSerializer(article)
-        return StructuredResponse(serializer.data, status.HTTP_200_OK)
+        return StructuredResponse(status.HTTP_200_OK, serializer.data)
 
     @exception_handler_wrapper
     def put(self, request, pk, format=None):
@@ -119,11 +120,12 @@ class ArticleInstance(GenericAPIView):
         )
         if serializer.is_valid():
             serializer.save()
-            return StructuredResponse(serializer.data, status.HTTP_200_OK)
+            return StructuredResponse(status.HTTP_200_OK, serializer.data)
         else:
             return StructuredResponse(
-                None, status.HTTP_400_BAD_REQUEST,
-                errors.BAD_REQUEST_4000, serializer.errors
+                status.HTTP_400_BAD_REQUEST,
+                error_code=errors.BAD_REQUEST_4000,
+                errors=serializer.errors,
             )
 
     @exception_handler_wrapper
@@ -131,4 +133,4 @@ class ArticleInstance(GenericAPIView):
         article = Article.objects.get(id=pk, author=request.user)
         article.is_deleted = True
         article.save()
-        return StructuredResponse({}, status.HTTP_204_NO_CONTENT)
+        return StructuredResponse(status.HTTP_204_NO_CONTENT)

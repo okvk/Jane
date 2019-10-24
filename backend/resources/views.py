@@ -6,7 +6,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
 )
 
-from config import errors
+from utils import errors
 from utils.common import StructuredResponse
 from utils.decorators import exception_handler_wrapper
 from .models import Resource
@@ -25,7 +25,7 @@ class ResourceList(GenericAPIView):
     def get(self, request, format=None):
         resources = Resource.objects.filter(owner=request.user)
         serializer = ResourceSerializer(resources, many=True)
-        return StructuredResponse(serializer.data, status.HTTP_200_OK)
+        return StructuredResponse(status.HTTP_200_OK, serializer.data)
 
     @exception_handler_wrapper
     def post(self, request, format=None):
@@ -33,13 +33,12 @@ class ResourceList(GenericAPIView):
         if serializer.is_valid():
             upload = serializer.validated_data["upload"]
             serializer.save(owner=request.user, filename=upload.name)
-            return StructuredResponse(serializer.data, status.HTTP_201_CREATED)
+            return StructuredResponse(status.HTTP_201_CREATED, serializer.data)
         else:
             return StructuredResponse(
-                None,
                 status.HTTP_400_BAD_REQUEST,
-                errors.INVALID_INPUT_4001,
-                serializer.errors,
+                error_code=errors.INVALID_INPUT_4001,
+                errors=serializer.errors,
             )
 
 
@@ -52,10 +51,10 @@ class ResourceInstance(GenericAPIView):
     def get(self, request, pk, format=None):
         resource = Resource.objects.get(id=pk)
         serializer = ResourceSerializer(resource)
-        return StructuredResponse(serializer.data, status.HTTP_200_OK)
+        return StructuredResponse(status.HTTP_200_OK, serializer.data)
 
     @exception_handler_wrapper
     def delete(self, request, pk, format=None):
         resource = Resource.objects.get(id=pk, owner=request.user)
         resource.delete()
-        return StructuredResponse({}, status.HTTP_204_NO_CONTENT)
+        return StructuredResponse(status.HTTP_204_NO_CONTENT)
