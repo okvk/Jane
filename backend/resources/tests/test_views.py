@@ -1,3 +1,5 @@
+import errno
+import os
 import uuid
 from PIL import Image
 from django.core.files.base import ContentFile
@@ -14,13 +16,23 @@ from utils import errors
 
 
 def create_image(
-    filename, size=(100, 100), image_mode="RGB", image_format="PNG"
+    filename,
+    size=(100, 100),
+    image_mode="RGB",
+    image_format="PNG",
+    path="temp/",
 ):
     """
     Generate a test image
     """
-    Image.new(image_mode, size).save(filename, image_format)
-    image_file = ContentFile(open(filename, "rb").read(), name=filename)
+    if not os.path.exists(path):
+        try:
+            os.makedirs(path)
+        except OSError as exc:  # Guard against race condition
+            if exc.errno != errno.EEXIST:
+                raise
+    Image.new(image_mode, size).save(path + filename, image_format)
+    image_file = ContentFile(open(path + filename, "rb").read(), name=filename)
     return image_file
 
 
@@ -40,6 +52,11 @@ class ResourceTests(TestCase):
         )
         self.factory = APIRequestFactory()
 
+    # deleting the user will remove the user, and resource CASCADE including file in the disk
+    def tearDown(self):
+        self.user_a.delete()
+        self.user_b.delete()
+
     def create_resource_instance(
         self, filename="test.png", filetype="IMAGE", file_item=None, user=None
     ):
@@ -57,11 +74,6 @@ class ResourceTests(TestCase):
         force_authenticate(request, user=user or self.user_a)
         response = ResourceList.as_view()(request)
         return response
-
-    # deleting the user will remove the user, and resource CASCADE including file in the disk
-    def tearDown(self):
-        self.user_a.delete()
-        self.user_b.delete()
 
     def test_adding_an_image_resource(self):
         response = self.create_resource_instance()
