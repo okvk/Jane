@@ -2,7 +2,13 @@ import "braft-editor/dist/index.css";
 import React from "react";
 import PropTypes from "prop-types";
 import BraftEditor from "braft-editor";
+import Markdown from "braft-extensions/dist/markdown";
+
 import PreviewHtml from "./PreviewHtml";
+
+const options = {
+  excludeControls: ["letter-spacing", "line-height", "font-size"]
+};
 
 class Editor extends React.Component {
   preview = () => {
@@ -18,21 +24,9 @@ class Editor extends React.Component {
 
   render() {
     const { theme, editorState, handleEditorChange } = this.props;
-    let excludeControls = [
-      "letter-spacing",
-      "line-height",
-      "clear",
-      "headings",
-      "list-ol",
-      "list-ul",
-      "remove-styles",
-      "superscript",
-      "subscript",
-      "hr",
-      "text-align"
-    ];
+
     if (theme === "full") {
-      excludeControls = [];
+      options.excludeControls = [];
     }
 
     const extendControls = [
@@ -44,12 +38,14 @@ class Editor extends React.Component {
       }
     ];
 
+    BraftEditor.use(Markdown(options));
+
     return (
       <div className="editor-wrapper">
         <BraftEditor
           // TODO: Using Throttle to improve performance
           onChange={editor => handleEditorChange(editor)}
-          excludeControls={excludeControls}
+          excludeControls={options.excludeControls}
           extendControls={extendControls}
           contentStyle={{ height: 800 }}
         />

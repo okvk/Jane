@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Layout, Button, Input } from "antd";
 import { connect } from "react-redux";
 import BraftEditor from "braft-editor";
-import "./NewArticle.scss";
 import { Editor, TagSelector } from "components";
 import { createArticle, getTagList } from "redux/actions/articleActions";
+
+import "./NewArticle.scss";
 
 class Write extends Component {
   state = {
@@ -53,7 +54,7 @@ class Write extends Component {
             </div>
             <div className="write-button">
               <div className="wrtie-history">
-                <Button type="primary" size="default">
+                <Button type="primary" size="default" className="editor-button">
                   历史
                 </Button>
               </div>
@@ -62,6 +63,7 @@ class Write extends Component {
                   type="primary"
                   size="default"
                   disabled={!title}
+                  className="editor-button"
                   onClick={this.onArticleSubmit}
                 >
                   发布

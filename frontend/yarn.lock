@@ -1757,6 +1757,15 @@ braft-editor@^2.3.2:
     draftjs-utils "^0.9.4"
     immutable "~3.7.4"
 
+braft-extensions@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/braft-extensions/-/braft-extensions-0.0.20.tgz#04408cabb79b3d7b9574d6e5d9269661bb781cf1"
+  integrity sha512-BOMDh+Hcrd7iTjZThKfBVyjTuCsYWrsUs/O+rvmQQ2Yg/ifDJKBso4zsnd5BuEsktVU+Ziwq87aZ3pOdTsYPXQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    braft-convert "^2.1.10"
+    braft-utils "^3.0.8"
+
 braft-finder@^0.0.18:
   version "0.0.18"
   resolved "https://registry.yarnpkg.com/braft-finder/-/braft-finder-0.0.18.tgz#5f43659b61290081fb2920cc3ce1f62e31e9da57"
