@@ -71,6 +71,7 @@ class CodeMirrorEditor extends React.Component {
   render() {
     const editor = React.createElement("textarea", {
       ref: this.editorRef,
+      placeholder: "What's on your mind...",
       value: this.props.value,
       readOnly: this.props.readOnly,
       onChange: this.props.onChange,

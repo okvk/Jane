@@ -14,7 +14,7 @@ class Write extends Component {
     selectedTags: [],
     editorState: "",
     title: "",
-    theme: "monokai",
+    theme: "default",
     preview: false
   };
 
