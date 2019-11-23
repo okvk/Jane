@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getArticle } from "redux/actions/articleActions";
 import { BlogLayout } from "layouts";
+import { Separator, Tag, MarkdownEditor } from "components";
 import "./ArticleDetail.scss";
-import { Separator, Tag } from "components";
 
 class ArticlePage extends Component {
   componentDidMount() {
@@ -32,13 +32,9 @@ class ArticlePage extends Component {
             <span className="author">作者: {article.author}</span>
           </div>
           <Separator />
-          <div
-            className="content"
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: article.content
-            }}
-          />
+          <div className="content">
+            <MarkdownEditor src={article.raw} />
+          </div>
           <Separator />
           {article.tags &&
             article.tags.map(tag => <Tag {...tag} key={tag.name} />)}
