@@ -6,24 +6,25 @@ import django.utils.timezone
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('tags', '0001_initial'),
-    ]
+    dependencies = [("tags", "0001_initial")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='tag',
-            name='created',
-        ),
+        migrations.RemoveField(model_name="tag", name="created"),
         migrations.AddField(
-            model_name='tag',
-            name='ctime',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='created at'),
+            model_name="tag",
+            name="ctime",
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=django.utils.timezone.now,
+                verbose_name="created at",
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='tag',
-            name='mtime',
-            field=models.DateTimeField(auto_now=True, verbose_name='updated at'),
+            model_name="tag",
+            name="mtime",
+            field=models.DateTimeField(
+                auto_now=True, verbose_name="updated at"
+            ),
         ),
     ]

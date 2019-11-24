@@ -8,35 +8,67 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('articles', '0009_auto_20190617_2031'),
-    ]
+    dependencies = [("articles", "0009_auto_20190617_2031")]
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64, unique=True)),
-                ('description', models.CharField(max_length=256)),
-                ('counts', models.PositiveIntegerField(default=0)),
-                ('created', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64, unique=True)),
+                ("description", models.CharField(max_length=256)),
+                ("counts", models.PositiveIntegerField(default=0)),
+                ("created", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name='TagMap',
+            name="TagMap",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('aid', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tag_maps', to='articles.Article', verbose_name='article')),
-                ('tid', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tag_maps', to='tags.Tag', verbose_name='tag')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "aid",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tag_maps",
+                        to="articles.Article",
+                        verbose_name="article",
+                    ),
+                ),
+                (
+                    "tid",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tag_maps",
+                        to="tags.Tag",
+                        verbose_name="tag",
+                    ),
+                ),
             ],
-            options={
-                'unique_together': {('aid', 'tid')},
-            },
+            options={"unique_together": {("aid", "tid")}},
         ),
         migrations.AddField(
-            model_name='tag',
-            name='articles',
-            field=models.ManyToManyField(related_name='tags', through='tags.TagMap', to='articles.Article'),
+            model_name="tag",
+            name="articles",
+            field=models.ManyToManyField(
+                related_name="tags",
+                through="tags.TagMap",
+                to="articles.Article",
+            ),
         ),
     ]
