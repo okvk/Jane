@@ -7,7 +7,7 @@ import history from "helpers/history";
 import { Footer, Header } from "layouts";
 import AppRoutes from "routes";
 
-import "./App.scss";
+import "./App.module.scss";
 
 class App extends Component {
   componentDidMount() {

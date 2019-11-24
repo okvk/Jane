@@ -6,4 +6,5 @@ $active-button-color: #1890ff;
 .ant-layout-content {
   min-height: calc(100vh - #{$header-height} - #{$footer-height});
   margin-top: $header-height;
+  padding: 0 50px;
 }
