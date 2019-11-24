@@ -7,8 +7,8 @@ from .models import Tag, TagMap
 
 class TagSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
-    created = serializers.ReadOnlyField()
+    ctime = serializers.ReadOnlyField()
 
     class Meta:
         model = Tag
-        fields = ("id", "name", "description", "counts", "created")
+        fields = ("id", "name", "description", "counts", "ctime")

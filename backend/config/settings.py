@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import datetime
+import os
 
+from config import config
 from config.config import *
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +40,7 @@ INSTALLED_APPS = [
     # Self-defined apps
     "accounts",
     "articles",
+    "resources",
     "tags",
 ]
 
@@ -105,7 +109,7 @@ JWT_AUTH = {
     "JWT_PAYLOAD_HANDLER": "rest_framework_jwt.utils.jwt_payload_handler",
     "JWT_PAYLOAD_GET_USER_ID_HANDLER": "rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler",
     # Overwrite the default JWT response
-    "JWT_SECRET_KEY": SECRET_KEY,
+    "JWT_SECRET_KEY": config.SECRET_KEY,
     "JWT_GET_USER_SECRET_KEY": None,
     "JWT_PUBLIC_KEY": None,
     "JWT_PRIVATE_KEY": None,

@@ -29,7 +29,7 @@ const BlogSidebar = props => (
       <div className="blog-avatar">
         <Avatar
           className="blog-avatar-icon"
-          src={`${BASE_URL}/${props.avatar}`}
+          // src={`${BASE_URL}/${props.avatar}`}
         />
       </div>
       <div className="blog-username">{props.username}</div>

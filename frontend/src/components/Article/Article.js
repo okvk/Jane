@@ -22,7 +22,7 @@ const Article = props => (
     <div className="article-meta">
       <div className="article-time">
         <Icon type="clock-circle" className="article-clock" />
-        {dateFormat(props.created)}
+        {dateFormat(props.ctime)}
       </div>
       <div className="article-tags">
         {props.tags.map(tag => (

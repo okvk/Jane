@@ -16,10 +16,12 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
+temp/
 
 # development files
 venv/
 .idea/
+.vscode
 
 # dependencies
 /node_modules

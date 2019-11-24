@@ -9,6 +9,7 @@ import openNotification from "./Notification/Notification";
 import Separator from "./Separator/Separator";
 import Tag from "./Tag/Tag";
 import TagSelector from "./TagSelector/TagSelector";
+import { MarkdownEditor } from "./Editor/MarkdownEditor";
 
 export {
   Article,
@@ -16,6 +17,7 @@ export {
   BlogSidebar,
   DropdownMenu,
   Editor,
+  MarkdownEditor,
   MenuMarkup,
   NavBar,
   openNotification,

@@ -1,13 +1,13 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 
 from .models import Tag, TagMap
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "description", "counts", "created")
+    list_display = ("id", "name", "description", "counts", "ctime")
     ordering = ["counts"]
     actions = ["combine_tags"]
-    readonly_fields = ("id", "created")
+    readonly_fields = ("id", "ctime")
 
     def combine_tags(self, request, queryset):
         """

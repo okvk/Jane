@@ -1,0 +1,75 @@
+.page-header {
+  color: #fff;
+  background: #191818;
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.markdown-editor {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+.editor,
+.editor-form {
+  height: 100%;
+}
+
+.editor-pane {
+  display: block;
+  width: 80%;
+  overflow: auto;
+  min-height: 420px;
+}
+.editor-preview-mode {
+  width: 55%;
+}
+.result-pane {
+  width: 45%;
+  padding-left: 12px;
+  display: block;
+  overflow: auto;
+}
+
+.editor textarea {
+  padding: 0px;
+  border: 0px;
+}
+
+.CodeMirror {
+  height: 100%;
+  font-size: 16px;
+  -moz-box-shadow: inset 0 0 2px #a8dcf5;
+  -webkit-box-shadow: inset 0 0 2px #a8dcf5;
+  box-shadow: inset 0 0 2px #a8dcf5;
+}
+
+.CodeMirror pre.CodeMirror-placeholder {
+  opacity: 0.5;
+}
+
+pre {
+  border: 1px solid #ccc;
+}
+
+blockquote {
+  color: #666;
+  margin: 0;
+  padding-left: 3em;
+  border-left: 0.5em #eee solid;
+}
+
+tr {
+  border-top: 1px solid #c6cbd1;
+  background: #fff;
+}
+
+th,
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+table tr:nth-child(2n) {
+  background: #f6f8fa;
+}

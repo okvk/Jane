@@ -1,8 +1,10 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+
 import routes from "./routes";
 
-const registryRoutes = _routes => _routes.map((route, i) => <RouteWrapper key={i} {...route} />);
+const registryRoutes = _routes =>
+  _routes.map((route, i) => <RouteWrapper key={i} {...route} />);
 
 const RouteWrapper = route => (
   <React.Fragment>
@@ -18,4 +20,5 @@ const RouteWrapper = route => (
   </React.Fragment>
 );
 
-export { registryRoutes, routes };
+const AppRoutes = () => <Switch>{registryRoutes(routes)}</Switch>;
+export default AppRoutes;

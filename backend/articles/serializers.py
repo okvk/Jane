@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+from html.parser import HTMLParser
 from rest_framework import serializers
 
 from .models import Article
@@ -17,8 +18,8 @@ class ArticleSerializer(serializers.ModelSerializer):
     tags = serializers.SerializerMethodField()
     author = serializers.ReadOnlyField(source="author.username")
     is_deleted = serializers.ReadOnlyField()
-    last_modified = serializers.ReadOnlyField()
-    created = serializers.ReadOnlyField()
+    ctime = serializers.ReadOnlyField()
+    mtime = serializers.ReadOnlyField()
 
     class Meta:
         model = Article
@@ -32,16 +33,18 @@ class ArticleSerializer(serializers.ModelSerializer):
             "is_published",
             "is_sticky",
             "is_deleted",
-            "last_modified",
             "tags_list",
             "tags",
-            "created",
+            "ctime",
+            "mtime",
         )
 
     def cleanhtml(self, raw_html):
         cleanr = re.compile("<.*?>")
         cleantext = re.sub(cleanr, "", raw_html)
-        return cleantext
+        html_parser = HTMLParser()
+        plaintext = html_parser.unescape(cleantext)
+        return plaintext
 
     def create(self, validated_data):
         tag_list = validated_data.pop("tags_list")

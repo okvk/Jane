@@ -10,7 +10,9 @@
 .write-button {
   display: flex;
 }
-button {
+button,
+.write-preview,
+.write-theme {
   margin-right: 12px;
 }
 .article-title {
@@ -27,4 +29,5 @@ button {
 }
 .article-editor {
   margin-top: 12px;
+  width: 100%;
 }

@@ -1,16 +1,21 @@
 import React, { Component } from "react";
-import { Layout, Button, Input } from "antd";
+import { Layout, Button, Input, Switch, Select } from "antd";
 import { connect } from "react-redux";
-import BraftEditor from "braft-editor";
-import "./NewArticle.scss";
-import { Editor, TagSelector } from "components";
+import { Editor, TagSelector, MarkdownEditor } from "components";
 import { createArticle, getTagList } from "redux/actions/articleActions";
+import "./NewArticle.scss";
+
+const ReactDOMServer = require("react-dom/server");
+
+const { Option } = Select;
 
 class Write extends Component {
   state = {
     selectedTags: [],
-    editorState: BraftEditor.createEditorState(),
-    title: ""
+    editorState: "",
+    title: "",
+    theme: "default",
+    preview: false
   };
 
   componentDidMount() {
@@ -18,8 +23,12 @@ class Write extends Component {
     this.props.dispatch(getTagList());
   }
 
-  handleEditorChange = editorState => {
-    this.setState({ editorState });
+  toggleMarkdownPreview = () => {
+    this.setState(prevState => ({ preview: !prevState.preview }));
+  };
+
+  handleEditorChange = evt => {
+    this.setState({ editorState: evt.target.value });
   };
 
   onTitleChange = event => {
@@ -31,19 +40,29 @@ class Write extends Component {
   };
 
   onArticleSubmit = () => {
+    const html = ReactDOMServer.renderToStaticMarkup(
+      <MarkdownEditor src={this.state.editorState} />
+    );
+
     const data = {
       title: this.state.title,
-      content: this.state.editorState.toHTML(),
-      raw: this.state.editorState.toRAW(),
+      content: html,
+      raw: this.state.editorState,
       is_published: true,
       tags_list: this.state.selectedTags.map(tag => tag.key)
     };
     this.props.dispatch(createArticle(data));
   };
 
+  changeTheme = theme => {
+    this.setState({ theme });
+  };
+
   render() {
+    // For more them choice, view https://codemirror.net/demo/theme.html
+    const themeList = ["default", "monokai", "idea", "eclipse"];
     const { tags } = this.props;
-    const { title, editorState, selectedTags } = this.state;
+    const { title, editorState, selectedTags, preview, theme } = this.state;
     return (
       <Layout.Content style={{ padding: "0 50px" }}>
         <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
@@ -52,6 +71,22 @@ class Write extends Component {
               shady last modified at Yesterday 18:34
             </div>
             <div className="write-button">
+              <div className="write-theme">
+                <Select
+                  defaultValue="monokai"
+                  style={{ width: 120 }}
+                  onChange={this.changeTheme}
+                >
+                  {themeList.map(item => (
+                    <Option key={item} value={item}>
+                      {item}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+              <div className="write-preview">
+                <Switch onChange={this.toggleMarkdownPreview} />
+              </div>
               <div className="wrtie-history">
                 <Button type="primary" size="default">
                   历史
@@ -89,7 +124,8 @@ class Write extends Component {
               <Editor
                 editorState={editorState}
                 handleEditorChange={this.handleEditorChange}
-                theme="Compact"
+                theme={theme}
+                preview={preview}
               />
             </div>
           </div>

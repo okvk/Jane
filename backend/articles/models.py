@@ -2,7 +2,6 @@ from django.db import models
 from accounts.models import User
 
 
-# Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length=256)
     summary = models.CharField(max_length=512, null=True)
@@ -17,11 +16,11 @@ class Article(models.Model):
     is_sticky = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    last_modified = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
+    ctime = models.DateTimeField(verbose_name="posted at", auto_now_add=True)
+    mtime = models.DateTimeField(verbose_name="updated at", auto_now=True)
 
     class Meta:
-        ordering = ["is_sticky", "-last_modified"]
+        ordering = ["is_sticky", "-mtime"]
 
     def __str__(self):
         return self.title
