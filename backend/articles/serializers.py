@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+from html.parser import HTMLParser
 from rest_framework import serializers
 
 from .models import Article
@@ -41,7 +42,9 @@ class ArticleSerializer(serializers.ModelSerializer):
     def cleanhtml(self, raw_html):
         cleanr = re.compile("<.*?>")
         cleantext = re.sub(cleanr, "", raw_html)
-        return cleantext
+        html_parser = HTMLParser()
+        plaintext = html_parser.unescape(cleantext)
+        return plaintext
 
     def create(self, validated_data):
         tag_list = validated_data.pop("tags_list")
