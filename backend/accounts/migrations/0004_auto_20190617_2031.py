@@ -5,59 +5,71 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('accounts', '0003_user_avatar'),
-    ]
+    dependencies = [("accounts", "0003_user_avatar")]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='avatar',
-            field=models.ImageField(blank=True, null=True, upload_to='media/account/photos/%Y/%M'),
+            model_name="user",
+            name="avatar",
+            field=models.ImageField(
+                blank=True, null=True, upload_to="media/account/photos/%Y/%M"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='date_of_birth',
-            field=models.DateField(null=True, verbose_name='birthday'),
+            model_name="user",
+            name="date_of_birth",
+            field=models.DateField(null=True, verbose_name="birthday"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='email',
-            field=models.EmailField(max_length=255, unique=True, verbose_name='email'),
+            model_name="user",
+            name="email",
+            field=models.EmailField(
+                max_length=255, unique=True, verbose_name="email"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='is_active',
-            field=models.BooleanField(default=True, verbose_name='is active'),
+            model_name="user",
+            name="is_active",
+            field=models.BooleanField(default=True, verbose_name="is active"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='is_admin',
-            field=models.BooleanField(default=False, verbose_name='is admin'),
+            model_name="user",
+            name="is_admin",
+            field=models.BooleanField(default=False, verbose_name="is admin"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='joined',
-            field=models.DateTimeField(auto_now_add=True, verbose_name='joined at'),
+            model_name="user",
+            name="joined",
+            field=models.DateTimeField(
+                auto_now_add=True, verbose_name="joined at"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='motto',
-            field=models.CharField(max_length=200, null=True, verbose_name='motto'),
+            model_name="user",
+            name="motto",
+            field=models.CharField(
+                max_length=200, null=True, verbose_name="motto"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='nickname',
-            field=models.CharField(max_length=32, null=True, verbose_name='nickname'),
+            model_name="user",
+            name="nickname",
+            field=models.CharField(
+                max_length=32, null=True, verbose_name="nickname"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='real_name',
-            field=models.CharField(max_length=32, null=True, verbose_name='real name'),
+            model_name="user",
+            name="real_name",
+            field=models.CharField(
+                max_length=32, null=True, verbose_name="real name"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='username',
-            field=models.CharField(max_length=32, null=True, unique=True, verbose_name='username'),
+            model_name="user",
+            name="username",
+            field=models.CharField(
+                max_length=32, null=True, unique=True, verbose_name="username"
+            ),
         ),
     ]

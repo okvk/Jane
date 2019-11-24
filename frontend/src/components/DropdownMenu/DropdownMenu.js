@@ -12,7 +12,7 @@ const DropdownMenu = props => {
       <Menu
         key="user"
         mode="horizontal"
-        onClick={() => { }}
+        onClick={() => {}}
         style={{ lineHeight: "63px" }}
         className="user-section"
       >
@@ -28,7 +28,7 @@ const DropdownMenu = props => {
           <Menu.Item key="profile">
             <Link to={`/${props.user.username}`} key="profile">
               Profile
-          </Link>
+            </Link>
           </Menu.Item>
           <Menu.Item key="SignOut" onClick={props.onLogout}>
             Logout

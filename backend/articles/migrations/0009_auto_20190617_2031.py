@@ -7,41 +7,29 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('articles', '0008_article_raw'),
-    ]
+    dependencies = [("articles", "0008_article_raw")]
 
     operations = [
-        migrations.AlterUniqueTogether(
-            name='tagmap',
-            unique_together=None,
-        ),
-        migrations.RemoveField(
-            model_name='tagmap',
-            name='aid',
-        ),
-        migrations.RemoveField(
-            model_name='tagmap',
-            name='tid',
-        ),
+        migrations.AlterUniqueTogether(name="tagmap", unique_together=None),
+        migrations.RemoveField(model_name="tagmap", name="aid"),
+        migrations.RemoveField(model_name="tagmap", name="tid"),
         migrations.AlterModelOptions(
-            name='article',
-            options={'ordering': ['is_sticky', '-last_modified']},
+            name="article",
+            options={"ordering": ["is_sticky", "-last_modified"]},
         ),
         migrations.RenameField(
-            model_name='article',
-            old_name='is_stickied',
-            new_name='is_sticky',
+            model_name="article", old_name="is_stickied", new_name="is_sticky"
         ),
         migrations.AlterField(
-            model_name='article',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='articles', to=settings.AUTH_USER_MODEL, verbose_name='author'),
+            model_name="article",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="articles",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="author",
+            ),
         ),
-        migrations.DeleteModel(
-            name='Tag',
-        ),
-        migrations.DeleteModel(
-            name='TagMap',
-        ),
+        migrations.DeleteModel(name="Tag"),
+        migrations.DeleteModel(name="TagMap"),
     ]

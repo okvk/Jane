@@ -20,5 +20,5 @@ const RouteWrapper = route => (
   </React.Fragment>
 );
 
-const AppRoutes = () => (<Switch>{registryRoutes(routes)}</Switch>);
+const AppRoutes = () => <Switch>{registryRoutes(routes)}</Switch>;
 export default AppRoutes;
