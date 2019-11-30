@@ -15,6 +15,7 @@
     "less": "^3.9.0",
     "lodash": "^4.17.13",
     "lodash.mergewith": "^4.6.2",
+    "mermaid": "^8.4.2",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
