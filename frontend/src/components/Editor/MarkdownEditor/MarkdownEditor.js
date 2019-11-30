@@ -1,7 +1,7 @@
 import React from "react";
 import toc from "remark-toc";
 import PropTypes from "prop-types";
-import CodeBlock from "./CodeBlock";
+import CodeNodeRender from "./CodeNodeRender";
 import MarkdownRender from "./MathRender";
 import "./MarkdownEditor.scss";
 
@@ -13,7 +13,7 @@ const MarkdownEditor = props => {
       source={src}
       skipHtml={skipHtml}
       escapeHtml={escapeHtml}
-      renderers={{ code: CodeBlock }}
+      renderers={{ code: CodeNodeRender }}
       plugins={[toc]}
     />
   );
