@@ -5,19 +5,28 @@ python:
 services:
   - mysql
 env:
-  - DJANGO=2.2 JANE_DEBUG=True JANE_SECRET_KEY="gakv40vku62um^qvapdzy2k1dsdsdffdfdfdfdd8" JANE_DB_USERNAME=root JANE_DB_HOST=127.0.0.1 JANE_DB_PASSWORD="" JANE_DB_PORT=3306 JANE_DB_NAME=test JANE_SENTRY=https://837eefe94ce7f@sentry.io/13700
+  global:
+    - DJANGO=2.2
+    - JANE_DEBUG=True
+    - JANE_SECRET_KEY="gakv40vku62um^qvapdzy2k1dsdsdffdfdfdfdd8"
+    - JANE_DB_USERNAME=root
+    - JANE_DB_HOST=127.0.0.1
+    - JANE_DB_PASSWORD=""
+    - JANE_DB_PORT=3306
+    - JANE_DB_NAME=test
+    - JANE_SENTRY=https://uselesskey@sentry.io/10086
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
-  - nvm install v10.15.0
+  - travis_retry nvm install v10.15.0
   - nvm use v10.15.0
   - nvm alias default v10.15.0
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2
   - export PATH="$HOME/.yarn/bin:$PATH"
 install:
-  - pip install -r backend/requirements/development.pip
+  - travis_retry pip install -r backend/requirements/development.pip
   - cd $TRAVIS_BUILD_DIR/frontend && yarn install
 script:
-  - cd $TRAVIS_BUILD_DIR/backend && python manage.py check
+  - cd $TRAVIS_BUILD_DIR/backend && python3 manage.py check
   - cd $TRAVIS_BUILD_DIR/backend && python3 manage.py test
   - cd $TRAVIS_BUILD_DIR && pre-commit run --all-files
 # vim:ft=ansible
