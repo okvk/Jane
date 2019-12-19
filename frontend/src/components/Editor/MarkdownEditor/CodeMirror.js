@@ -26,6 +26,9 @@ class CodeMirrorEditor extends React.Component {
     if (!isTextArea) {
       this.editor = CodeMirror.fromTextArea(this.editorRef.current, this.props);
       this.editor.on("change", this.handleChange);
+      this.editor.on("dragover", (_instance, event) => {
+        event.preventDefault();
+      });
     }
   }
 
