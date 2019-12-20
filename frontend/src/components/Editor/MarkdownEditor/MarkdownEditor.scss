@@ -34,6 +34,7 @@
 .editor textarea {
   padding: 0px;
   border: 0px;
+  word-wrap: break-word;
 }
 
 .CodeMirror {
@@ -74,10 +75,10 @@ table tr:nth-child(2n) {
   background: #f6f8fa;
 }
 
-#editor-wrapper .ant-upload-drag-container {
+#editor-wrapper .ant-upload-drag-container,
+#editor-wrapper .ant-upload.ant-upload-drag .ant-upload-btn {
   display: block;
 }
-
 #editor-wrapper .ant-upload.ant-upload-drag .ant-upload {
   padding: 0px;
 }

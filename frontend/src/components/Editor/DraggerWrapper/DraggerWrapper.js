@@ -1,10 +1,12 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import React, { Component } from "react";
-import { Upload, message } from "antd";
+import { message } from "antd";
 import { BASE_URL } from "configs/settings";
 import articlesRequest from "middlewares/articles";
+import DraggerInstance from "./DraggerInstance";
+import UploadedFileList from "./UploadedFileList";
+import "./DraggerWrapper.scss";
 
-const { Dragger } = Upload;
 class DraggerWrapper extends Component {
   constructor(props) {
     super(props);
@@ -15,13 +17,6 @@ class DraggerWrapper extends Component {
 
   onChange = info => {
     const { file, fileList } = info;
-    if (file.status === "done") {
-      message.success(`${file.name} file uploaded successfully.`);
-    } else if (file.status === "error") {
-      message.error(`${file.name} file upload failed.`);
-    } else if (file.status === "removed") {
-      message.success(`${file.name} file removed successfully.`);
-    }
     this.setState({
       fileList: fileList.map(item => {
         if (item.uid === file.uid) {
@@ -30,32 +25,34 @@ class DraggerWrapper extends Component {
         return item;
       })
     });
+
+    if (file.status === "removed") {
+      message.success(`${file.name} file removed successfully.`);
+      this.setState({
+        fileList: fileList.filter(item => item.uid !== file.uid)
+      });
+    } else if (file.status === "done") {
+      message.success(`${file.name} file uploaded successfully.`);
+    } else if (file.status === "error") {
+      message.error(`${file.name} file upload failed.`);
+    }
   };
 
-  // Showing file dragging icon
-  dragHandler = event => {
-    event.dataTransfer.dropEffect = "copy";
-  };
-
-  onSuccess = (ret, file) => {
+  onSuccess = (ret, file, data = {}) => {
     const uploadedFile = {
-      name: file.name,
-      uid: file.uid,
+      name: ret.filename,
+      uid: data.uid || file.uid,
       fileId: ret.id,
       percent: 100,
       status: "done",
-      url: `/media/${ret.upload}`
+      url: `${BASE_URL}/media/${ret.upload}`
     };
     this.onChange({ file: uploadedFile, fileList: this.state.fileList });
-    // Adding image tag to editor
-    // TODO: Dynamic change image height/width setting
-    let fileComponent;
-    if (file.fileType === "IMAGE") {
-      fileComponent = `![${uploadedFile.name}](${BASE_URL}${uploadedFile.url})`;
-    } else {
-      fileComponent = `[${uploadedFile.name}](${BASE_URL}${uploadedFile.url})`;
-    }
-    const editorState = this.props.editorState.concat(fileComponent);
+
+    // Markdown syntax string: Auto generate for uploaded file inside editor
+    const editorState = this.props.editorState.concat(
+      this.getMarkdownText(uploadedFile)
+    );
     this.props.changeEditorState(editorState);
   };
 
@@ -63,38 +60,38 @@ class DraggerWrapper extends Component {
     console.log("onError", err);
   };
 
-  onProgress = ({ percent }, file) => {
+  onProgress = ({ percent }, file, data = {}) => {
     const uploadingFile = {
-      name: file.name,
-      uid: file.uid,
+      name: data.filename || file.name,
+      uid: data.uid || file.uid,
       percent: parseInt(percent, 10),
       status: "uploading"
     };
     this.onChange({ file: uploadingFile, fileList: this.state.fileList });
   };
 
-  customRequest = ({ file }) => {
-    // construct form-data
+  customRequest = ({ file, data }) => {
+    // construct form-data for file upload
     const formData = new FormData();
-    formData.append("upload", file);
-    if (file.name.endsWith("png") || file.name.endsWith("jpg")) {
-      formData.append("filetype", "IMAGE");
-      file.fileType = "IMAGE";
-    } else {
-      formData.append("filetype", "ATTACHMENT");
-      file.fileType = "ATTACHMENT";
+    if (data) {
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+      });
     }
+    formData.append("upload", file);
+    formData.append("filetype", this.getFileType(file));
     articlesRequest
       .uploadFile(formData, {
         onUploadProgress: ({ total, loaded }) => {
           this.onProgress(
             { percent: Math.round((loaded / total) * 100).toFixed(2) },
-            file
+            file,
+            data
           );
         }
       })
       .then(({ data: response }) => {
-        this.onSuccess(response, file);
+        this.onSuccess(response, file, data);
       })
       .catch(this.onError);
     return {
@@ -104,45 +101,132 @@ class DraggerWrapper extends Component {
     };
   };
 
-  componentDidMount = () => {
-    document.addEventListener("dragover", evt => this.dragHandler(evt));
+  // Generate blob file from chipboard and upload manually
+  pasteImage = event => {
+    const items = (event.clipboardData || event.originalEvent.clipboardData)
+      .items;
+    Object.keys(items).forEach(index => {
+      const item = items[index];
+      if (item.kind === "file") {
+        const blob = item.getAsFile();
+        const uid = `screenshot-${Math.random()
+          .toString(36)
+          .substring(2, 12)}`;
+        const filename = `${uid}.png`;
+        // Manually upload image file
+        this.customRequest({ file: blob, data: { filename, uid } });
+        this.setState(prevState => ({
+          fileList: prevState.fileList.concat({
+            file: blob,
+            filename,
+            name: filename,
+            uid
+          })
+        }));
+      }
+    });
   };
 
-  componentWillUnmount = () => {
-    document.removeEventListener("dragover", evt => this.dragHandler(evt));
+  getMarkdownText = file => {
+    const filetype = this.getFileType(file);
+    let fileComponent;
+    if (filetype === "IMAGE") {
+      fileComponent = `![${file.name}](${file.url})`;
+    } else {
+      fileComponent = `[${file.name}](${file.url})`;
+    }
+    return fileComponent;
+  };
+
+  getFileType = file => {
+    if (
+      file.name.endsWith("png") ||
+      file.name.endsWith("jpg") ||
+      file.name.endsWith("jpeg")
+    ) {
+      return "IMAGE";
+    }
+    return "ATTACHMENT";
   };
 
   onRemove = file => {
-    console.log(file);
     articlesRequest
       .deleteFile(file.fileId)
       .then()
       .catch(this.onError);
+    this.onChange({
+      file: { ...file, status: "removed" },
+      fileList: this.state.fileList
+    });
+  };
+
+  // Copy file markdown syntax to user chipboard
+  onCopy = file => {
+    const str = this.getMarkdownText(file);
+    const el = document.createElement("textarea");
+    el.value = str;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    message.success(
+      `${file.name} markdown syntax is copied to chipboard successfully`
+    );
+  };
+
+  // Showing file dragging icon
+  dragHandler = event => {
+    event.dataTransfer.dropEffect = "copy";
+  };
+
+  componentDidMount = () => {
+    document.addEventListener("dragover", evt => this.dragHandler(evt));
+    document.addEventListener("paste", evt => this.pasteImage(evt));
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener("dragover", evt => this.dragHandler(evt));
+    document.removeEventListener("paste", evt => this.pasteImage(evt));
   };
 
   render() {
     return (
-      <Dragger
-        multiple
-        customRequest={this.customRequest}
-        onChange={this.onChange}
-        onRemove={this.onRemove}
-        fileList={this.state.fileList}
-        openFileDialogOnClick={false}
-        showUploadList={{
-          showPreviewIcon: false,
-          showDownloadIcon: false,
-          showRemoveIcon: true
-        }}
-        style={{
-          height: "100%",
-          width: "100%",
-          border: "none",
-          padding: "0px"
-        }}
-      >
-        {this.props.children}
-      </Dragger>
+      <div className="editor-dragger-wrapper">
+        <DraggerInstance
+          multiple={false}
+          customRequest={this.customRequest}
+          onChange={this.onChange}
+          onRemove={this.onRemove}
+          fileList={this.state.fileList}
+          showUploadList={false}
+          style={{
+            height: "100%",
+            width: "100%",
+            border: "none",
+            padding: "0px"
+          }}
+        >
+          {this.props.children}
+        </DraggerInstance>
+
+        <DraggerInstance
+          customRequest={this.customRequest}
+          onChange={this.onChange}
+          onRemove={this.onRemove}
+          fileList={this.state.fileList}
+          openFileDialogOnClick
+        >
+          <p className="editor-dropzone">
+            Attach files by dragging & dropping, selecting or pasting them.
+          </p>
+        </DraggerInstance>
+
+        <UploadedFileList
+          fileList={this.state.fileList}
+          onDelete={this.onRemove}
+          onCopy={this.onCopy}
+        />
+      </div>
     );
   }
 }

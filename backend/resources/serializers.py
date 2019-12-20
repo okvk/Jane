@@ -12,7 +12,7 @@ from .models import Resource
 
 class ResourceSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
-    filename = serializers.ReadOnlyField()
+    filename = serializers.CharField(required=False)
     owner = serializers.ReadOnlyField(source="owner.id")
     ctime = serializers.ReadOnlyField()
 
