@@ -1,4 +1,4 @@
-import { get, post } from "./http";
+import { get, post, del } from "./http";
 
 export default {
   getTagList() {
@@ -12,5 +12,11 @@ export default {
   },
   getArticleList(username) {
     return get(`/articles/?username=${username}`);
+  },
+  uploadFile(data, config) {
+    return post("/resources/", data, config);
+  },
+  deleteFile(fileId) {
+    return del(`/resources/${fileId}`);
   }
 };

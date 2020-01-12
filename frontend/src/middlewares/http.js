@@ -53,9 +53,9 @@ function handleError(error, hideErr) {
   }
 }
 
-export function post(url, data, hideErr = false) {
+export function post(url, data, configuration = {}, hideErr = false) {
   return getAxios()
-    .post(url, processData(data))
+    .post(url, processData(data), configuration)
     .then(res => res.data)
     .catch(err => {
       handleError(err, hideErr);
