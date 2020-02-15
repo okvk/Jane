@@ -13,6 +13,13 @@ const Footer = () => {
         target="_blank"
       >
         Jane
+      </a>{" "}
+      <a
+        href="http://beian.miit.gov.cn/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        粤ICP备19067163号
       </a>
     </Layout.Footer>
   );
