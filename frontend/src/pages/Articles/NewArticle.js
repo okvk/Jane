@@ -31,6 +31,10 @@ class Write extends Component {
     this.setState({ editorState: evt.target.value });
   };
 
+  changeEditorState = editorState => {
+    this.setState({ editorState });
+  };
+
   onTitleChange = event => {
     this.setState({ title: event.target.value });
   };
@@ -123,6 +127,7 @@ class Write extends Component {
             <div className="article-editor">
               <Editor
                 editorState={editorState}
+                changeEditorState={this.changeEditorState}
                 handleEditorChange={this.handleEditorChange}
                 theme={theme}
                 preview={preview}

@@ -32,7 +32,8 @@ class ResourceList(GenericAPIView):
         serializer = ResourceSerializer(data=request.data)
         if serializer.is_valid():
             upload = serializer.validated_data["upload"]
-            serializer.save(owner=request.user, filename=upload.name)
+            filename = serializer.validated_data.get("filename", upload.name)
+            serializer.save(owner=request.user, filename=filename)
             return StructuredResponse(status.HTTP_201_CREATED, serializer.data)
         else:
             return StructuredResponse(

@@ -1,7 +1,9 @@
 import axios from "axios";
 import store from "redux/store";
-import { config, networkError, authError } from "configs/settings";
 import { push } from "react-router-redux";
+
+import { config } from "configs/settings";
+import { networkError, authError } from "constants/errors";
 import showNotification from "redux/actions/utils";
 
 function getAxios() {
@@ -18,7 +20,7 @@ function getAxios() {
     timeout: 60000,
     responseType: "json",
     transformRequest: [
-      function(data) {
+      data => {
         if (data instanceof FormData) return data;
         return JSON.stringify(data);
       }
@@ -33,7 +35,6 @@ function processData(data) {
 function handleError(error, hideErr) {
   if (!hideErr && error.response) {
     const status = error.response.status;
-    console.log(status === 500);
     if (status === config.httpCode.INTERNAL_SERVER_ERROR) {
       store.dispatch(showNotification(networkError));
     } else {
@@ -52,9 +53,9 @@ function handleError(error, hideErr) {
   }
 }
 
-export function post(url, data, hideErr = false) {
+export function post(url, data, configuration = {}, hideErr = false) {
   return getAxios()
-    .post(url, processData(data))
+    .post(url, processData(data), configuration)
     .then(res => res.data)
     .catch(err => {
       handleError(err, hideErr);

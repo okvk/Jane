@@ -1,16 +1,11 @@
 import React from "react";
-import { Layout, Breadcrumb } from "antd";
+import { Layout } from "antd";
 
 const Home = () => (
-  <Layout.Content style={{ padding: "0 50px" }}>
-    <Breadcrumb style={{ margin: "16px 0" }}>
-      <Breadcrumb.Item>Home</Breadcrumb.Item>
-      <Breadcrumb.Item>List</Breadcrumb.Item>
-      <Breadcrumb.Item>App</Breadcrumb.Item>
-    </Breadcrumb>
-    <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
-      Content
-    </div>
+  <Layout.Content style={{ textAlign: "center", paddingTop: "30vh" }}>
+    <span role="img" aria-label="developing" style={{ fontSize: 100 }}>
+      🚧
+    </span>
   </Layout.Content>
 );
 export default Home;

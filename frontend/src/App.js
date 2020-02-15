@@ -3,11 +3,11 @@ import { Router } from "react-router-dom";
 import { connect } from "react-redux";
 import { Layout } from "antd";
 
-import history from "helpers/history";
+import { history, ScrollToTop } from "helpers";
 import { Footer, Header } from "layouts";
 import AppRoutes from "routes";
 
-import "./App.scss";
+import "./App.module.scss";
 
 class App extends Component {
   componentDidMount() {
@@ -17,6 +17,7 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
+        <ScrollToTop />
         <Layout className="layout">
           <Header />
           <AppRoutes />
