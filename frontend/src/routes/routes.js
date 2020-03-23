@@ -1,6 +1,6 @@
 import { ArticlePages, Home, Login, Register, Tags } from "pages";
 
-const { ArticleDetail, ArticleList, NewArticle } = ArticlePages;
+const { ArticleDetail, ArticleList, NewArticle, ArticleEdit } = ArticlePages;
 
 const routes = [
   {
@@ -26,6 +26,10 @@ const routes = [
       {
         path: "/:username/articles/:articleId",
         component: ArticleDetail
+      },
+      {
+        path: "/:username/articles/:articleId/edit",
+        component: ArticleEdit
       },
       {
         path: "/:username/tags",

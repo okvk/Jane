@@ -4,7 +4,13 @@ const initialState = {
   user: {},
   tags: [],
   article: {},
-  articleList: []
+  articleList: [],
+  compose: {
+    articleId: null,
+    title: "",
+    editorState: "",
+    selectedTags: []
+  }
 };
 const articles = (state = initialState, action) => {
   switch (action.type) {
@@ -12,6 +18,14 @@ const articles = (state = initialState, action) => {
       return Object.assign({}, state, {
         user: action.user
       });
+    case TYPES.UPDATE_ARTICLE_EDITOR:
+      return {
+        ...state,
+        compose: {
+          ...state.compose,
+          ...action.data
+        }
+      };
     case TYPES.GET_TAG_LIST:
       return Object.assign({}, state, {
         tags: action.tags

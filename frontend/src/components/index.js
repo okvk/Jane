@@ -1,4 +1,5 @@
 import Article from "./Article/Article";
+import ArticleEdit from "./Article/ArticleEdit";
 import BaseFormItem from "./BaseForm/BaseFormItem";
 import BlogSidebar from "./BlogSidebar/BlogSidebar";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
@@ -13,6 +14,7 @@ import { MarkdownEditor } from "./Editor/MarkdownEditor";
 
 export {
   Article,
+  ArticleEdit,
   BaseFormItem,
   BlogSidebar,
   DropdownMenu,

@@ -1,3 +1,4 @@
+@import "App.module.scss";
 .article-item {
   margin-bottom: 12px;
   padding: 24px;
@@ -8,6 +9,16 @@
   font-size: 1.2em;
   font-weight: 600;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+.article-edit,
+.article-delete {
+  margin-right: 12px;
+  color: $active-button-color;
+  :hover {
+    color: #fa541c;
+  }
 }
 .article-summary {
   text-indent: 12px;

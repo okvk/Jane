@@ -33,13 +33,36 @@ export function createArticle(data) {
   return dispatch =>
     articlesRequest.createArticle(data).then(
       response => {
-        const articleId = response.data.id;
         dispatch(() =>
-          store.dispatch(push(`/${response.data.author}/articles/${articleId}`))
+          store.dispatch(
+            push(`/${response.data.author}/articles/${response.data.id}`)
+          )
         );
       },
       err => console.log(err)
     );
+}
+export function updateArticle(articleId, data) {
+  return dispatch =>
+    articlesRequest.updateArticle(articleId, data).then(
+      response => {
+        dispatch(() =>
+          store.dispatch(
+            push(`/${response.data.author}/articles/${response.data.id}`)
+          )
+        );
+      },
+      err => console.log(err)
+    );
+}
+
+export function composeArticle(data) {
+  return dispatch => {
+    dispatch({
+      type: TYPES.UPDATE_ARTICLE_EDITOR,
+      data
+    });
+  };
 }
 
 export function getArticle(articleId) {
@@ -56,7 +79,6 @@ export function getArticle(articleId) {
       err => console.log(err)
     );
 }
-
 export function getArticleList(username = null) {
   return dispatch =>
     articlesRequest.getArticleList(username).then(
@@ -67,6 +89,16 @@ export function getArticleList(username = null) {
             articles: response.data.records
           })
         );
+      },
+      err => console.log(err)
+    );
+}
+
+export function deleteArticle(articleId, username) {
+  return dispatch =>
+    articlesRequest.deleteArticle(articleId).then(
+      response => {
+        dispatch(() => store.dispatch(getArticleList(username)));
       },
       err => console.log(err)
     );
