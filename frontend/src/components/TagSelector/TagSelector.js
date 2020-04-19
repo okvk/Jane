@@ -8,12 +8,12 @@ const TagSelector = props => {
   const filteredTags = tags.filter(
     tag => !selectedItems.map(item => item.key).includes(tag.id)
   );
-
   return (
     <Select
       mode="multiple"
       placeholder={placeholder}
       labelInValue
+      defaultValue={selectedItems}
       onChange={selected => onChange(selected)}
       style={{ width: "100%", border: "none" }}
     >
