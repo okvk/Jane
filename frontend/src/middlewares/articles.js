@@ -1,4 +1,4 @@
-import { get, post, del } from "./http";
+import { get, post, del, put } from "./http";
 
 export default {
   getTagList() {
@@ -9,6 +9,12 @@ export default {
   },
   getArticle(articleId) {
     return get(`/articles/${articleId}/`);
+  },
+  deleteArticle(articleId) {
+    return del(`/articles/${articleId}/`);
+  },
+  updateArticle(articleId, data) {
+    return put(`/articles/${articleId}/`, data);
   },
   getArticleList(username) {
     return get(`/articles/?username=${username}`);
