@@ -48,12 +48,11 @@ class DraggerWrapper extends Component {
       url: `${BASE_URL}/media/${ret.upload}`
     };
     this.onChange({ file: uploadedFile, fileList: this.state.fileList });
-
-    // Markdown syntax string: Auto generate for uploaded file inside editor
-    const editorState = this.props.editorState.concat(
-      this.getMarkdownText(uploadedFile)
-    );
-    this.props.changeEditorState(editorState);
+    const editor = document.querySelector(".CodeMirror").CodeMirror;
+    const doc = editor.getDoc();
+    const cursor = doc.getCursor();
+    const imageString = `\n${this.getMarkdownText(uploadedFile)}\n`;
+    doc.replaceRange(imageString, cursor);
   };
 
   onError = err => {
