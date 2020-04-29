@@ -102,7 +102,7 @@ class ArticleList(GenericAPIView):
 
 
 class ArticleInstance(GenericAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     renderer_classes = (JSONRenderer, BrowsableAPIRenderer)
     serializer_class = ArticleSerializer
 
