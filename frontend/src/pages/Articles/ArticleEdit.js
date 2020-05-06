@@ -17,7 +17,7 @@ class ArticleEdit extends Component {
             selectedTags:
               tags &&
               tags.map(item => {
-                return { key: item.id, label: item.name };
+                return item.name;
               })
           })
         );

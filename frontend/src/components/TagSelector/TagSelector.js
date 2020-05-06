@@ -5,20 +5,17 @@ import "./TagSelector.scss";
 
 const TagSelector = props => {
   const { selectedItems, placeholder, tags, onChange } = props;
-  const filteredTags = tags.filter(
-    tag => !selectedItems.map(item => item.key).includes(tag.id)
-  );
+  const filteredTags = tags.filter(tag => !selectedItems.includes(tag.name));
   return (
     <Select
       mode="multiple"
       placeholder={placeholder}
-      labelInValue
-      defaultValue={selectedItems}
-      onChange={selected => onChange(selected)}
+      value={selectedItems}
+      onChange={onChange}
       style={{ width: "100%", border: "none" }}
     >
       {filteredTags.map(item => (
-        <Select.Option key={item.id} value={item.id}>
+        <Select.Option key={item.name} value={item.name}>
           {item.name}
         </Select.Option>
       ))}
@@ -28,12 +25,7 @@ const TagSelector = props => {
 
 TagSelector.propTypes = {
   placeholder: PropTypes.string,
-  selectedItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.number.isRequired,
-      label: PropTypes.string.isRequired
-    })
-  ).isRequired,
+  selectedItems: PropTypes.arrayOf(PropTypes.string.isRequired),
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -44,6 +36,7 @@ TagSelector.propTypes = {
 };
 
 TagSelector.defaultProps = {
+  selectedItems: [],
   placeholder: "选择合适的标签"
 };
 

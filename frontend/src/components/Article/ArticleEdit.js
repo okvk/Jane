@@ -58,7 +58,9 @@ class Write extends Component {
       content: html,
       raw: this.props.editorState,
       is_published: true,
-      tags_list: this.props.selectedTags.map(tag => tag.key)
+      tags_list: this.props.selectedTags
+        .map(item => this.props.tags.find(o => o.name === item))
+        .map(o => o.id)
     };
     if (this.props.articleId) {
       this.props.dispatch(updateArticle(this.props.articleId, data));
@@ -150,12 +152,7 @@ class Write extends Component {
 }
 
 Write.propTypes = {
-  selectedTags: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.number.isRequired,
-      label: PropTypes.string.isRequired
-    })
-  ),
+  selectedTags: PropTypes.arrayOf(PropTypes.string.isRequired),
   editorState: PropTypes.string,
   title: PropTypes.string,
   theme: PropTypes.string,

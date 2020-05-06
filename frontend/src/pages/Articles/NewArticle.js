@@ -7,6 +7,7 @@ class NewArticle extends Component {
   componentDidMount() {
     this.props.dispatch(
       composeArticle({
+        articleId: null,
         title: "",
         editorState: "",
         selectedTags: []
