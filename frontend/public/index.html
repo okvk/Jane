@@ -34,10 +34,6 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah"
-      rel="stylesheet"
-    />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -109,6 +105,14 @@
         z-index: -1;
         opacity: 0;
         transition: opacity 1s ease 0.5s, z-index 0.1s ease 1.5s;
+      }
+
+      body {
+        height: 100vh;
+      }
+
+      #root {
+        overflow: auto;
       }
     </style>
     <title>Jane</title>
