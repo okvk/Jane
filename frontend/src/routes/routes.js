@@ -1,4 +1,4 @@
-import { ArticlePages, Home, Login, Register, Tags } from "pages";
+import { ArticlePages, Home, Login, Register, Tags } from "@/pages";
 
 const { ArticleDetail, ArticleList, NewArticle, ArticleEdit } = ArticlePages;
 

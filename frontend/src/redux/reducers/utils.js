@@ -1,4 +1,4 @@
-import TYPES from "redux/types/utilsTypes";
+import TYPES from "@/redux/types/utilsTypes";
 
 const utils = (state = {}, action) => {
   switch (action.type) {

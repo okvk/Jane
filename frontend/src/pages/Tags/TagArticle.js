@@ -1,7 +1,8 @@
 import React from "react";
 import { Icon } from "antd";
-import { Separator } from "components";
 import { Link } from "react-router-dom";
+
+import { Separator } from "@/components";
 import "./Tags.scss";
 
 const dateFormat = date => {
@@ -38,4 +39,5 @@ const TagArticle = props => (
     </div>
   </div>
 );
+
 export default TagArticle;

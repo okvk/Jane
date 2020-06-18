@@ -1,10 +1,10 @@
 import axios from "axios";
-import store from "redux/store";
 import { push } from "react-router-redux";
 
-import { config } from "configs/settings";
-import { networkError, authError } from "constants/errors";
-import showNotification from "redux/actions/utils";
+import store from "@/redux/store";
+import { config } from "@/configs/settings";
+import { networkError, authError } from "@/constants/errors";
+import showNotification from "@/redux/actions/utils";
 
 function getAxios() {
   const token = localStorage.getItem("token") || null;

@@ -1,6 +1,5 @@
-import { openNotification } from "components";
-
-import TYPES from "redux/types/utilsTypes";
+import { openNotification } from "@/components";
+import TYPES from "@/redux/types/utilsTypes";
 
 function showNotification(msg) {
   openNotification(msg.type, msg.title, msg.description);

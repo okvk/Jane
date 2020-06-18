@@ -15,16 +15,11 @@ repos:
     hooks:
       - id: prettier
 
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v5.6.0 # Use the sha / tag you want to point at
+  - repo: local
     hooks:
       - id: eslint
-        additional_dependencies:
-          - eslint@5.6.0
-          - babel-eslint@9.0.0
-          - eslint-config-airbnb@17.1.0
-          - eslint-plugin-import@2.17.2
-          - eslint-plugin-jsx-a11y@6.2.1
-          - eslint-plugin-react@7.13.0
-          - eslint-plugin-prettier@3.1.0
-          - eslint-config-prettier@4.3.0
+        name: eslint
+        files: 'frontend/.*\.js$'
+        entry: frontend/eslint.sh
+        language: node
+        types: [text]

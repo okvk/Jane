@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { Button, Layout } from "antd";
 import { Link } from "react-router-dom";
 
-import { MenuMarkup, NavBar, DropdownMenu } from "components";
-import { logoutUser } from "redux/actions/authActions";
-
-import logo from "assets/logo.png";
+import { MenuMarkup, NavBar, DropdownMenu } from "@/components";
+import { logoutUser } from "@/redux/actions/authActions";
+import logo from "@/assets/logo.png";
 import "./Header.scss";
 
 const Header = ({ location, dispatch, isAuthenticated }) => {
@@ -42,4 +41,5 @@ const mapStateToProps = state => {
   const { isAuthenticated } = state.authentication;
   return { isAuthenticated };
 };
+
 export default withRouter(connect(mapStateToProps)(Header));

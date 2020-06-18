@@ -1,7 +1,9 @@
-@import "App.module.scss";
+@import "@/App.module.scss";
+
 .tags-wrapper {
   background-color: #f0f2f5;
 }
+
 .tags-container {
   padding: 24px;
   margin-bottom: 12px;
@@ -13,9 +15,11 @@
     font-weight: 500;
     line-height: 28px;
   }
+
   .list {
     margin-top: 24px;
   }
+
   .item {
     height: 30px;
     text-align: center;
@@ -23,14 +27,17 @@
     margin-right: 24px;
     margin-bottom: 12px;
   }
+
   .item:hover {
     vertical-align: top;
     background-color: $active-button-color;
     color: #ffffff;
   }
+
   .name {
     padding: 0 12px;
   }
+
   .count {
     font-size: 10px;
     position: absolute;
@@ -54,8 +61,10 @@
   font-weight: 500;
   margin-left: 12px;
 }
+
 .tag-article-item {
   padding: 12px 0px;
+
   .dot {
     height: 4px;
     width: 4px;
@@ -65,21 +74,25 @@
     margin: 4px 8px;
     opacity: 0.6;
   }
+
   .date {
     display: inline-block;
     opacity: 0.6;
   }
+
   .title {
     display: inline-block;
     font-size: 1.2em;
     font-weight: 500;
     margin-left: 24px;
     opacity: 0.8;
+
     &:hover {
       opacity: 1;
     }
   }
 }
+
 // handle Fixed page header overlaps in-page anchors
 .jumptarget::before {
   content: "";
