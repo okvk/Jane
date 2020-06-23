@@ -1,14 +1,17 @@
 # Jane
 
-![许可证][license]
+[![许可证][license]][license-link] [![pre-commit][pcm-logo]][pcm-repo]
 
 [license]: https://img.shields.io/github/license/itechub/Jane.svg
-
-🏕 基于 Python（Django）& JavaScript（React）开发，使用 Docker 与 GitLab CI 部署的博客系统。
+[license-link]: https://github.com/itechub/Jane/blob/master/LICENSE
+[pcm-logo]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
+[pcm-repo]: https://github.com/pre-commit/pre-commit
 
 [English][en] | `简体中文`
 
 [en]: README.md
+
+🏕 基于 Python（Django）& JavaScript（React）开发，使用 Docker 与 GitLab CI 部署的博客系统。
 
 ## 截图
 
@@ -41,6 +44,10 @@
 [development]: docs/README.zh-hans.md
 
 ## 参与开发
+
+> Pending
+
+## 许可证
 
 > Pending
 

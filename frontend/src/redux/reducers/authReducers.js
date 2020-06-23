@@ -1,4 +1,4 @@
-import TYPES from "redux/types/userTypes";
+import TYPES from "@/redux/types/userTypes";
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem("token"),
@@ -24,4 +24,5 @@ const authentication = (state = initialState, action) => {
       return state;
   }
 };
+
 export default authentication;

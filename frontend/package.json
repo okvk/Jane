@@ -8,7 +8,6 @@
     "babel-plugin-import": "^1.13.0",
     "classnames": "^2.2.6",
     "customize-cra": "^0.9.1",
-    "eslint": "^6.7.2",
     "history": "^4.10.1",
     "less": "^3.10.3",
     "lodash": "^4.17.15",
@@ -34,9 +33,10 @@
     "set-value": "^2.0.1"
   },
   "scripts": {
-    "start": "NODE_PATH=src react-app-rewired start",
-    "build": "NODE_PATH=src react-app-rewired build",
-    "test": "NODE_PATH=src react-app-rewired test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eslint": "eslint src/**/*.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,8 +49,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "eslint": "^6.7.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.7.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",

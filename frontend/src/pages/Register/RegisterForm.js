@@ -1,11 +1,14 @@
 import React from "react";
 import { Form, Input, Checkbox, Button } from "antd";
-import { BaseFormItem } from "components";
+import { BaseFormItem } from "@/components";
 
 class RegistrationForm extends React.Component {
-  state = {
-    confirmDirty: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      confirmDirty: false
+    };
+  }
 
   handleSubmit = e => {
     e.preventDefault();

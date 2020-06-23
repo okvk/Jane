@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Layout, Button, Input, Switch, Select } from "antd";
 import { connect } from "react-redux";
-import { Editor, TagSelector, MarkdownEditor } from "components";
+
+import { Editor, TagSelector, MarkdownEditor } from "@/components";
 import {
   createArticle,
   getTagList,
   composeArticle,
   updateArticle
-} from "redux/actions/articleActions";
+} from "@/redux/actions/articleActions";
 import "./ArticleEdit.scss";
 
 const ReactDOMServer = require("react-dom/server");

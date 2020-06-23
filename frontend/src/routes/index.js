@@ -7,7 +7,7 @@ const registryRoutes = _routes =>
   _routes.map((route, i) => <RouteWrapper key={i} {...route} />);
 
 const RouteWrapper = route => (
-  <React.Fragment>
+  <>
     <Route
       exact
       path={route.path}
@@ -17,7 +17,7 @@ const RouteWrapper = route => (
       )}
     />
     {route.routes && registryRoutes(route.routes)}
-  </React.Fragment>
+  </>
 );
 
 const AppRoutes = () => <Switch>{registryRoutes(routes)}</Switch>;

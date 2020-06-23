@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Modal, Icon, Tooltip } from "antd";
 import { connect } from "react-redux";
 import { HashLink as Link } from "react-router-hash-link";
+
+import { Tag } from "@/components";
+import { deleteArticle } from "@/redux/actions/articleActions";
 import "./Article.scss";
-import { Tag } from "components";
-import { deleteArticle } from "redux/actions/articleActions";
 
 const { confirm } = Modal;
 
@@ -92,4 +93,5 @@ function mapStateToProps(state) {
   const { username } = state.authentication.user;
   return { username };
 }
+
 export default connect(mapStateToProps)(Article);

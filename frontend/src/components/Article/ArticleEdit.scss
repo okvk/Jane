@@ -1,32 +1,39 @@
-@import "App.module.scss";
+@import "@/App.module.scss";
 
 .write-toolbar {
   display: flex;
   justify-content: space-between;
 }
+
 .wrtie-container {
   margin-top: 12px;
 }
+
 .write-button {
   display: flex;
 }
+
 button,
 .write-preview,
 .write-theme {
   margin-right: 12px;
 }
+
 .article-title {
   padding: 8px 0px;
 }
+
 .article-title-input {
   border: none;
   width: 100%;
   height: 48px;
   font-size: 1.8em;
+
   &:focus {
     box-shadow: none;
   }
 }
+
 .article-editor {
   margin-top: 12px;
   width: 100%;
