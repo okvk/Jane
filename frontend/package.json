@@ -30,7 +30,8 @@
     "redux-thunk": "^2.3.0",
     "remark-math": "^2.0.0",
     "remark-toc": "^6.0.0",
-    "set-value": "^2.0.1"
+    "set-value": "^2.0.1",
+    "vditor": "^3.3.10"
   },
   "scripts": {
     "start": "react-app-rewired start",

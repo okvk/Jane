@@ -3460,6 +3460,11 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
+diff-match-patch@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/diff-match-patch/download/diff-match-patch-1.0.5.tgz#abb584d5f10cd1196dfc55aa03701592ae3f7b37"
+  integrity sha1-q7WE1fEM0Rlt/FWqA3AVkq4/ezc=
+
 diff-sequences@^24.9.0:
   version "24.9.0"
   resolved "https://registry.npm.taobao.org/diff-sequences/download/diff-sequences-24.9.0.tgz?cache=0&sync_timestamp=1566444249037&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdiff-sequences%2Fdownload%2Fdiff-sequences-24.9.0.tgz#5715d6244e2aa65f48bba0bc972db0b0b11e95b5"
@@ -10571,6 +10576,13 @@ value-equal@^1.0.1:
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+
+vditor@^3.3.10:
+  version "3.3.10"
+  resolved "https://registry.npm.taobao.org/vditor/download/vditor-3.3.10.tgz#cced557ec25587d78436cec5ca63c27582945da9"
+  integrity sha1-zO1VfsJVh9eENs7FymPCdYKUXak=
+  dependencies:
+    diff-match-patch "^1.0.5"
 
 vendors@^1.0.0:
   version "1.0.3"

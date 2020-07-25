@@ -1,14 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Editor from "./Editor";
+
+import Vditor from "vditor";
+import "vditor/src/assets/scss/index.scss";
+
 import MarkdownEditor from "./MarkdownEditor";
 import "./MarkdownEditor.scss";
 
 const classNames = require("classnames");
 
 class MarkdownEditorContainer extends React.PureComponent {
+  componentDidMount() {
+    const vditor = new Vditor("vditor", {
+      toolbarConfig: {
+        pin: true
+      },
+      cache: {
+        enable: false
+      },
+      after() {
+        vditor.setValue("");
+      }
+    });
+  }
+
   render() {
-    const { editorState, handleEditorChange, preview, theme } = this.props;
+    const { editorState, preview } = this.props;
     return (
       <div className="markdown-editor">
         <div
@@ -16,11 +33,12 @@ class MarkdownEditorContainer extends React.PureComponent {
             "editor-preview-mode": preview
           })}
         >
-          <Editor
+          <div id="vditor" />
+          {/* <Editor
             value={editorState}
             onChange={handleEditorChange}
             theme={theme}
-          />
+          /> */}
         </div>
         {preview ? (
           <div className="result-pane">
