@@ -10,7 +10,7 @@ import openNotification from "./Notification/Notification";
 import Separator from "./Separator/Separator";
 import Tag from "./Tag/Tag";
 import TagSelector from "./TagSelector/TagSelector";
-import { MarkdownEditor } from "./Editor/MarkdownEditor";
+import Previewer from "./Editor/Previewer";
 
 export {
   Article,
@@ -19,10 +19,10 @@ export {
   BlogSidebar,
   DropdownMenu,
   Editor,
-  MarkdownEditor,
   MenuMarkup,
   NavBar,
   openNotification,
+  Previewer,
   Separator,
   Tag,
   TagSelector
