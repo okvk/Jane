@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Layout, Button, Input, Switch, Select } from "antd";
+import { Layout, Button, Input } from "antd";
 import { connect } from "react-redux";
 
-import { Editor, TagSelector, MarkdownEditor } from "@/components";
+import { Editor, TagSelector } from "@/components";
 import {
   createArticle,
   getTagList,
@@ -12,16 +12,11 @@ import {
 } from "@/redux/actions/articleActions";
 import "./ArticleEdit.scss";
 
-const ReactDOMServer = require("react-dom/server");
-
-const { Option } = Select;
-
 class Write extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      theme: this.props.theme,
-      preview: this.props.preview
+      vditor: null
     };
   }
 
@@ -29,14 +24,6 @@ class Write extends Component {
     // Request tag list from api
     this.props.dispatch(getTagList());
   }
-
-  toggleMarkdownPreview = () => {
-    this.setState(prevState => ({ preview: !prevState.preview }));
-  };
-
-  handleEditorChange = evt => {
-    this.props.dispatch(composeArticle({ editorState: evt.target.value }));
-  };
 
   changeEditorState = editorState => {
     this.props.dispatch(composeArticle({ editorState }));
@@ -50,14 +37,11 @@ class Write extends Component {
     this.props.dispatch(composeArticle({ selectedTags: values }));
   };
 
-  onArticleSubmit = () => {
-    const html = ReactDOMServer.renderToStaticMarkup(
-      <MarkdownEditor src={this.props.editorState} />
-    );
+  handleArticleSubmit = () => {
     const data = {
       title: this.props.title,
-      content: html,
-      raw: this.props.editorState,
+      content: this.state.vditor.getHTML(),
+      raw: this.state.vditor.getValue(),
       is_published: true,
       tags_list: this.props.selectedTags
         .map(item => this.props.tags.find(o => o.name === item))
@@ -70,15 +54,12 @@ class Write extends Component {
     }
   };
 
-  changeTheme = theme => {
-    this.setState({ theme });
+  setVditor = vditor => {
+    this.setState({ vditor });
   };
 
   render() {
-    // For more them choice, view https://codemirror.net/demo/theme.html
-    const themeList = ["default", "monokai", "idea", "eclipse"];
     const { tags, title, editorState, selectedTags } = this.props;
-    const { preview, theme } = this.state;
     return (
       <Layout.Content style={{ padding: "0 50px" }}>
         <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
@@ -87,35 +68,19 @@ class Write extends Component {
               shady last modified at Yesterday 18:34
             </div>
             <div className="write-button">
-              <div className="write-theme">
-                <Select
-                  defaultValue="monokai"
-                  style={{ width: 120 }}
-                  onChange={this.changeTheme}
-                >
-                  {themeList.map(item => (
-                    <Option key={item} value={item}>
-                      {item}
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-              <div className="write-preview">
-                <Switch onChange={this.toggleMarkdownPreview} />
-              </div>
-              <div className="wrtie-history">
+              {/* <div className="wrtie-history">
                 <Button type="primary" size="default">
                   历史
                 </Button>
-              </div>
+              </div> */}
               <div className="wrtie-publish">
                 <Button
                   type="primary"
                   size="default"
                   disabled={!title}
-                  onClick={this.onArticleSubmit}
+                  onClick={this.handleArticleSubmit}
                 >
-                  发布
+                  Publish
                 </Button>
               </div>
             </div>
@@ -140,9 +105,7 @@ class Write extends Component {
               <Editor
                 editorState={editorState}
                 changeEditorState={this.changeEditorState}
-                handleEditorChange={this.handleEditorChange}
-                theme={theme}
-                preview={preview}
+                setVditor={this.setVditor}
               />
             </div>
           </div>
@@ -155,17 +118,13 @@ class Write extends Component {
 Write.propTypes = {
   selectedTags: PropTypes.arrayOf(PropTypes.string.isRequired),
   editorState: PropTypes.string,
-  title: PropTypes.string,
-  theme: PropTypes.string,
-  preview: PropTypes.bool
+  title: PropTypes.string
 };
 
 Write.defaultProps = {
   selectedTags: [],
   editorState: "",
-  title: "",
-  theme: "",
-  preview: false
+  title: ""
 };
 
 function mapStateToProps(state) {

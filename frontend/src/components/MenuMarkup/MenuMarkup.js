@@ -14,7 +14,6 @@ const MenuMarkup = ({
   className
 }) => (
   <Menu
-    theme="light"
     mode={mobileVersion ? "vertical" : "horizontal"}
     selectedKeys={[`${activeLinkKey}`]}
     className={`${className} ${styles.menu}`}
