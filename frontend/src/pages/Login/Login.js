@@ -1,5 +1,6 @@
 import React from "react";
-import { FormLayout } from "layouts";
+
+import { FormLayout } from "@/layouts";
 import LoginForm from "./LoginForm";
 
 const Login = props => (
@@ -7,4 +8,5 @@ const Login = props => (
     <LoginForm />
   </FormLayout>
 );
+
 export default Login;

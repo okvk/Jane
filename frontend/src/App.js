@@ -3,9 +3,9 @@ import { Router } from "react-router-dom";
 import { connect } from "react-redux";
 import { Layout } from "antd";
 
-import { history, ScrollToTop } from "helpers";
-import { Footer, Header } from "layouts";
-import AppRoutes from "routes";
+import { history, ScrollToTop } from "@/helpers";
+import { Footer, Header } from "@/layouts";
+import AppRoutes from "@/routes";
 
 import "./App.module.scss";
 

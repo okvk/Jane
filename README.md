@@ -1,14 +1,17 @@
 # Jane
 
-![license][license]
+[![license][license]][license-link] [![pre-commit][pcm-logo]][pcm-repo]
 
 [license]: https://img.shields.io/github/license/itechub/Jane.svg
-
-🏕Blog system written in Python(Django) & JavaScript(React), deployed by Docker & GitLab CI.
+[license-link]: https://github.com/itechub/Jane/blob/master/LICENSE
+[pcm-logo]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
+[pcm-repo]: https://github.com/pre-commit/pre-commit
 
 `English` | [简体中文][zh_hans]
 
 [zh_hans]: README.zh-hans.md
+
+🏕Blog system written in Python(Django) & JavaScript(React), deployed by Docker & GitLab CI.
 
 ## Screenshots
 
@@ -41,6 +44,10 @@ See more details in [Development Documentaion][development].
 [development]: docs/README.md
 
 ## Contributing
+
+> Pending
+
+## License
 
 > Pending
 

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getArticle, composeArticle } from "redux/actions/articleActions";
-import { ArticleEdit as AE } from "components";
+
+import { getArticle, composeArticle } from "@/redux/actions/articleActions";
+import { ArticleEdit as AE } from "@/components";
 
 class ArticleEdit extends Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class ArticleEdit extends Component {
             selectedTags:
               tags &&
               tags.map(item => {
-                return { key: item.id, label: item.name };
+                return item.name;
               })
           })
         );
@@ -33,4 +34,5 @@ function mapStateToProps(state) {
   const article = state.articles.article;
   return { article };
 }
+
 export default connect(mapStateToProps)(ArticleEdit);

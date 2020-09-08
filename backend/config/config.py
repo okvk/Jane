@@ -19,6 +19,7 @@ DATABASES = {
         "NAME": os.environ.get("JANE_DB_NAME", "unknown"),
         "HOST": os.environ.get("JANE_DB_HOST", "unknown"),
         "PORT": os.environ.get("JANE_DB_PORT", "unknown"),
+        "OPTIONS": {"charset": "utf8mb4"},
     }
 }
 

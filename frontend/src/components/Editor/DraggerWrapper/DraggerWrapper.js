@@ -1,8 +1,9 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import React, { Component } from "react";
 import { message } from "antd";
-import { BASE_URL } from "configs/settings";
-import articlesRequest from "middlewares/articles";
+
+import { BASE_URL } from "@/configs/settings";
+import articlesRequest from "@/middlewares/articles";
 import DraggerInstance from "./DraggerInstance";
 import UploadedFileList from "./UploadedFileList";
 import "./DraggerWrapper.scss";

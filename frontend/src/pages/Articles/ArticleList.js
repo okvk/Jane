@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getArticleList } from "redux/actions/articleActions";
-import { BlogLayout } from "layouts";
-import { Article } from "components";
+
+import { getArticleList } from "@/redux/actions/articleActions";
+import { BlogLayout } from "@/layouts";
+import { Article } from "@/components";
 
 class ArticleList extends Component {
   componentDidMount() {
@@ -31,4 +32,5 @@ function mapStateToProps(state) {
   const { articleList, user } = state.articles;
   return { articleList, user };
 }
+
 export default connect(mapStateToProps)(ArticleList);

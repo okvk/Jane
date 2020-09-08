@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Avatar } from "antd";
 import { Link } from "react-router-dom";
-import Separator from "components/Separator/Separator";
+
+import Separator from "@/components/Separator/Separator";
 import Menu from "./Menu";
 import "./BlogSidebar.scss";
 

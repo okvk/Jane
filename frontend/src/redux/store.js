@@ -1,4 +1,4 @@
-/* eslint no-underscore-dangle: 1 */
+/* eslint no-underscore-dangle: off */
 import { createStore, applyMiddleware, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { routerMiddleware } from "react-router-redux";
@@ -11,8 +11,8 @@ const loggerMiddleware = createLogger();
 
 const middleware = applyMiddleware(
   routerMiddleware(history),
-  thunkMiddleware
-  // loggerMiddleware
+  thunkMiddleware,
+  loggerMiddleware
 );
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

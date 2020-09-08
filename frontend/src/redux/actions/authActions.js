@@ -1,8 +1,8 @@
-import store from "redux/store";
 import { push } from "react-router-redux";
-import authRequest from "middlewares/auth";
 
-import TYPES from "redux/types/userTypes";
+import store from "@/redux/store";
+import authRequest from "@/middlewares/auth";
+import TYPES from "@/redux/types/userTypes";
 
 function receiveLogin(data) {
   return dispatch => {

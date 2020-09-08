@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getArticle } from "redux/actions/articleActions";
-import { BlogLayout } from "layouts";
-import { Separator, Tag, MarkdownEditor } from "components";
+
+import { Separator, Tag, Previewer } from "@/components";
+import { BlogLayout } from "@/layouts";
+import { getArticle } from "@/redux/actions/articleActions";
 import "./ArticleDetail.scss";
 
 class ArticlePage extends Component {
@@ -33,7 +34,7 @@ class ArticlePage extends Component {
           </div>
           <Separator />
           <div className="content">
-            <MarkdownEditor src={article.raw} />
+            <Previewer id="previewer" raw={article.raw} />
           </div>
           <Separator />
           {article.tags &&
@@ -48,4 +49,5 @@ function mapStateToProps(state) {
   const article = state.articles.article;
   return { article };
 }
+
 export default connect(mapStateToProps)(ArticlePage);
