@@ -879,7 +879,6 @@
   resolved "https://registry.npm.taobao.org/@cnakazawa/watch/download/@cnakazawa/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
   dependencies:
     exec-sh "^0.3.2"
-    minimist "^1.2.0"
 
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
@@ -5620,13 +5619,13 @@ json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/json5/download/json5-1.0.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjson5%2Fdownload%2Fjson5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
   dependencies:
-    minimist "^1.2.0"
+    minimist "^1.2.3"
 
 json5@^2.1.0:
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/json5/download/json5-2.1.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjson5%2Fdownload%2Fjson5-2.1.1.tgz#81b6cb04e9ba496f1c7005d07b4368a2638f90b6"
   dependencies:
-    minimist "^1.2.0"
+    minimist "^1.2.3"
 
 jsonfile@^4.0.0:
   version "4.0.0"
@@ -6078,22 +6077,10 @@ minimatch@3.0.4, minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@0.0.8:
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/minimist/download/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
-
-minimist@^1.1.1, minimist@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npm.taobao.org/minimist/download/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-
 minimist@^1.2.3:
   version "1.2.5"
   resolved "https://registry.npm.taobao.org/minimist/download/minimist-1.2.5.tgz?cache=0&sync_timestamp=1589682820731&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fminimist%2Fdownload%2Fminimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
-
-minimist@~0.0.1:
-  version "0.0.10"
-  resolved "https://registry.npm.taobao.org/minimist/download/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
 minipass-collect@^1.0.2:
   version "1.0.2"
@@ -6152,7 +6139,7 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1:
   version "0.5.1"
   resolved "https://registry.npm.taobao.org/mkdirp/download/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
-    minimist "0.0.8"
+    minimist "^1.2.3"
 
 moment@2.x, moment@^2.24.0:
   version "2.24.0"
@@ -6260,11 +6247,6 @@ node-fetch@^1.0.1:
 node-forge@0.9.0:
   version "0.9.0"
   resolved "https://registry.npm.taobao.org/node-forge/download/node-forge-0.9.0.tgz?cache=0&sync_timestamp=1569524876130&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnode-forge%2Fdownload%2Fnode-forge-0.9.0.tgz#d624050edbb44874adca12bb9a52ec63cb782579"
-
-node-forge@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npm.taobao.org/node-forge/download/node-forge-0.10.0.tgz?cache=0&sync_timestamp=1599010773454&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnode-forge%2Fdownload%2Fnode-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"
-  integrity sha1-Mt6ir7Ppkm8C7lzoeUkCaRpna/M=
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -6538,7 +6520,6 @@ optimist@^0.6.1:
   version "0.6.1"
   resolved "https://registry.npm.taobao.org/optimist/download/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
   dependencies:
-    minimist "~0.0.1"
     wordwrap "~0.0.2"
 
 optimize-css-assets-webpack-plugin@5.0.3:
@@ -8707,7 +8688,6 @@ sane@^4.0.3:
     execa "^1.0.0"
     fb-watchman "^2.0.0"
     micromatch "^3.1.4"
-    minimist "^1.1.1"
     walker "~1.0.5"
 
 sanitize.css@^10.0.0:
