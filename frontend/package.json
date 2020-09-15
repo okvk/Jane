@@ -53,5 +53,19 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
     "less-loader": "^5.0.0"
+  },
+  "resolutions": {
+    "@hapi/hoek": "^8.5.1",
+    "acorn": "^7.1.1",
+    "dot-prop": "^4.2.1",
+    "elliptic": "^6.5.3",
+    "http-proxy": "^1.18.1",
+    "kind-of": "^6.0.3",
+    "minimist": "^1.2.3",
+    "node-fetch": "^2.6.1",
+    "node-forge": "^0.10.0",
+    "serialize-javascript": "^3.1.0",
+    "yargs-parser": "^13.1.2",
+    "websocket-extensions": "^0.1.4"
   }
 }
