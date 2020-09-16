@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MarkdownEditorContainer from "./MarkdownEditor/MarkdownEditorContainer";
+import VditorWrapper from "./VditorWrapper/VditorWrapper";
 import DraggerWrapper from "./DraggerWrapper";
 
 const Editor = props => {
@@ -8,7 +8,7 @@ const Editor = props => {
     <div id="editor-wrapper">
       {props.type === "markdown" ? (
         <DraggerWrapper {...props}>
-          <MarkdownEditorContainer {...props} />
+          <VditorWrapper {...props} />
         </DraggerWrapper>
       ) : null}
     </div>

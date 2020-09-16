@@ -217,7 +217,8 @@ class DraggerWrapper extends Component {
           openFileDialogOnClick
         >
           <p className="editor-dropzone">
-            Attach files by dragging & dropping, selecting or pasting them.
+            Attach files by dragging & dropping, pasting or clicking this bar to
+            select them.
           </p>
         </DraggerInstance>
 

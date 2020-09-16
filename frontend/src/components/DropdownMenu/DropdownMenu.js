@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { Avatar, Menu } from "antd";
@@ -18,11 +18,11 @@ const DropdownMenu = props => {
       >
         <SubMenu
           title={
-            <Fragment>
+            <>
               <span style={{ color: "#999", marginRight: 4 }}>Hi,</span>
               <span>{props.user.username}</span>
               <Avatar style={{ marginLeft: 8 }} src={props.avatar} />
-            </Fragment>
+            </>
           }
         >
           <Menu.Item key="profile">

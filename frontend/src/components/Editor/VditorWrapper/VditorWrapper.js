@@ -4,11 +4,9 @@ import PropTypes from "prop-types";
 import Vditor from "vditor";
 import "vditor/src/assets/scss/index.scss";
 
-import "./MarkdownEditor.scss";
+import "./VditorWrapper.scss";
 
-const classNames = require("classnames");
-
-class MarkdownEditorContainer extends React.PureComponent {
+class VditorWrapper extends React.PureComponent {
   constructor(props) {
     super(props);
     this.vditor = null;
@@ -42,22 +40,16 @@ class MarkdownEditorContainer extends React.PureComponent {
   }
 
   render() {
-    return (
-      <div className="markdown-editor">
-        <div className={classNames("editor-pane")}>
-          <div id="vditor" />
-        </div>
-      </div>
-    );
+    return <div id="vditor" />;
   }
 }
 
-MarkdownEditorContainer.propTypes = {
+VditorWrapper.propTypes = {
   editorState: PropTypes.string
 };
 
-MarkdownEditorContainer.defaultProps = {
+VditorWrapper.defaultProps = {
   editorState: ""
 };
 
-export default MarkdownEditorContainer;
+export default VditorWrapper;
