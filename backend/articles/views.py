@@ -88,6 +88,7 @@ class ArticleList(GenericAPIView):
         context = paginate_data(request, articles, ArticleSerializer)
         return StructuredResponse(status.HTTP_200_OK, context)
 
+    @exception_handler_wrapper
     def post(self, request, format=None):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid():
